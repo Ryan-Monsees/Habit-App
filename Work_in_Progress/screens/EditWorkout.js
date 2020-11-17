@@ -42,7 +42,7 @@ export default class EditWorkout extends React.Component {
 
  storeData = async() => {
     try {
-      const someArray = ["You","Are","gay"];
+      const someArray = ["first","second","third"];
       await AsyncStorage.setItem('array', JSON.stringify(someArray))
     
     } catch(err) {
