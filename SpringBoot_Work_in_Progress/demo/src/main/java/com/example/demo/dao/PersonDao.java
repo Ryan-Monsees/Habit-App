@@ -12,7 +12,7 @@ public interface PersonDao {
     // generates a random ID and returns a
     // Person object with the ID and person that was
     // passed as a parameter
-    default int addPerson(Person person) {
+    default int insertPerson(Person person) {
         UUID id = UUID.randomUUID();
         return insertPerson(id, person);
     }
