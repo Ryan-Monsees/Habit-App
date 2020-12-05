@@ -4,7 +4,7 @@ import {NavigationContainer, StackActions} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import StartScreen from '../screens/StartScreen';
 import Workout from '../screens/Workout';
-import EditWorkout from '../screens/EditWorkout';
+import HabitList from '../screens/HabitList';
 
 
 const HomeStack = createStackNavigator();
@@ -21,7 +21,7 @@ export default function homeStack() {
              }}>
                 <HomeStack.Screen name="Home" component={StartScreen} />
                 <HomeStack.Screen name="Workout" component={Workout} />
-                <HomeStack.Screen name="Edit Workout" component={EditWorkout} />
+                <HomeStack.Screen name="Habit List" component={HabitList} />
             </HomeStack.Navigator>
         </NavigationContainer>
     );

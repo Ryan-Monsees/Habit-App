@@ -24,9 +24,9 @@ const Workout = props => {
                     color='lightblue'
                     buttonWidth={.2}
                     buttonHeight={.1}
-                    text="Edit Workout"
+                    text="Habit List"
                     navigation={props.navigation}
-                    navigateTo="Edit Workout"
+                    navigateTo="Habit List"
                 />
 
             </View>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity, FlatList } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { debug } from 'react-native-reanimated';
-import EditExercise from '../components/EditExercise';
+import AddHabit from '../components/AddHabit';
 import ExerciseComp from '../components/Exercise';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -10,11 +10,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 
 
-export default class EditWorkout extends React.Component {
+export default class HabitList extends React.Component {
 
 
   
-    
+    componentDidMount(){
+      this.getData();
+    }
 
     constructor(props) {
       super(props);
@@ -32,6 +34,9 @@ export default class EditWorkout extends React.Component {
       
 
       this.addExerciseHandler = this.addExerciseHandler.bind(this);
+
+      
+
   }
   
   
@@ -42,8 +47,8 @@ export default class EditWorkout extends React.Component {
 
  storeData = async() => {
     try {
-      const someArray = ["first","second","third"];
-      await AsyncStorage.setItem('array', JSON.stringify(someArray))
+      
+      await AsyncStorage.setItem('array', JSON.stringify(habits))
     
     } catch(err) {
       console.log(err);
@@ -94,7 +99,7 @@ export default class EditWorkout extends React.Component {
     
     
     this.storeData();
-    this.getData();
+    
   
     
   }
@@ -114,7 +119,7 @@ render() {
       
 
 
-       <EditExercise
+       <AddHabit
           isVisible={this.state.isAddMode}
           addExerciseHandler = {this.addExerciseHandler} />
           
