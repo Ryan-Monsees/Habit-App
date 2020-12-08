@@ -6,21 +6,22 @@ import ButtonNav from '../components/ButtonNav';
 
 
 
-const StartScreen = props => {
 
+const StartScreen = props => {
 
 
     return (
 
         <View style={styles.container}>
 
+            
             {/* Background */}
             <ImageBackground
                 source={require('../assets/Clouds.jpg')}
                 style={styles.imageBackground}
             >
                 <Text style={styles.title}>
-                    Habitual
+                    Better Today
                     </Text>
             </ImageBackground>
 
@@ -32,9 +33,9 @@ const StartScreen = props => {
                     color='lightblue'
                     buttonWidth={.2}
                     buttonHeight={.1}
-                    text="Workout"
+                    text="Edit Habits"
                     navigation={props.navigation}
-                    navigateTo="Workout"
+                    navigateTo="Edit Habits"
                 />
 
                 

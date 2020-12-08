@@ -3,20 +3,16 @@ import { View, Text, StyleSheet, Dimensions, TouchableOpacity, FlatList } from '
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { debug } from 'react-native-reanimated';
 import AddHabit from '../components/AddHabit';
-import ExerciseComp from '../components/Exercise';
+import Habit from '../components/Habit';
 import AsyncStorage from '@react-native-community/async-storage';
+import { InteractionManager } from 'react-native';
 
 
 
 
 
-export default class HabitList extends React.Component {
+export default class EditHabits extends React.Component {
 
-
-  
-    componentDidMount(){
-      this.getData();
-    }
 
     constructor(props) {
       super(props);
@@ -57,25 +53,7 @@ export default class HabitList extends React.Component {
 
     }
 
-  getData = async() => {
-    
-
-    const test = [];
-     try {
-
-       await AsyncStorage.getItem('array')
-      .then(req => JSON.parse(req))
-      .then(json => console.log(json))
-      .catch(error => console.log('error!'));
-     }  catch(err) {
-       console.log(err);
-     }
-     
-     console.log(habits);
-     
-   
-
-    }
+  
     
  
     
@@ -126,10 +104,14 @@ render() {
        
         <View>
  
+      {/* Displays the list of habits */}
         { habits.map((item, key)=>(
-          <Text key={key} style={styles.TextStyle} > 
-          { item.name + " " + item.count } 
-          </Text>)
+
+          <Habit  name= {item.name}
+                  count= {item.count}
+                  key= {key}
+          />
+          )
           )
         }
 

@@ -3,17 +3,17 @@ import { View, Text, StyleSheet, Dimensions, ImageBackground, TouchableOpacity} 
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 
-const Exercise = props => {
+const Habit = props => {
 
     return (
         
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.habit}>
             
             {/* Styles and displays the goals */}
             <View>
                 
                 {/* Displays the name */}
-                <Text>{props.name}</Text>
+                <Text>{props.name + " " + props.count}</Text>
             </View>
         </TouchableOpacity>
     ); 
@@ -21,4 +21,15 @@ const Exercise = props => {
 
 }
 
-export default Exercise;
+const styles = EStyleSheet.create({
+    habit: {
+        backgroundColor: 'blue',
+        alignItems: 'center',
+        
+       
+    },
+
+});
+
+
+export default Habit;

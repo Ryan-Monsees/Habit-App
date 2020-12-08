@@ -8,7 +8,9 @@ import './global.js'
 
 import { initialWindowSafeAreaInsets } from 'react-native-safe-area-context';
 
+import * as SQLite from 'expo-sqlite';
 
+import ApiCalendar from 'react-google-calendar-api';
 
 YellowBox.ignoreWarnings([
   'Require cycle:'
@@ -20,31 +22,57 @@ export default class App extends React.Component {
 
   componentDidMount() {
       
-    this.getData();
-    habits.push({name: "Picking lip", count: 0});
-    habits[0].count++;
-    //console.log("Array: " + habits[0].count);
-    
+    this.getDate();
+
+   
+
+   
+
   }
  
-  getData = async() => {
+  
+
+  getDate = async() => {
     
-
-    const test = [];
+    
+    
      try {
+        
+        // Gets the current date
+        const date = (new Date().getMonth() + 1) + " " +
+        new Date().getDate() + " " + 
+        new Date().getFullYear();
 
-       await AsyncStorage.getItem('array')
-      .then(req => JSON.parse(req))
-      .then(json => console.log(json))
-      .catch(error => console.log('error!'));
+        // Gets the list of habits
+        const array = await AsyncStorage.getItem('array') || '[]';
+        habits = JSON.parse(array);
+
+        // gets the stored dates
+        const storedPrevDate = await AsyncStorage.getItem('prevDate') || "";
+        const storedCurrDate = await AsyncStorage.getItem('currDate') || "";
+        prevDate = storedPrevDate;
+        currDate = storedCurrDate;
+
+        if(currDate == "" || date != currDate)
+        {
+          prevDate = currDate;
+          currDate = date;
+        }
+
+      // Stores the accurate dates
+      await AsyncStorage.setItem('prevDate', prevDate);
+      await AsyncStorage.setItem('currDate', currDate);
+        
+      console.log("current prevDate: " + prevDate);
+      console.log("current currDate: " + currDate);
+
      }  catch(err) {
        console.log(err);
      }
-     console.log("START HABITS PRINT");
-     console.log(habits);
-     console.log("FINISHED HABITS PRINT");
+    
      
-   
+     
+    
 
     }
 
