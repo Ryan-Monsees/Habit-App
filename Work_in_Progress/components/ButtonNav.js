@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-
-import { ScreenChange } from '../App';
 import { NavigationHelpersContext } from '@react-navigation/native';
 
 let { height, width } = Dimensions.get('window');

@@ -3,21 +3,22 @@ import { View, Text, StyleSheet, Dimensions, TouchableOpacity, FlatList } from '
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { debug } from 'react-native-reanimated';
 import AddHabit from '../components/AddHabit';
-import Habit from '../components/Habit';
+import HabitEditDisplay from '../components/HabitEditDisplay';
 import AsyncStorage from '@react-native-community/async-storage';
 import { InteractionManager } from 'react-native';
 
 
 
 
-
+//============================================================
+// Where you edit the list of habits
+//============================================================
 export default class EditHabits extends React.Component {
 
 
     constructor(props) {
       super(props);
 
-      
      
 
       this.state = {
@@ -25,18 +26,12 @@ export default class EditHabits extends React.Component {
         isAddMode: false 
       }       
       
-      
-
-      
-
-      this.addExerciseHandler = this.addExerciseHandler.bind(this);
-
+      this.addHabitHandler = this.addHabitHandler.bind(this);
+      this.cancelHabitHandler = this.cancelHabitHandler.bind(this);
+      this.addHabitMode = this.addHabitMode.bind(this);
       
 
   }
-  
-  
-
   
  
   
@@ -49,37 +44,28 @@ export default class EditHabits extends React.Component {
     } catch(err) {
       console.log(err);
     }
-  
-
     }
 
-  
+  // Pulls up the screen to add or edit a habit
+  addHabitMode() {
     
- 
-    
+    this.setState({isAddMode: true});
+  }
 
+  // Handles cancelling the adding of a habit
+  cancelHabitHandler() {
 
-
-
-  
-  
-  
-
-
-  addExerciseHandler(props) {
-
-    
-   
-    
-    habits.push({name: props, count: 0});
     this.setState({isAddMode: false});
 
-    
-    
+  }
+
+  // Handles adding a new habit
+  addHabitHandler(props) {
+
+    habits.push({name: props, count: 0});
+    this.setState({isAddMode: false});
     this.storeData();
-    
-  
-    
+
   }
  
   
@@ -87,29 +73,34 @@ export default class EditHabits extends React.Component {
 render() {
   return (
     <View style={styles.MainContainer}>
+
+      {/* Button to press to add a new habit */}
        <TouchableOpacity
-            style = {styles.button}
-            onPress={() => this.setState({isAddMode: true})}
+            style = {styles.addButton}
+            onPress={() => this.addHabitMode()}
             >
-          <Text>Add</Text>
+          <Text style={styles.addButtonText}>
+            Add
+          </Text>
        </TouchableOpacity>
 
       
 
-
+      {/* The screen that only appears when adding a new habit */}
        <AddHabit
           isVisible={this.state.isAddMode}
-          addExerciseHandler = {this.addExerciseHandler} />
-          
+          addHabitHandler = {this.addHabitHandler} 
+          cancelHabitHandler = {this.cancelHabitHandler} />
        
         <View>
  
       {/* Displays the list of habits */}
         { habits.map((item, key)=>(
 
-          <Habit  name= {item.name}
+          <HabitEditDisplay  name= {item.name}
                   count= {item.count}
                   key= {key}
+                  addHabitMode = {this.addHabitMode}
           />
           )
           )
@@ -125,17 +116,22 @@ render() {
   }
 }
 
+// Gets the dimesions of the screen for proper sizing in
+// the Extended style sheet
 let { height, width } = Dimensions.get('window');
+
 EStyleSheet.build({ $rem: width / height });
 
-
-
-
 const styles = EStyleSheet.create({
-    button: {
+
+  addButton: {
         backgroundColor: 'blue',
         alignItems: 'center',
-        padding: 50
+        padding: height * .10
+    },
+
+    addButtonText: {
+      fontSize: '50rem',
     },
 
 });

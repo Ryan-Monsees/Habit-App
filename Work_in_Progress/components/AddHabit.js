@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Button, Modal, TextInput, Alert} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { BackHandler, View, Text, StyleSheet, Dimensions, Button, Modal, TextInput, Alert} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const EditExercise = props => {
+const AddHabit = props => {
 
-    const [exerciseName, setExerciseName] = useState('');
+    const cancelHabit = () => {
+        props.cancelHabitHandler();
+     }
+
+    
+
+       
+     
+    const [habitName, setHabitName] = useState('');
 
     // Changes the TextInput to the entered text
     const inputHandler = (enteredText) => {
-    setExerciseName(enteredText);
+    setHabitName(enteredText);
     };
 
-    const addExercise = () => {
+    const addHabit = () => {
+
+
         // Checks to make sure it's only characters and spaces
-        if(/\S/.test(exerciseName) && exerciseName != '' && exerciseName[exerciseName.length-1] != ' ') {     
+        if(/\S/.test(habitName) && habitName != '' && habitName[habitName.length-1] != ' ') {     
             
             // Removes multiple spaces and adds it to the array
-            props.addExerciseHandler(exerciseName.replace(/\s+/g, " "));
+            props.addHabitHandler(habitName.replace(/\s+/g, " "));
 
             
             // Clears input
-            setExerciseName('');
+            setHabitName('');
         }
         else {
             Alert.alert(
@@ -35,6 +45,9 @@ const EditExercise = props => {
             );
         }
         
+
+
+
         
     }
 
@@ -42,17 +55,21 @@ return(
     <Modal visible={props.isVisible} animationType="slide">
         {/* Where you enter a new goal */}
         <TextInput
-          placeholder="Enter exercise name"
+          placeholder="Enter name of habit"
           style={styles.textInput}
           onChangeText={inputHandler}
-          value={exerciseName}
+          value={habitName}
         />
 
 
        
     <Button
         title="ADD"
-        onPress={addExercise} />
+        onPress={addHabit} />
+
+    <Button 
+        title="CANCEL"
+        onPress={cancelHabit} />
 
     </Modal>
 
@@ -69,4 +86,4 @@ return(
 
         }
     });
-export default EditExercise;
+export default AddHabit;
