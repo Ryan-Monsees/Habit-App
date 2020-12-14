@@ -1,12 +1,10 @@
 import React, {useRef} from 'react';
-import { StyleSheet, Text, View, YellowBox} from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 
-import EStyleSheet from 'react-native-extended-stylesheet';
+
 import HomeStack from './routes/homeStack';
 import AsyncStorage from '@react-native-community/async-storage';
 import './global.js'
-
-import { initialWindowSafeAreaInsets } from 'react-native-safe-area-context';
 
 import * as SQLite from 'expo-sqlite';
 

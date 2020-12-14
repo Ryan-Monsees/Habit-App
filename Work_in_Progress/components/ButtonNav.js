@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { NavigationHelpersContext } from '@react-navigation/native';
+
 
 let { height, width } = Dimensions.get('window');
 EStyleSheet.build({ $rem: width / height });
@@ -18,13 +18,20 @@ Props for the button are:
     text= What to display inside the button
     navigation= The navigation component needed to navigate to a new screen
     navigateTo= Which screen to navigate to
+    parameters= variables to pass to the next screen
  */
 export default function ButtonNav(props) {
 
 
+    
+        
+    
+
     return (
         // Sets up the button so when it's pressed it navigates to the parameter "naviateTo" 
-        <TouchableOpacity onPress={() => props.navigation.navigate(props.navigateTo)}>
+        <TouchableOpacity onPress={() => {  props.navigation.navigate(props.navigateTo, props.parameters); 
+                                            
+    }}>
 
             {/* Sets up the styles for the button */}
             <View style={styles(props).button}>
@@ -46,6 +53,7 @@ export default function ButtonNav(props) {
 const styles = (props) => EStyleSheet.create({
 
     buttonText: {
+        // Uses dynamic font sizes based on screen size
         fontSize: '30rem',
         textAlign: 'center'
 
