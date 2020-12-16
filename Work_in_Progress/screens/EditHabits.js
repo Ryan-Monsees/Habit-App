@@ -8,7 +8,7 @@ import HabitEditDisplay from '../components/HabitEditDisplay';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-
+import storeData from '../components/StoreData';
 
 
 
@@ -30,9 +30,7 @@ export default class EditHabits extends React.Component {
         
       }       
       
-     
-      
-      
+      console.log("ACTIVATE");
   }
   
  

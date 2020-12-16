@@ -4,13 +4,16 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import '../global.js'
+
+import storeData from '../components/StoreData';
 
 //=====================================================
 // The screen that displays when adding a habit.
 //=====================================================
 const EditHabitMode = props => {
 
-   
+  
 
     // Checks to see if we're editting a habit
     // or adding a habit by seeing if we passed
@@ -26,7 +29,7 @@ const EditHabitMode = props => {
     // Holds the index in the habit array that we're editting.
     const index = indexCheck;
     
-    console.log(index);
+    
 
     // State for holding the habit name to be added.
     const [habitName, setHabitName] = useState('');
@@ -43,17 +46,22 @@ const EditHabitMode = props => {
 
     // functional component version of ComponentDidMount
     // Will execute when this component opens 
-    const retrieveHabitInfo = () => {
-       
-           console.log("setting habit information");
-            //setHabitName(props.habitName);
-            //setHabitCount(props.habitCount);
-            //setHabitWeight(props.habitWeight); 
-       
-     
+    useEffect(() => {
         
-    }
+        
 
+        if(index != -1)
+        {
+           //setHabitName(habits[index].name);
+           
+        }
+        
+       });
+
+
+
+    
+    // Stores the updated information in local storage
     const storeData = async() => {
         try {
           
@@ -65,13 +73,22 @@ const EditHabitMode = props => {
         }
 
     // Handles adding a new habit
-  const addHabitHandler = (props)  => {
+    const addHabitHandler = (props)  => {
 
-    habits.push({name: props.name, count: props.count});
+        habits.push({name: props.name, count: props.count});
     
-    this.storeData();
+        this.storeData();
 
-  }
+     }
+
+    // Handles deleting the selected habit.
+    const deleteHabit = () => {
+
+        habits.splice(index, 1);
+        props.navigation.goBack();
+    }
+
+
  
 
 
@@ -79,7 +96,7 @@ const EditHabitMode = props => {
     // to cancel adding a habit.
     const cancelHabit = () => {
         
-        console.log(index);
+        
         
         
         // Clears input.
@@ -157,6 +174,10 @@ return(
     <Button
         title="ADD"
         onPress={addHabit} />
+
+    <Button
+        title="DELETE"
+        onPress={deleteHabit} />
 
     {/* Button to cancel adding a new habit */}
     <Button 
