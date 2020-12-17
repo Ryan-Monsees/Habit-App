@@ -5,8 +5,15 @@ import '../global.js'
 class StoreData extends React.Component {
 
 
-    StoreHabits() {
-        console.log("I found you, FAKER!");
+    StoreHabits = async() => {
+        console.log("Storing data...");
+            try {
+              
+              await AsyncStorage.setItem('array', JSON.stringify(habits))
+            
+            } catch(err) {
+              console.log(err);
+            }
     }
 
     StoreDay() {

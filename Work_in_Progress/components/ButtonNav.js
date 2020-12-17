@@ -24,14 +24,24 @@ export default function ButtonNav(props) {
 
 
     
+    const checkParams = () => {
+        if(props.parameters)
+        {
+            console.log("Passed parameters!");
+            props.navigation.navigate(props.navigateTo, props.parameters);
+        }
+        else
+        {
+            props.navigation.navigate(props.navigateTo);
+        }
         
+    }
     
 
     return (
         // Sets up the button so when it's pressed it navigates to the parameter "naviateTo" 
-        <TouchableOpacity onPress={() => {  props.navigation.navigate(props.navigateTo, props.parameters); 
-                                            
-    }}>
+        <TouchableOpacity onPress={checkParams} 
+                                            >
 
             {/* Sets up the styles for the button */}
             <View style={styles(props).button}>

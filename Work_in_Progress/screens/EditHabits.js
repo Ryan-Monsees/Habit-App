@@ -26,29 +26,17 @@ export default class EditHabits extends React.Component {
      
 
       this.state = {
-        
+        habitsArray: habits
         
       }       
       
-      console.log("ACTIVATE");
+      
   }
   
- 
-  
-
- storeData = async() => {
-    try {
-      
-      await AsyncStorage.setItem('array', JSON.stringify(habits))
-    
-    } catch(err) {
-      console.log(err);
-    }
-    }
-
-  
-  
-  
+  reRender() {
+    this.setState({habitsArray: habits});
+    console.log("RERENDERING!");
+  }
   
   
 render() {
@@ -66,13 +54,13 @@ render() {
           text= "Add new habit"
           navigation= {this.props.navigation}
           navigateTo= "Edit Habit Mode"
-          parameters= {{index: 1337}}
+          parameters= {{onGoBack: () => this.reRender()}}
          />
           
         <View>
  
       {/* Displays the list of habits */}
-        { habits.map((item, index)=>(
+        { this.state.habitsArray.map((item, index)=>(
 
           <HabitEditDisplay 
                   index= {index}
@@ -93,7 +81,7 @@ render() {
     </View>
   );
 
-  }
+}
 }
 
 // Gets the dimesions of the screen for proper sizing in

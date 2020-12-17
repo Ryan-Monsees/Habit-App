@@ -18,7 +18,7 @@ const HabitEditDisplay = props => {
     return (
         <View>
         <TouchableOpacity
-            onPress={() => props.navigation.navigate("Edit Habit Mode", {index: props.index})}
+            onPress={() => props.navigation.navigate("Edit Habit Mode", {index: props.index, onGoBack: () => props.parameters})}
             style={styles.habit}>
             
             
