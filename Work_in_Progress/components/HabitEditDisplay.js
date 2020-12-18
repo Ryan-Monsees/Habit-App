@@ -8,18 +8,10 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 const HabitEditDisplay = props => {
 
 
-
-    
-    /*
-        props.navigation.navigate("Edit Habit Mode", {name: props.name, 
-                                                    count: props.count})
-    */
   
     return (
-        <View>
-        <TouchableOpacity
-            onPress={() => props.navigation.navigate("Edit Habit Mode", {index: props.index, onGoBack: () => props.parameters})}
-            style={styles.habit}>
+        <View style = {styles.habit}> 
+        
             
             
             <View>
@@ -27,7 +19,6 @@ const HabitEditDisplay = props => {
                 {/* Displays the name */}
                 <Text>{props.name + " " + props.count}</Text>
             </View>
-        </TouchableOpacity>
         </View>
     ); 
 

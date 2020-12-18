@@ -33,9 +33,9 @@ export default class EditHabits extends React.Component {
       
   }
   
-  reRender() {
+  updateHabits() {
     this.setState({habitsArray: habits});
-    console.log("RERENDERING!");
+   
   }
   
   
@@ -54,22 +54,23 @@ render() {
           text= "Add new habit"
           navigation= {this.props.navigation}
           navigateTo= "Edit Habit Mode"
-          parameters= {{onGoBack: () => this.reRender()}}
+          parameters= {{index: -1, onGoBack: () => this.updateHabits()}}
          />
           
         <View>
  
       {/* Displays the list of habits */}
         { this.state.habitsArray.map((item, index)=>(
-
+          // Makes it so when you click on a Habit it passes the habit index and updateHabits() to Edit Habit Mode and navigates to it
+          <TouchableOpacity onPress = {() => this.props.navigation.navigate("Edit Habit Mode", {index: index, onGoBack: () => this.updateHabits()})}
+                            key= {index}>
           <HabitEditDisplay 
                   index= {index}
                   name= {item.name}
                   count= {item.count}
-                  key= {index}
                   navigation= {this.props.navigation}
-                  
           />
+          </TouchableOpacity>
           )
           )
         }

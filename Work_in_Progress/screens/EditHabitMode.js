@@ -18,50 +18,49 @@ export default class EditHabitMode extends React.Component {
         super(props);
         
 
-        // Checks to see if we're editting a habit
-        // or adding a habit by seeing if we passed
-        // the index to this screen.
-        let indexCheck, habitNameCheck, habitWeightCheck, habitCountCheck;
-        if(props.route.params.index) {
-            indexCheck = props.route.params.index;
-            habitNameCheck = habits[indexCheck].name;
-            habitWeightCheck = habits[indexCheck].weight;
-            habitCountCheck = habits[indexCheck].count;
-        }
-        else {
-            indexCheck = -1;
-            habitNameCheck = "";
-            habitWeightCheck = 1;
-            habitCountCheck = 0;
-        }
+       
+
+       
     
         this.state = {
         // Holds the index in the habit array that we're editting.
-            index: indexCheck,
+            index: -1,
 
             // State for holding the habit name to be added.
-            habitName: habitNameCheck,
+            habitName: "",
 
              // State for holding the weight of the habit.
             // The higher the number, the more points it's worth
             // A negative number is a negative habit that decreases
             // your total score at the end of the day
-            habitWeight: habitWeightCheck,
+            habitWeight: 1,
 
              // State for holding the number of times the habit
             // has been done today
-            habitCount: habitCountCheck
-        }       
+            habitCount: 0
+        }    
+        
         
 
+       
+    }
+    
+    componentDidMount() {
+        // Checks to see if we're editting a habit
+        // or adding a habit by seeing if we passed
+        // the index to this screen. If it's -1,
+        // We're adding a new Habit
+        console.log("index: " + this.props.route.params.index);
+        if(this.props.route.params.index != -1) {
+            this.setState({index : this.props.route.params.index}); 
+            this.setState({habitName : habits[this.props.route.params.index].name});
+            this.setState({habitWeight : habits[this.props.route.params.index].weight});
+            this.setState({habitCount : habits[this.props.route.params.index].count});
+        }
         
-    } 
-
-
-    
-
-    
-   
+        console.log("Habit Name: " + this.state.habitName);
+        
+    }
 
     // Handles adding a new habit
     addHabitHandler() {
@@ -81,16 +80,9 @@ export default class EditHabitMode extends React.Component {
         this.props.navigation.goBack();
     }
 
-
- 
-
-
     // Calls the function from EditHabit.js
     // to cancel adding a habit.
     cancelHabit() {
-        
-        
-        
         
         // Clears input.
         this.setState({habitName: ""});

@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import { StyleSheet, Text, View} from 'react-native';
+import { LogBox, StyleSheet, Text, View} from 'react-native';
 
 
 import HomeStack from './routes/homeStack';
@@ -15,13 +15,21 @@ import * as SQLite from 'expo-sqlite';
 // of React Navigation
 export default class App extends React.Component {
 
+  
   // Runs once when the app starts
   componentDidMount() {
     
+    LogBox.ignoreLogs([
+      'Non-serializable values were found in the navigation state',
+    ]);
+    
+
+
     this.getDate();
 
   }
  
+  
   
   /*  
       Gets the current date. If the current date is different
