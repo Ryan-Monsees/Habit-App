@@ -18,10 +18,10 @@ export default class App extends React.Component {
   
   // Runs once when the app starts
   componentDidMount() {
-    
-    LogBox.ignoreLogs([
-      'Non-serializable values were found in the navigation state',
-    ]);
+
+    //LogBox.ignoreLogs([
+      //'Non-serializable values were found in the navigation state',
+    //]);
     
 
 
