@@ -26,7 +26,8 @@ const HabitEditDisplay = props => {
 }
 
 const styles = EStyleSheet.create({
-    habit: {
+    habit: {   
+        padding: 100,
         backgroundColor: 'blue',
         alignItems: 'center',
         

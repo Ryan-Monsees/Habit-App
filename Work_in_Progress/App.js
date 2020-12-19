@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import { LogBox, StyleSheet, Text, View} from 'react-native';
+import { YellowBox, StyleSheet, Text, View} from 'react-native';
 
 
 import HomeStack from './routes/homeStack';
@@ -19,9 +19,9 @@ export default class App extends React.Component {
   // Runs once when the app starts
   componentDidMount() {
 
-    //LogBox.ignoreLogs([
-      //'Non-serializable values were found in the navigation state',
-    //]);
+    YellowBox.ignoreWarnings([
+      'Non-serializable values were found in the navigation state',
+    ]);
     
 
 
