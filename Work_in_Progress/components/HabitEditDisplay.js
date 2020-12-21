@@ -14,11 +14,13 @@ const HabitEditDisplay = props => {
         
             
             
-            <View>
+            {/*<View style = {styles.habitText}> */}
                 
                 {/* Displays the name */}
-                <Text>{props.name + " " + props.count}</Text>
-            </View>
+                <Text style = {styles.habitText}>
+                    {props.name + " " + props.count}
+                </Text>
+            {/* </View> */}
         </View>
     ); 
 
@@ -27,12 +29,16 @@ const HabitEditDisplay = props => {
 
 const styles = EStyleSheet.create({
     habit: {   
-        padding: 100,
         backgroundColor: 'blue',
-        alignItems: 'center',
-        
-       
+         alignItems: 'center',
+         justifyContent: 'center',    
     },
+
+    habitText: {
+         // Uses dynamic font sizes based on screen size
+         fontSize: '30rem',
+         textAlign: 'center'
+    }
 
 });
 

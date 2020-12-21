@@ -37,7 +37,11 @@ export default class EditHabitMode extends React.Component {
 
              // State for holding the number of times the habit
             // has been done today
-            habitCount: 0
+            habitCount: 0,
+
+            isNewHabit: true,
+
+            addOrSave: "ADD"
         }    
         
         
@@ -50,26 +54,20 @@ export default class EditHabitMode extends React.Component {
         // or adding a habit by seeing if we passed
         // the index to this screen. If it's -1,
         // We're adding a new Habit
-        console.log("index: " + this.props.route.params.index);
         if(this.props.route.params.index != -1) {
             this.setState({index : this.props.route.params.index}); 
             this.setState({habitName : habits[this.props.route.params.index].name});
             this.setState({habitWeight : habits[this.props.route.params.index].weight});
             this.setState({habitCount : habits[this.props.route.params.index].count});
+            this.setState({isNewHabit: false, addOrSave: "SAVE"});
+            console.log("addorSave: " + this.state.addOrSave);
         }
         
         console.log("Habit Name: " + this.state.habitName);
         
     }
 
-    // Handles adding a new habit
-    addHabitHandler() {
-
-        habits.push({name: props.name, count: props.count});
     
-        storeData.StoreHabits();
-
-     }
 
     // Handles deleting the selected habit.
     deleteHabit()  {
@@ -109,12 +107,23 @@ export default class EditHabitMode extends React.Component {
         habitNameCheck.length <= 50) {     
             
             // Removes multiple spaces and adds it to the array.
-            habits.push({   name: habitNameCheck.replace(/\s+/g, " "), 
-                            weight: 0,      
-                            count: 0});
+            // If index != -1, we're editing a habit in the array instead. 
+            if(this.state.index == -1) {
+                habits.push({   name: habitNameCheck.replace(/\s+/g, " "), 
+                                weight: 0,      
+                                count: 0});
+            }
+            else {
+                habits[this.state.index] = {    name: habitNameCheck.replace(/\s+/g, " "), 
+                                                weight: 0,      
+                                                count: 0};
+            }
+            
+            
 
             
-            // Clears input.
+            // Clears input. Navigates back. onGoBack() updates the EditHabits.js state array
+            storeData.StoreHabits();
             this.setState({habitName: ""});
             this.props.route.params.onGoBack();
             this.props.navigation.goBack();
@@ -167,18 +176,22 @@ export default class EditHabitMode extends React.Component {
 
         {/* Button to confirm adding a new habit */}
         <Button
-            title="ADD"
+            title={this.state.addOrSave.toString()}
             onPress={() => this.addHabit()} />
 
+        {!this.state.isNewHabit ? (
         <Button
             title="DELETE"
             onPress={() => this.deleteHabit()} />
+        ): null}
+
 
         {/* Button to cancel adding a new habit */}
         <Button 
             title="CANCEL"
             onPress={() => this.cancelHabit()} />
 
+           
         </View>
         );
     }
