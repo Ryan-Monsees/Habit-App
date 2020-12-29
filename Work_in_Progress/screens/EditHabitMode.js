@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {View, Text, StyleSheet, Dimensions, Button, Modal, TextInput, Alert, CheckBox} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Button, Modal, TextInput, Alert, CheckBox, TouchableOpacity} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
 
@@ -90,47 +90,25 @@ export default class EditHabitMode extends React.Component {
 
 
     // Changes the TextInput to the entered text.
-    inputHandler(enteredText) {
-        console.log("updating text to: " + enteredText);
-    this.setState({habitName: enteredText});
+    inputHandlerName(enteredTextName) {
+    this.setState({habitName: enteredTextName});
     };
+
+    inputHandlerWeight(enteredTextWeight) {
+        this.setState({habitWeight: enteredTextWeight});
+    }
 
     // Handles adding a habit once the user hits add
     addHabit() {
 
         let habitNameCheck = this.state.habitName;
+        let habitWeightCheck = this.state.habitWeight;
         console.log("habitNameCheck: " + habitNameCheck);
         
         // Checks to make sure it's only characters and spaces.
-        if(/\S/.test(habitNameCheck) && habitNameCheck != '' &&
-        habitNameCheck[habitNameCheck.length-1] != ' ' &&
-        habitNameCheck.length <= 50) {     
+        if(!(/\S/.test(habitNameCheck) && habitNameCheck != '' &&
+        habitNameCheck[habitNameCheck.length-1] != ' ')) {
             
-            // Removes multiple spaces and adds it to the array.
-            // If index != -1, we're editing a habit in the array instead. 
-            if(this.state.index == -1) {
-                habits.push({   name: habitNameCheck.replace(/\s+/g, " "), 
-                                weight: 0,      
-                                count: 0});
-            }
-            else {
-                habits[this.state.index] = {    name: habitNameCheck.replace(/\s+/g, " "), 
-                                                weight: 0,      
-                                                count: 0};
-            }
-            
-            
-
-            
-            // Clears input. Navigates back. onGoBack() updates the EditHabits.js state array
-            storeData.StoreHabits();
-            this.setState({habitName: ""});
-            this.props.route.params.onGoBack();
-            this.props.navigation.goBack();
-        }
-        // What it displays if the input is invalid
-        else {
-            if(habitNameCheck.length <= 50)
             Alert.alert(
                 'Invalid input',
                 'Must contain only characters and spaces',
@@ -141,55 +119,104 @@ export default class EditHabitMode extends React.Component {
                     
                 ]
             );
-            else
-            Alert.alert(
-                'Invalid input',
-                'Too long! Make it clear and concise',
-                [
-                    {
-                        text: 'Ok'
-                    }
-                    
-                ]
-            );
-
         }
+        else if(!(habitNameCheck.length <= 50)) {
+                Alert.alert(
+                    'Invalid input',
+                    'Too long! Make it clear and concise',
+                    [
+                        {
+                            text: 'Ok'
+                        }
+                        
+                    ]
+                );
+        }
+        else {
+            // Removes multiple spaces and adds it to the array.
+            // If index != -1, we're editing a habit in the array instead. 
+            if(this.state.index == -1) {
+                habits.push({   name: habitNameCheck.replace(/\s+/g, " "), 
+                                weight: habitWeightCheck,      
+                                count: 0});
+            }
+            else{
+                habits[this.state.index] = {    name: habitNameCheck.replace(/\s+/g, " "), 
+                                                weight: 0,      
+                                                count: 0};
+            
+                }
         
-        
+        // Clears input. Navigates back. onGoBack() updates the EditHabits.js state array
+        storeData.StoreHabits();
+        this.setState({habitName: ""});
+        this.props.route.params.onGoBack();
+        this.props.navigation.goBack();
+        }  
+                
+            
 
-
-        
     }
 
 
     render() {
         return(
-        <View>
+        <View style = {styles.container}>
             {/* Where you enter a new goal. */}
             <TextInput
             placeholder="Enter name of habit"
             style={styles.textInput}
-            onChangeText={enteredText => this.inputHandler(enteredText)}
+            onChangeText={enteredTextName => this.inputHandlerName(enteredTextName)}
             value={this.state.habitName}
             />
 
+            {/* Where you enter a new goal. */}
+            <View style = {styles.currHabitWeight}>
+                <Text style = {styles.currHabitWeightText}>
+                    {this.state.habitWeight}
+                </Text>
+               
+            </View>
+
 
         {/* Button to confirm adding a new habit */}
-        <Button
-            title={this.state.addOrSave.toString()}
-            onPress={() => this.addHabit()} />
+        <TouchableOpacity
+            style = {styles.addButton}
+            onPress={() => this.addHabit()} >
+                <View style = {styles.addButtonView}>
+                    <Text style = {styles.addButtonText}>
+                    {this.state.addOrSave.toString()}
+                    </Text>
+                </View>
+
+
+            </TouchableOpacity>
 
         {!this.state.isNewHabit ? (
-        <Button
-            title="DELETE"
-            onPress={() => this.deleteHabit()} />
+        <TouchableOpacity
+            style = {styles.deleteButton}
+            onPress={() => this.deleteHabit()} >
+                <View style = {styles.deleteButtonView}>
+                    <Text style = {styles.deleteButtonText}>
+                        DELETE
+                    </Text>
+                </View>
+        </TouchableOpacity>
         ): null}
 
 
         {/* Button to cancel adding a new habit */}
-        <Button 
-            title="CANCEL"
-            onPress={() => this.cancelHabit()} />
+        <TouchableOpacity
+            style={styles.cancelButton}
+            onPress={() => this.cancelHabit()} >
+
+            <View style = {styles.cancelButtonView}>
+                    <Text style = {styles.cancelButtonText}>
+                        CANCEL
+                    </Text>
+            </View>
+
+        </TouchableOpacity>
 
            
         </View>
@@ -207,8 +234,71 @@ export default class EditHabitMode extends React.Component {
     EStyleSheet.build({ $rem: width / height });
     
     const styles = EStyleSheet.create({
+
+        container: {
+            flex: 1,
+        },
         
-        textInput: {
-                padding: 100
+        addButton: {
+                flex: 1,
+                backgroundColor: 'blue',
+                
+        },
+        
+        addButtonView: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+
+        addButtonText: {
+            textAlign: 'center'
+        },
+
+        deleteButton: {
+            flex: 1,
+            backgroundColor: 'blue',
+            
+        },
+        
+        deleteButtonView: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+
+        deleteButtonText: {
+            textAlign: 'center'
+        },
+
+        cancelButton: {
+            flex: 1,
+            backgroundColor: 'rgb(255,255,0)'
+        },
+
+        cancelButtonView: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+
+        cancelButtonText: {
+            textAlign: 'center'
+        },
+
+        currHabitWeight: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'cyan'
+        },
+
+        currHabitWeightText: {
+            textAlign: 'center'
+        },
+
+       textInput: {
+                flex: 1,
+                textAlign: 'center'
         }
     });
