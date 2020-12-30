@@ -103,10 +103,47 @@ export default class EditHabitMode extends React.Component {
 
         let habitNameCheck = this.state.habitName;
         let habitWeightCheck = this.state.habitWeight;
+        let found = false;
+        let checkArray = true;
+        let index = this.state.index;
         console.log("habitNameCheck: " + habitNameCheck);
         
+        
+       // Checks to see if the new name is different from the old name.
+       // If it is the same, we don't check the array for duplicates
+        if(index !== -1) {
+            if(habits[index].name.toLowerCase() === habitNameCheck.toLowerCase()) {
+                checkArray = false;
+                console.log("check array false");
+            }
+        }
+        // Checks to see if the habit name is in the array
+        if(checkArray) {
+            for(var i = 0; i < habits.length; i++) {
+                if(habits[i].name.toLowerCase() === habitNameCheck.toLowerCase()) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        
+
+        if(found) {
+
+            Alert.alert(
+                'Already exists',
+                'Try another habit name',
+                [
+                    {
+                        text: 'Ok'
+                    }
+                    
+                ]
+            );
+
+        }
         // Checks to make sure it's only characters and spaces.
-        if(!(/\S/.test(habitNameCheck) && habitNameCheck != '' &&
+        else if(!(/\S/.test(habitNameCheck) && habitNameCheck != '' &&
         habitNameCheck[habitNameCheck.length-1] != ' ')) {
             
             Alert.alert(
