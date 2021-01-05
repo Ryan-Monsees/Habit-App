@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import '../global.js'
 
 import storeData from '../components/StoreData';
+import BackButton from '../components/BackButton';
 
 //=====================================================
 // The screen that displays when adding a habit.
@@ -199,6 +200,10 @@ export default class EditHabitMode extends React.Component {
     render() {
         return(
         <View style = {styles.container}>
+           
+
+            
+
             {/* Where you enter a new goal. */}
             <TextInput
             placeholder="Enter name of habit"
@@ -275,6 +280,7 @@ export default class EditHabitMode extends React.Component {
         container: {
             flex: 1,
         },
+
         
         addButton: {
                 flex: 1,

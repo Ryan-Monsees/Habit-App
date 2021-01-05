@@ -15,15 +15,6 @@ const StartScreen = props => {
         <View style={styles.container}>
 
             
-            {/* Background */}
-            <ImageBackground
-                source={require('../assets/Clouds.jpg')}
-                style={styles.imageBackground}
-            >
-                <Text style={styles.title}>
-                    Better Today
-                    </Text>
-            </ImageBackground>
 
 
 

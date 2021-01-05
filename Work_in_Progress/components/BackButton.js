@@ -11,12 +11,34 @@ import { createStackNavigator } from '@react-navigation/stack';
 export default function BackButton  (props) {
     return(
         <View>
-            <Button
-                title="go back"
+            <TouchableOpacity
+                style = {styles.button}
                 onPress={() => props.navigation.navigate.goBack()}
-            />
+            >
+                <View style = {styles.buttonView}>
+                    
+                </View>
+
+            </TouchableOpacity>
+
+
 
             
         </View>
     )
 }
+
+let { height, width } = Dimensions.get('window');
+
+const styles = EStyleSheet.create({
+
+    
+
+    buttonView: {
+        
+        backgroundColor: 'blue',
+        height: height * .1,
+        width: width * .1
+    },
+
+});
