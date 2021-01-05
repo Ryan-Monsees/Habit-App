@@ -10,6 +10,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import storeData from '../components/StoreData';
 
+import '../global.js';
+
 
 
 
@@ -87,11 +89,7 @@ render() {
 }
 }
 
-// Gets the dimesions of the screen for proper sizing in
-// the Extended style sheet
-let { height, width } = Dimensions.get('window');
-
-EStyleSheet.build({ $rem: width / height });
+EStyleSheet.build({ $rem: sWidth / sHeight });
 
 const styles = EStyleSheet.create({
 
@@ -103,8 +101,8 @@ const styles = EStyleSheet.create({
   habit: {
     flex: 1,
     
-    width: width,
-    height: .2 * height, 
+    width: sWidth,
+    
   },
 
   scrollView: {
@@ -122,7 +120,7 @@ const styles = EStyleSheet.create({
   addButton: {
         backgroundColor: 'blue',
         alignItems: 'center',
-        padding: height * .10
+        padding: sHeight * .10
     },
 
     addButtonText: {

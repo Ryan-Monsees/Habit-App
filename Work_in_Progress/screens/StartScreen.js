@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet, Text, ImageBackground, PixelRatio, Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import ButtonNav from '../components/ButtonNav';
-
+import '../global.js';
 
 
 
@@ -45,8 +45,8 @@ const StartScreen = props => {
 
 };
 
-let { height, width } = Dimensions.get('window');
-EStyleSheet.build({ $rem: width / height });
+
+EStyleSheet.build({ $rem: sWidth / sHeight });
 
 
 
@@ -55,8 +55,8 @@ const styles = EStyleSheet.create({
 
     // Added to style properly based on the screen size
     container: {
-        width: width,
-        height: height,
+        width: sWidth,
+        height: sHeight,
 
     },
 
@@ -65,13 +65,6 @@ const styles = EStyleSheet.create({
         color: 'yellow',
         opacity: .5,
 
-    },
-
-    imageBackground: {
-        width: width,
-        height: height * .25,
-        justifyContent: 'center',
-        alignItems: 'center'
     },
 
 
