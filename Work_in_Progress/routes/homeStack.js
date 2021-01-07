@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Button, Image, ImageBackground, Dimensions} from 'react-native';
+import {View, Text, TouchableOpacity, Image, ImageBackground, Dimensions} from 'react-native';
 import {BaseRouter, NavigationContainer, useLinkProps} from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 
@@ -18,30 +18,47 @@ const HomeStack = createStackNavigator();
 // Sets up the foundation for React Navigation so that
 // it can transition between screens properly
 export default function homeStack() {
-  
-    function BetterTodayHeader({navigation: {goBack}}) {
-        
+ 
+    function BetterTodayHeader(props) {
+        console.log("route: " + props.name);
         return (
-
-            <View style={{height: sHeight*.2, width: sWidth, backgroundColor: 'blue'}}>
+            
+            <View style={styles.Container}>
          
                 <ImageBackground
-                    style={{height: '100%', width: '100%'}}
+                    style={styles.imageBackground}
                     source={require('../assets/Clouds.jpg')}>
+                    
+                    {/* 
+                        Will only show the Back button if the 
+                        screen is not the main screen
+                    */}
+                    {!(props.name == "Better Today") ? (
+                    <View style={{justifyContent: 'center', flex: 1}}>
+                        <TouchableOpacity
+                            style={styles.backButton} 
+                            onPress = {() => props.navigation.goBack()}>
+                            <View style={styles.backButtonView}>
+                                <Text style={styles.backButtonText}>
+                                    Back
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                      ): null}
 
-                <HeaderBackButton onPress = {() => goBack()}/>
-                    <Text>
-                    
-                    
+
+
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>
+                        {props.name}
                     </Text>
+                </View>
+
                 </ImageBackground>
             </View>
         );
       }
-        
-       
-     
-  
 
     return (
         <NavigationContainer>
@@ -52,12 +69,12 @@ export default function homeStack() {
                 <HomeStack.Screen name="Better Today" component={StartScreen} 
                     options={({ navigation, route }) => ({
                                
-                                header: props => <BetterTodayHeader {...props} />
+                                header: props => <BetterTodayHeader name="Better Today" {...props} />
 
                                 })}/>
                 <HomeStack.Screen name="Edit Habits" component={EditHabits} 
                options={({ navigation, route }) => ({ 
-                    header: props => <BetterTodayHeader {...props} />
+                    header: props => <BetterTodayHeader name= "Edit Habits" {...props} />
 
                 })}/>
                 <HomeStack.Screen name="Edit Habit Mode" component={EditHabitMode} 
@@ -71,10 +88,48 @@ export default function homeStack() {
 EStyleSheet.build({ $rem: sWidth / sHeight });
 const styles = EStyleSheet.create({
 
-    HeaderView: {
+    Container: {
         height: sHeight*.2, 
         width: sWidth,
+        
     },
+
+    imageBackground: {
+        height: '100%', 
+        width: '100%', 
+        flex: 1
+    },
+
+    backButton: {
+       flex: 0
+    },
+
+    backButtonView: {
+       
+        backgroundColor: 'blue',
+        width: sWidth*.1,
+        height: sHeight*.05,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+
+    backButtonText: {
+        
+        textAlign: 'center',
+    },
+
+    Header: {
+        justifyContent:'flex-end',
+    },
+
+    headerText: {
+        textAlign: 'center',
+        justifyContent: 'flex-end',
+        fontSize: '100rem'
+    },
+
+   
    
 
 });
