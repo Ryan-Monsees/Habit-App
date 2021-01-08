@@ -69,12 +69,14 @@ export default function homeStack() {
                 <HomeStack.Screen name="Better Today" component={StartScreen} 
                     options={({ navigation, route }) => ({
                                
-                                header: props => <BetterTodayHeader name="Better Today" {...props} />
+                                header: props => <BetterTodayHeader name="Better Today" {...props} />,
 
+                
                                 })}/>
                 <HomeStack.Screen name="Edit Habits" component={EditHabits} 
                options={({ navigation, route }) => ({ 
-                    header: props => <BetterTodayHeader name= "Edit Habits" {...props} />
+                    header: props => <BetterTodayHeader name= "Edit Habits" {...props} />,
+
 
                 })}/>
                 <HomeStack.Screen name="Edit Habit Mode" component={EditHabitMode} 
@@ -97,7 +99,8 @@ const styles = EStyleSheet.create({
     imageBackground: {
         height: '100%', 
         width: '100%', 
-        flex: 1
+        flex: 1,
+        justifyContent: 'flex-end'
     },
 
     backButton: {
@@ -119,13 +122,8 @@ const styles = EStyleSheet.create({
         textAlign: 'center',
     },
 
-    Header: {
-        justifyContent:'flex-end',
-    },
-
     headerText: {
         textAlign: 'center',
-        justifyContent: 'flex-end',
         fontSize: '100rem'
     },
 
