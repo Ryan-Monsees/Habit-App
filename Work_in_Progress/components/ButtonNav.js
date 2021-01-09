@@ -27,7 +27,6 @@ export default function ButtonNav(props) {
     const checkParams = () => {
         if(props.parameters)
         {
-            console.log("Passed parameters!");
             props.navigation.navigate(props.navigateTo, props.parameters);
         }
         else

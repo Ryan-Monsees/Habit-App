@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Button, Modal, TextInput, Alert, CheckBox, TouchableOpacity } from 'react-native';
+import { View, Text, KeyboardAwareScrollView, TextInput, Alert, CheckBox, TouchableOpacity } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
 
@@ -8,6 +8,10 @@ import '../global.js'
 
 import storeData from '../components/StoreData';
 import BackButton from '../components/BackButton';
+import WeightButton from '../components/WeightButton';
+import SignButton from '../components/SignButton';
+
+
 
 //=====================================================
 // The screen that displays when adding a habit.
@@ -38,9 +42,17 @@ export default class EditHabitMode extends React.Component {
 
             isNewHabit: true,
 
+            // Determines if the Add button will display 
+            // "ADD" if you're adding a new habit or "SAVE"
+            // if you are editing a habit
             addOrSave: "ADD",
 
-            negate: -1
+            weightButtonController: {
+                sign: 1,
+                color: 'blue'
+            }
+
+
         }
 
 
@@ -60,7 +72,7 @@ export default class EditHabitMode extends React.Component {
             this.setState({ habitName: habits[this.props.route.params.index].name });
             this.setState({ habitWeight: habits[this.props.route.params.index].weight });
             this.setState({ habitCount: habits[this.props.route.params.index].count });
-            this.setState({ isNewHabit: false, addOrSave: "SAVE" }); 
+            this.setState({ isNewHabit: false, addOrSave: "SAVE" });
         }
     }
 
@@ -201,51 +213,74 @@ export default class EditHabitMode extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View
+        
+            style={styles().container}>
 
 
 
-                <View style={styles.textInputView}>
+                <View style={styles().textInputView}>
                     {/* Where you enter a new goal. */}
                     <TextInput
                         multiline={true}
                         numberOfLines={3}
                         placeholder="Enter name of habit"
-                        style={styles.textInput}
+                        style={styles().textInput}
                         onChangeText={enteredTextName => this.inputHandlerName(enteredTextName)}
                         value={this.state.habitName}
                     />
                 </View>
 
                 {/* Where you set the weight of a habit */}
-                <View style={styles.habitWeight}>
+                <View style={styles().habitWeight}>
 
-                    <View style={styles.currHabitWeightView}>
-                        <Text style={styles.currHabitWeightText}>
+                    <View style={styles().currHabitWeightView}>
+                        <Text style={styles().currHabitWeightText}>
                             {this.state.habitWeight}
                         </Text>
                     </View>
-                    
 
-                    <View style={styles.buttonRow}>
-                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 1})}>
-                            <WeightButton number={1} />
+                    <View style={styles().signButtons}>
+
+                        {/* Negative */}
+                        <TouchableOpacity onPress={() => this.setState({ weightButtonController: { sign: -1, color: 'red' } })}>
+                            <SignButton color='red'
+                                sign='-' />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 2 })}>
-                            <WeightButton number={2} />
+                        {/* Positive  */}
+                        <TouchableOpacity onPress={() => this.setState({ weightButtonController: { sign: 1, color: 'blue' } })}>
+                            <SignButton color='blue'
+                                sign='+' />
+                        </TouchableOpacity>
+                    </View>
+
+                    {/* this.state.weightButtonController.color */}
+                    <View style={styles().buttonRow}>
+                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 1 * this.state.weightButtonController.sign })}>
+                            <WeightButton
+                                number={1 * this.state.weightButtonController.sign}
+                                color={this.state.weightButtonController.color} />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 3 })}>
-                            <WeightButton number={3} />
+                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 2 * this.state.weightButtonController.sign })}>
+                            <WeightButton number={2 * this.state.weightButtonController.sign}
+                                color={this.state.weightButtonController.color} />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 4 })}>
-                            <WeightButton number={4} />
+                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 3 * this.state.weightButtonController.sign })}>
+                            <WeightButton number={3 * this.state.weightButtonController.sign}
+                                color={this.state.weightButtonController.color} />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 5 })}>
-                            <WeightButton number={5} />
+                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 4 * this.state.weightButtonController.sign })}>
+                            <WeightButton number={4 * this.state.weightButtonController.sign}
+                                color={this.state.weightButtonController.color} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 5 * this.state.weightButtonController.sign })}>
+                            <WeightButton number={5 * this.state.weightButtonController.sign}
+                                color={this.state.weightButtonController.color} />
                         </TouchableOpacity>
                     </View>
 
@@ -256,10 +291,10 @@ export default class EditHabitMode extends React.Component {
 
                 {/* Button to confirm adding a new habit */}
                 <TouchableOpacity
-                    style={styles.addButton}
+                    style={styles().addButton}
                     onPress={() => this.addHabit()} >
-                    <View style={styles.addButtonView}>
-                        <Text style={styles.addButtonText}>
+                    <View style={styles().addButtonView}>
+                        <Text style={styles().addButtonText}>
                             {this.state.addOrSave.toString()}
                         </Text>
                     </View>
@@ -269,10 +304,10 @@ export default class EditHabitMode extends React.Component {
 
                 {!this.state.isNewHabit ? (
                     <TouchableOpacity
-                        style={styles.deleteButton}
+                        style={styles().deleteButton}
                         onPress={() => this.deleteHabit()} >
-                        <View style={styles.deleteButtonView}>
-                            <Text style={styles.deleteButtonText}>
+                        <View style={styles().deleteButtonView}>
+                            <Text style={styles().deleteButtonText}>
                                 DELETE
                     </Text>
                         </View>
@@ -282,11 +317,11 @@ export default class EditHabitMode extends React.Component {
 
                 {/* Button to cancel adding a new habit */}
                 <TouchableOpacity
-                    style={styles.cancelButton}
+                    style={styles().cancelButton}
                     onPress={() => this.cancelHabit()} >
 
-                    <View style={styles.cancelButtonView}>
-                        <Text style={styles.cancelButtonText}>
+                    <View style={styles().cancelButtonView}>
+                        <Text style={styles().cancelButtonText}>
                             CANCEL
                     </Text>
                     </View>
@@ -305,10 +340,12 @@ export default class EditHabitMode extends React.Component {
 
 EStyleSheet.build({ $rem: sWidth / sHeight });
 
-const styles = EStyleSheet.create({
+const styles = (props) => EStyleSheet.create({
+
 
     container: {
         flex: 1,
+        height: sHeight
     },
 
     textInputView: {
@@ -317,7 +354,6 @@ const styles = EStyleSheet.create({
         backgroundColor: 'purple',
         alignItems: 'center'
     },
-
 
     habitWeight: {
         flex: 1,
@@ -336,8 +372,18 @@ const styles = EStyleSheet.create({
     },
 
     currHabitWeightText: {
-        
+
         textAlign: 'center'
+    },
+
+    signButtons: {
+        flex: 1,
+        backgroundColor: 'green',
+        height: '50%',
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
     },
 
     buttonRow: {
@@ -347,19 +393,9 @@ const styles = EStyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        
+
     },
 
-    weightButton: {
-        height: '50%',
-        width: sWidth*.15,
-        backgroundColor: 'red',
-        justifyContent: 'center'
-    },
-
-    weightButtonText: {
-        textAlign: 'center',
-    },
 
     textInput: {
         flex: 1,
@@ -419,22 +455,11 @@ const styles = EStyleSheet.create({
         textAlign: 'center'
     },
 
-   
+
 
 
 });
 
-// Component for the buttons to change the weight of a habit
-function WeightButton(props) {
-    return (
-
-        <View style={styles.weightButton}>
-            <Text style = {styles.weightButtonText}>
-                {props.number}
-            </Text>
-        </View>
 
 
-    );
 
-}

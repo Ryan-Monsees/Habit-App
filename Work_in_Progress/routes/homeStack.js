@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image, ImageBackground, Dimensions} from 'react-native';
-import {BaseRouter, NavigationContainer, useLinkProps} from '@react-navigation/native';
+import { View, Text, TouchableOpacity, Image, ImageBackground, Dimensions } from 'react-native';
+import { BaseRouter, NavigationContainer, useLinkProps } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 
 
@@ -18,69 +18,68 @@ const HomeStack = createStackNavigator();
 // Sets up the foundation for React Navigation so that
 // it can transition between screens properly
 export default function homeStack() {
- 
+
     function BetterTodayHeader(props) {
         console.log("route: " + props.name);
         return (
-            
+
             <View style={styles.Container}>
-         
+
                 <ImageBackground
                     style={styles.imageBackground}
                     source={require('../assets/Clouds.jpg')}>
-                    
-                    {/* 
-                        Will only show the Back button if the 
-                        screen is not the main screen
-                    */}
+
+                    {/* Will only show the Back button if the 
+                        screen is not the main screen */}     
                     {!(props.name == "Better Today") ? (
-                    <View style={{justifyContent: 'center', flex: 1}}>
-                        <TouchableOpacity
-                            style={styles.backButton} 
-                            onPress = {() => props.navigation.goBack()}>
-                            <View style={styles.backButtonView}>
-                                <Text style={styles.backButtonText}>
-                                    Back
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
+                        <View style={{ justifyContent: 'center', flex: 1 }}>
+                            <TouchableOpacity
+                                style={styles.backButton}
+                                onPress={() => props.navigation.goBack()}>
+                                <View style={styles.backButtonView}>
+                                    <Text style={styles.backButtonText}>
+                                        Back
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    ) : null}
+
+
+
+                    <View style={styles.header}>
+                        <Text style={styles.headerText}>
+                            {props.name}
+                        </Text>
                     </View>
-                      ): null}
-
-
-
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>
-                        {props.name}
-                    </Text>
-                </View>
 
                 </ImageBackground>
             </View>
         );
-      }
+    }
 
     return (
         <NavigationContainer>
             <HomeStack.Navigator
-             screenOptions={{
-                 
-             }}>
-                <HomeStack.Screen name="Better Today" component={StartScreen} 
+                screenOptions={{
+
+                }}>
+                <HomeStack.Screen name="Better Today" component={StartScreen}
                     options={({ navigation, route }) => ({
-                               
-                                header: props => <BetterTodayHeader name="Better Today" {...props} />,
 
-                
-                                })}/>
-                <HomeStack.Screen name="Edit Habits" component={EditHabits} 
-               options={({ navigation, route }) => ({ 
-                    header: props => <BetterTodayHeader name= "Edit Habits" {...props} />,
+                        header: props => <BetterTodayHeader name="Better Today" {...props} />,
 
 
-                })}/>
-                <HomeStack.Screen name="Edit Habit Mode" component={EditHabitMode} 
-                options={{headerShown: false}}/>
+                    })} />
+                <HomeStack.Screen name="Edit Habits" component={EditHabits}
+                    options={({ navigation, route }) => ({
+                        
+                        header: props => <BetterTodayHeader name="Edit Habits" {...props} />,
+
+
+                    })} />
+                <HomeStack.Screen name="Edit Habit Mode" component={EditHabitMode}
+                    options={{ headerShown: false }} />
             </HomeStack.Navigator>
         </NavigationContainer>
     );
@@ -91,34 +90,34 @@ EStyleSheet.build({ $rem: sWidth / sHeight });
 const styles = EStyleSheet.create({
 
     Container: {
-        height: sHeight*.2, 
+        height: sHeight * .2,
         width: sWidth,
-        
+
     },
 
     imageBackground: {
-        height: '100%', 
-        width: '100%', 
+        height: '100%',
+        width: '100%',
         flex: 1,
         justifyContent: 'flex-end'
     },
 
     backButton: {
-       flex: 0
+        flex: 0
     },
 
     backButtonView: {
-       
+
         backgroundColor: 'blue',
-        width: sWidth*.1,
-        height: sHeight*.05,
+        width: sWidth * .1,
+        height: sHeight * .05,
         alignItems: 'center',
         justifyContent: 'center',
 
     },
 
     backButtonText: {
-        
+
         textAlign: 'center',
     },
 
@@ -127,7 +126,7 @@ const styles = EStyleSheet.create({
         fontSize: '100rem'
     },
 
-   
-   
+
+
 
 });
