@@ -38,7 +38,9 @@ export default class EditHabitMode extends React.Component {
 
             isNewHabit: true,
 
-            addOrSave: "ADD"
+            addOrSave: "ADD",
+
+            negate: -1
         }
 
 
@@ -226,7 +228,7 @@ export default class EditHabitMode extends React.Component {
                     
 
                     <View style={styles.buttonRow}>
-                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 1 })}>
+                        <TouchableOpacity onPress={() => this.setState({ habitWeight: 1})}>
                             <WeightButton number={1} />
                         </TouchableOpacity>
 
