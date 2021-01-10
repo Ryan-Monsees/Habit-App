@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, KeyboardAwareScrollView, TextInput, Alert, CheckBox, TouchableOpacity } from 'react-native';
+import { View, Text, KeyboardAwareScrollView, Platform, TextInput, Alert, CheckBox, TouchableOpacity } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
 
@@ -213,8 +213,8 @@ export default class EditHabitMode extends React.Component {
 
     render() {
         return (
-            <View
-        
+            <KeyboardAwareScrollView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles().container}>
 
 
@@ -329,7 +329,7 @@ export default class EditHabitMode extends React.Component {
                 </TouchableOpacity>
 
 
-            </View>
+            </KeyboardAwareScrollView>
         );
     }
 
@@ -345,7 +345,8 @@ const styles = (props) => EStyleSheet.create({
 
     container: {
         flex: 1,
-        height: sHeight
+        
+        
     },
 
     textInputView: {
@@ -357,6 +358,7 @@ const styles = (props) => EStyleSheet.create({
 
     habitWeight: {
         flex: 1,
+       
         alignItems: 'center',
         justifyContent: 'space-evenly',
         backgroundColor: 'cyan'
@@ -364,7 +366,6 @@ const styles = (props) => EStyleSheet.create({
 
     currHabitWeightView: {
         flex: 1,
-        height: '50%',
         width: '100%',
         backgroundColor: 'yellow',
         justifyContent: 'center'
@@ -372,7 +373,7 @@ const styles = (props) => EStyleSheet.create({
     },
 
     currHabitWeightText: {
-
+        fontSize: '50rem',
         textAlign: 'center'
     },
 
