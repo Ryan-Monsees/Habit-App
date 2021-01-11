@@ -7,6 +7,8 @@ import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack'
 import StartScreen from '../screens/StartScreen';
 import EditHabits from '../screens/EditHabits';
 import EditHabitMode from '../screens/EditHabitMode';
+import HabitCounter from '../screens/HabitCounter';
+import Progress from '../screens/Progress';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Header } from 'react-native/Libraries/NewAppScreen';
@@ -80,6 +82,24 @@ export default function homeStack() {
                     })} />
                 <HomeStack.Screen name="Edit Habit Mode" component={EditHabitMode}
                     options={{ headerShown: false }} />
+
+                <HomeStack.Screen name="Habit Counter" component={HabitCounter}
+                    options={({ navigation, route }) => ({
+                        
+                        header: props => <BetterTodayHeader name="Habit Counter" {...props} />,
+
+
+                    })} />
+
+                <HomeStack.Screen name="Progress" component={Progress}
+                    options={({ navigation, route }) => ({
+                        
+                        header: props => <BetterTodayHeader name="Progress" {...props} />,
+
+
+                    })} />
+
+
             </HomeStack.Navigator>
         </NavigationContainer>
     );

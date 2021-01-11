@@ -57,7 +57,6 @@ render() {
                     index= {index}
                     name= {item.name}
                     count= {item.count}
-                    navigation= {this.props.navigation}
               />
             </View>
             </TouchableWithoutFeedback>

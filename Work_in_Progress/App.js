@@ -44,7 +44,7 @@ export default class App extends React.Component {
         
         // Gets the current date
         const date = (new Date().getMonth() + 1) + " " +
-        new Date().getDate() + " " +
+        new Date().getDate()+1 + " " +
         new Date().getFullYear();
 
         // Gets the list of habits
@@ -62,6 +62,14 @@ export default class App extends React.Component {
         {
           prevDate = currDate;
           currDate = date;
+          
+          // Stores 
+          prevHabits = JSON.parse(JSON.stringify(habits));
+          
+          for(var i = 0; i < habits.length; i++)
+          {
+            habits[i].count = 0;
+          }
         }
 
       // Stores the accurate dates

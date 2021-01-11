@@ -213,8 +213,10 @@ export default class EditHabitMode extends React.Component {
 
     render() {
         return (
-            <KeyboardAwareScrollView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+
+        <View style = {styles().outerLayer}>
+            <View
+            
             style={styles().container}>
 
 
@@ -329,7 +331,8 @@ export default class EditHabitMode extends React.Component {
                 </TouchableOpacity>
 
 
-            </KeyboardAwareScrollView>
+            </View>
+        </View>
         );
     }
 
@@ -342,6 +345,10 @@ EStyleSheet.build({ $rem: sWidth / sHeight });
 
 const styles = (props) => EStyleSheet.create({
 
+    outerLayer: {
+        
+        height: sHeight
+    },
 
     container: {
         flex: 1,
@@ -358,7 +365,6 @@ const styles = (props) => EStyleSheet.create({
 
     habitWeight: {
         flex: 1,
-       
         alignItems: 'center',
         justifyContent: 'space-evenly',
         backgroundColor: 'cyan'
@@ -423,17 +429,16 @@ const styles = (props) => EStyleSheet.create({
 
     deleteButton: {
         position: 'absolute',
-        height: 50,
-        width: 50,
+        height: sHeight*.075,
+        width: sWidth*.15,
         right: 0,
         top: sHeight * .05,
         backgroundColor: 'red',
-        flex: 1
+        
     },
 
     deleteButtonView: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'center'
     },
 
@@ -442,7 +447,8 @@ const styles = (props) => EStyleSheet.create({
     },
 
     cancelButton: {
-        flex: 1,
+        //flex: 1,
+        height: sHeight*.2,
         backgroundColor: 'rgb(255,255,0)'
     },
 

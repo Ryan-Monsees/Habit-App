@@ -29,6 +29,25 @@ const StartScreen = props => {
                     navigateTo="Edit Habits"
                 />
 
+                <ButtonNav
+                    color='blue'
+                    buttonWidth={.2}
+                    buttonHeight={.1}
+                    text="Habit Counter"
+                    navigation={props.navigation}
+                    navigateTo="Habit Counter"
+                /> 
+                
+                <ButtonNav
+                color='rgb(255, 100, 0)'
+                buttonWidth={.2}
+                buttonHeight={.1}
+                text="Progress"
+                navigation={props.navigation}
+                navigateTo="Progress"
+            />
+
+
                 
 
             </View>
