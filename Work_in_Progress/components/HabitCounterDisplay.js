@@ -19,9 +19,10 @@ const HabitEditDisplay = props => {
             
             <TouchableOpacity 
             style = {styles.countMinus}
-            onPress={() => {    StoreData.StoreHabits();
+            onPress={() => {    
                                 habits[props.index].count--; 
-                                props.update(props.index); }}>
+                                props.update(props.index);
+                                StoreData.StoreHabits(); }}>
                 <View>
                     <Text style = {styles.countText}>
                         -
@@ -45,9 +46,9 @@ const HabitEditDisplay = props => {
             
             <TouchableOpacity 
             style = {styles.countPlus}
-            onPress={() => {    StoreData.StoreHabits(); 
-                                habits[props.index].count++; 
-                                props.update(props.index); }}>
+            onPress={() => {    habits[props.index].count++; 
+                                props.update(props.index);
+                                StoreData.StoreHabits(); }}>
                 <View>
                     <Text style = {styles.countText}>
                         +

@@ -5,7 +5,7 @@ import '../global.js';
 //================================================================
 // How each individual habit are displayed when in Habit Edit mode
 //=================================================================
-const HabitEditDisplay = props => {
+const HabitProgressDisplay = props => {
 
 
   
@@ -17,20 +17,20 @@ const HabitEditDisplay = props => {
                     weight
                 </Text>
                 <Text style = {styles.weightText}>
-                    {habits[props.index].weight}
+                    {prevHabits[props.index].weight}
                 </Text>
             </View>
                 
             <View style = {styles.name}>
                  {/* Displays the name */}
                  <Text style = {styles.habitText}>
-                    {habits[props.index].name}
+                    {prevHabits[props.index].name}
                 </Text>
             </View>
 
             <View style = {styles.count}>
                 <Text style = {styles.countText}>
-                {habits[props.index].count}
+                {prevHabits[props.index].count}
                 </Text>
             </View>
                
@@ -93,4 +93,4 @@ const styles = EStyleSheet.create({
 });
 
 
-export default HabitEditDisplay;
+export default HabitProgressDisplay;

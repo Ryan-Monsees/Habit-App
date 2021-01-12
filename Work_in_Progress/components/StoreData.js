@@ -16,6 +16,17 @@ class StoreData extends React.Component {
             }
     }
 
+    StorePrevHabits = async() => {
+      console.log("Storing data...");
+          try {
+            
+            await AsyncStorage.setItem('prevArray', JSON.stringify(prevHabits))
+          
+          } catch(err) {
+            console.log(err);
+          }
+  }
+
     StoreDay() {
         console.log("FAKER, I'm more real than you!");
     }

@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import './global.js'
 
 import * as SQLite from 'expo-sqlite';
+import storeData from './components/StoreData';
 
 
 
@@ -44,12 +45,16 @@ export default class App extends React.Component {
         
         // Gets the current date
         const date = (new Date().getMonth() + 1) + " " +
-        new Date().getDate()+1 + " " +
+        new Date().getDate() + " " +
         new Date().getFullYear();
 
         // Gets the list of habits
         const array = await AsyncStorage.getItem('array') || '[]';
         habits = JSON.parse(array);
+
+        // Gets the list of prevHabits
+        const array2 = await AsyncStorage.getItem('prevArray') || '[]';
+        prevHabits = JSON.parse(array2);
 
         // gets the stored dates and stores them in global variables
         const storedPrevDate = await AsyncStorage.getItem('prevDate') || "";
@@ -63,13 +68,20 @@ export default class App extends React.Component {
           prevDate = currDate;
           currDate = date;
           
-          // Stores 
+          // Stores the habits from the prev day in an array
           prevHabits = JSON.parse(JSON.stringify(habits));
+          storeData.StorePrevHabits();
           
+          console.log("RESETING COUNT");
+
           for(var i = 0; i < habits.length; i++)
           {
             habits[i].count = 0;
           }
+          
+          storeData.StoreHabits();
+
+
         }
 
       // Stores the accurate dates

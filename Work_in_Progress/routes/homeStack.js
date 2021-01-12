@@ -22,7 +22,7 @@ const HomeStack = createStackNavigator();
 export default function homeStack() {
 
     function BetterTodayHeader(props) {
-        console.log("route: " + props.name);
+        
         return (
 
             <View style={styles.Container}>

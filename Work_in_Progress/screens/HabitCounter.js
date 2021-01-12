@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+
 import '../global.js';
+import storeData from '../components/StoreData';
 
 import HabitCounterDisplay from '../components/HabitCounterDisplay';
 

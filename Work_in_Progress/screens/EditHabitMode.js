@@ -238,7 +238,7 @@ export default class EditHabitMode extends React.Component {
 
                     <View style={styles().currHabitWeightView}>
                         <Text style={styles().currHabitWeightText}>
-                            {this.state.habitWeight}
+                            Habit Weight: {this.state.habitWeight}
                         </Text>
                     </View>
 
