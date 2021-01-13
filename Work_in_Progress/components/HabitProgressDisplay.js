@@ -7,7 +7,11 @@ import '../global.js';
 //=================================================================
 const HabitProgressDisplay = props => {
 
-
+    var array;
+    if(props.array == 'habits')
+        array = habits;
+    else if(props.array == 'prevHabits')
+        array = prevHabits
   
     return (
         <View style = {styles.habitContainer}> 
@@ -17,20 +21,20 @@ const HabitProgressDisplay = props => {
                     weight
                 </Text>
                 <Text style = {styles.weightText}>
-                    {prevHabits[props.index].weight}
+                    {array[props.index].weight}
                 </Text>
             </View>
                 
             <View style = {styles.name}>
                  {/* Displays the name */}
                  <Text style = {styles.habitText}>
-                    {prevHabits[props.index].name}
+                    {array[props.index].name}
                 </Text>
             </View>
 
             <View style = {styles.count}>
                 <Text style = {styles.countText}>
-                {prevHabits[props.index].count}
+                {array[props.index].count}
                 </Text>
             </View>
                

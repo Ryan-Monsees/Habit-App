@@ -29,31 +29,14 @@ export default class Progress extends React.Component {
        this.state = {
         prevHabitsArray: prevHabits,
         prevHabitsTotal: prevHabitsTotalTemp,
-        HabitsArray: habits,
+        habitsArray: habits,
         habitsTotal: habitsTotalTemp,
         display: 'home'
     }
+    console.log("CONSTRUCTOR ACTIVATED");
 
   }
 
-    /*
-<ScrollView showsVerticalScrollIndicator={true}>
-          
-          { this.state.prevHabitsArray.map((item, index)=>(
-            // Makes it so when you click on a Habit it passes the habit index and updateHabits() to Edit Habit Mode and navigates to it
-           
-            <View style={styles.habit} key={index}>
-              <HabitProgressDisplay 
-                    index= {index}
-              />
-            </View>
-         
-            )
-            )
-          }
-          </ScrollView>
-
-    */
 
     render() {
         return(
@@ -71,7 +54,7 @@ export default class Progress extends React.Component {
               <TouchableOpacity onPress={() => this.setState({display: 'previous'})}>
                 <View>
                   <Text style = {styles.text}>
-                    Check previous array
+                    Check previous habits
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -79,21 +62,32 @@ export default class Progress extends React.Component {
             ) : null}
 
             {this.state.display == 'previous' ? (
-              <ScrollView showsVerticalScrollIndicator={true}>
-          
-              { this.state.prevHabitsArray.map((item, index)=>(
-                // Makes it so when you click on a Habit it passes the habit index and updateHabits() to Edit Habit Mode and navigates to it
-               
-                <View style={styles.habit} key={index}>
-                  <HabitProgressDisplay 
-                        index= {index}
-                  />
-                </View>
-             
-                )
-                )
-              }
-              </ScrollView>
+              <View>
+                <TouchableOpacity onPress={() => this.setState({display: 'home'})}>
+                  <View backgroundColor='red'> 
+                    <Text style = {styles.text}>
+                      go back
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <ScrollView showsVerticalScrollIndicator={true}>
+            
+                { this.state.prevHabitsArray.map((item, index)=>(
+                  // Makes it so when you click on a Habit it passes the habit index and updateHabits() to Edit Habit Mode and navigates to it
+                
+                  <View style={styles.habit} key={index}>
+                    <HabitProgressDisplay
+                          array='prevHabits' 
+                          index= {index}
+                    />
+                  </View>
+              
+                  )
+                  )
+                }
+                </ScrollView>
+              </View>
+
             ) : null}
 
             
@@ -105,8 +99,45 @@ export default class Progress extends React.Component {
               <Text style = {styles.text}>
                 Total score: {this.state.habitsTotal}
               </Text>
+
+              <TouchableOpacity onPress={() => this.setState({display: 'current'})}>
+                <View>
+                  <Text style = {styles.text}>
+                    Check habits
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
             ) : null}
+
+            {this.state.display == 'current' ? (
+            <View>
+              <TouchableOpacity onPress={() => this.setState({display: 'home'})}>
+                <View backgroundColor='red'> 
+                  <Text style = {styles.text}>
+                    go back
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <ScrollView showsVerticalScrollIndicator={true}>
+          
+              { this.state.habitsArray.map((item, index)=>(
+                // Makes it so when you click on a Habit it passes the habit index and updateHabits() to Edit Habit Mode and navigates to it
+              
+                <View style={styles.habit} key={index}>
+                  <HabitProgressDisplay
+                        array='habits' 
+                        index= {index}
+                  />
+                </View>
+            
+                )
+                )
+              }
+              </ScrollView>
+            </View>
+
+          ) : null}
 
             
 

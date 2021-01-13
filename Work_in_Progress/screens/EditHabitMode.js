@@ -200,7 +200,7 @@ export default class EditHabitMode extends React.Component {
 
             // Clears input. Navigates back. onGoBack() updates the EditHabits.js state array
             storeData.StoreHabits();
-            this.setState({ habitName: "" });
+         
             this.props.route.params.onGoBack();
             this.props.navigation.goBack();
         }
