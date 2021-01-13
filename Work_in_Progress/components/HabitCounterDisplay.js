@@ -19,10 +19,14 @@ const HabitEditDisplay = props => {
             
             <TouchableOpacity 
             style = {styles.countMinus}
-            onPress={() => {    
-                                habits[props.index].count--; 
-                                props.update(props.index);
-                                StoreData.StoreHabits(); }}>
+            onPress={() => {    // Checks to see if the count is greater than 
+                                // zero before incrementing and saving  
+                               if(habits[props.index].count > 0) {
+                                    habits[props.index].count--; 
+                                    props.update(props.index);
+                                    StoreData.StoreHabits();
+                               }  
+                               }}>
                 <View>
                     <Text style = {styles.countText}>
                         -

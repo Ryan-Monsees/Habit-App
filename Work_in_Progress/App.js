@@ -26,18 +26,19 @@ export default class App extends React.Component {
     
 
 
-    this.getDate();
+    this.getData();
 
   }
  
   
   
   /*  
-      Gets the current date. If the current date is different
-      from the saved currDate, it updates the prevDate to be 
-      currDate and then makes currDate the current date.
+     Gathers all the data from local storage. Also gets
+     the current date and see if it's different from the 
+     stored date, indicating we need to store the 
+     current habits array reset it.
   */
-  getDate = async() => {
+  getData = async() => {
     
     
     
@@ -70,9 +71,7 @@ export default class App extends React.Component {
           
           // Stores the habits from the prev day in an array
           prevHabits = JSON.parse(JSON.stringify(habits));
-          storeData.StorePrevHabits();
-          
-          console.log("RESETING COUNT");
+          storeData.StorePrevHabits();       
 
           for(var i = 0; i < habits.length; i++)
           {

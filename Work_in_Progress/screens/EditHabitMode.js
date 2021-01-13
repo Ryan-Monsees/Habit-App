@@ -188,11 +188,12 @@ export default class EditHabitMode extends React.Component {
                     count: 0
                 });
             }
+            // This occurs if we're editing a current habit
             else {
                 habits[this.state.index] = {
                     name: habitNameCheck.replace(/\s+/g, " "),
                     weight: habitWeightCheck,
-                    count: 0
+                    count: habits[this.state.index].count
                 };
 
             }
