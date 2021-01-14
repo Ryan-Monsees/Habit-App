@@ -123,13 +123,15 @@ const styles = EStyleSheet.create({
     },
 
     backButton: {
-        flex: 0
+        flex: 0,
+        width: sWidth * .1,
+        height: sHeight * .05,
     },
 
     backButtonView: {
 
         backgroundColor: 'blue',
-        width: sWidth * .1,
+       
         height: sHeight * .05,
         alignItems: 'center',
         justifyContent: 'center',
