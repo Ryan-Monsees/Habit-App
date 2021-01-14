@@ -16,6 +16,10 @@ import storeData from './components/StoreData';
 // of React Navigation
 export default class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   // Runs once when the app starts
   componentDidMount() {
 
