@@ -16,7 +16,6 @@ import storeData from './components/StoreData';
 // of React Navigation
 export default class App extends React.Component {
 
-  
   // Runs once when the app starts
   componentDidMount() {
 
@@ -28,7 +27,15 @@ export default class App extends React.Component {
 
     this.getData();
 
+
+    
+
   }
+
+
+ 
+  
+
  
   
   
