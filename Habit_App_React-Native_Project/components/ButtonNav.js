@@ -2,6 +2,7 @@ import React, { Component, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+import global from '../global';
 
 let { height, width } = Dimensions.get('window');
 EStyleSheet.build({ $rem: width / height });
@@ -64,7 +65,8 @@ const styles = (props) => EStyleSheet.create({
     buttonText: {
         // Uses dynamic font sizes based on screen size
         fontSize: '30rem',
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'white'
 
     },
 
@@ -73,7 +75,7 @@ const styles = (props) => EStyleSheet.create({
         // Sets the width, height, and color based on the parameters
         width: width * props.buttonWidth,
         height: height * props.buttonHeight,
-        backgroundColor: props.color,
+        backgroundColor: buttonColor,
         alignItems: 'center',
         justifyContent: 'center',
 

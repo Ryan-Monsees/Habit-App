@@ -52,7 +52,7 @@ export default class Progress extends React.Component {
               </Text>
 
               <TouchableOpacity onPress={() => this.setState({display: 'previous'})}>
-                <View>
+                <View style = {styles.button}>
                   <Text style = {styles.text}>
                     Check previous habits
                   </Text>
@@ -101,7 +101,7 @@ export default class Progress extends React.Component {
               </Text>
 
               <TouchableOpacity onPress={() => this.setState({display: 'current'})}>
-                <View>
+                <View style = {styles.button}>
                   <Text style = {styles.text}>
                     Check habits
                   </Text>
@@ -157,25 +157,31 @@ const styles = EStyleSheet.create({
     
     flex: 1,
     alignItems: 'center',
+    backgroundColor: sec
   },  
 
   previous: {
-    flex: 1,
-    height: '100%',
+    
+    height: sHeight * .4,
     width: '100%',
-    backgroundColor: 'rgb(0, 200, 100)'
+    backgroundColor: prim
   },
 
   current: {
-    flex: 1,
-    height: '100%',
+    
+    height: sHeight * .4,
     width: '100%',
-    backgroundColor: 'cyan'
+    backgroundColor: sec
+  },
+
+  button: {
+    backgroundColor: buttonColor
   },
 
   text: {
     textAlign: 'center',
-    fontSize: '50rem'
+    fontSize: '50rem',
+    color: 'white'
   },
 
   habit: {

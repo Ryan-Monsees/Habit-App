@@ -31,9 +31,6 @@ export default class App extends React.Component {
 
     this.getData();
 
-
-    
-
   }
 
 
@@ -54,7 +51,6 @@ export default class App extends React.Component {
     
     
      try {
-        
         // Gets the current date
         const date = (new Date().getMonth() + 1) + " " +
         new Date().getDate() + " " +

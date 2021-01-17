@@ -76,6 +76,7 @@ const styles = EStyleSheet.create({
     container: {
         width: sWidth,
         height: sHeight,
+        backgroundColor: prim,
 
     },
 

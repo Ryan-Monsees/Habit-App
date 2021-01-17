@@ -13,6 +13,7 @@ import Progress from '../screens/Progress';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 
+import '../global';
 
 const HomeStack = createStackNavigator();
 
@@ -27,9 +28,8 @@ export default function homeStack() {
 
             <View style={styles.Container}>
 
-                <ImageBackground
-                    style={styles.imageBackground}
-                    source={require('../assets/Clouds.jpg')}>
+                <View style = {styles.background}>
+               
 
                     {/* Will only show the Back button if the 
                         screen is not the main screen */}     
@@ -54,8 +54,8 @@ export default function homeStack() {
                             {props.name}
                         </Text>
                     </View>
-
-                </ImageBackground>
+                </View>
+               
             </View>
         );
     }
@@ -110,12 +110,13 @@ EStyleSheet.build({ $rem: sWidth / sHeight });
 const styles = EStyleSheet.create({
 
     Container: {
-        height: sHeight * .2,
+        height: Math.round(sHeight * .2),
         width: sWidth,
-
+        
     },
 
-    imageBackground: {
+    background: {
+        backgroundColor: 'rgb(0, 0, 50)',
         height: '100%',
         width: '100%',
         flex: 1,
@@ -130,8 +131,7 @@ const styles = EStyleSheet.create({
 
     backButtonView: {
 
-        backgroundColor: 'blue',
-       
+        backgroundColor: sec,
         height: sHeight * .05,
         alignItems: 'center',
         justifyContent: 'center',
@@ -139,13 +139,15 @@ const styles = EStyleSheet.create({
     },
 
     backButtonText: {
-
+        color: 'white',
         textAlign: 'center',
     },
 
     headerText: {
+        color: 'white',
         textAlign: 'center',
         fontSize: '100rem'
+        
     },
 
 
