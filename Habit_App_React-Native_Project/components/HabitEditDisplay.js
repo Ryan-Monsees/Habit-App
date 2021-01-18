@@ -30,6 +30,9 @@ const HabitEditDisplay = props => {
 
             <View style = {styles.count}>
                 <Text style = {styles.countText}>
+                Count: 
+                </Text>
+                <Text style = {styles.countText}>
                 {habits[props.index].count}
                 </Text>
             </View>
@@ -42,10 +45,24 @@ const HabitEditDisplay = props => {
 }
 
 const styles = EStyleSheet.create({
+    
+    habitContainer: {  
+        flex: 1, 
+        backgroundColor: prim,
+        borderBottomWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderColor: 'white',
+         alignItems: 'center',
+         justifyContent: 'center',
+         flexDirection: 'row',    
+    },
+   
+   
     weight: {
         flex: 1,
         height: Math.round(sHeight*.15),
-        backgroundColor: 'purple',
+        backgroundColor: sec,
         justifyContent: 'center',
         
         
@@ -55,9 +72,8 @@ const styles = EStyleSheet.create({
 
     weightText: {
         
-            textAlign: 'center',
-            
-           
+        textAlign: 'center',
+        color: 'white'         
     },
 
     name: {
@@ -67,26 +83,22 @@ const styles = EStyleSheet.create({
     count: {
         flex: 1,
         height: '100%',
-        backgroundColor: 'cyan',
+        backgroundColor: sec,
         justifyContent: 'center',
     },
 
     countText: {
         textAlign: 'center',
+        color: 'white'
     },
 
-    habitContainer: {  
-        flex: 1, 
-        backgroundColor: 'green',
-         alignItems: 'center',
-         justifyContent: 'center',
-         flexDirection: 'row',    
-    },
+    
 
     habitText: {
          // Uses dynamic font sizes based on screen size
          fontSize: '30rem',
          textAlign: 'center',
+         color: 'white',
          
     }
 

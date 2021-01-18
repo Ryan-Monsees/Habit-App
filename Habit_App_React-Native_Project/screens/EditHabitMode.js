@@ -360,7 +360,7 @@ const styles = (props) => EStyleSheet.create({
     textInputView: {
 
         height: sHeight * .2,
-        backgroundColor: 'purple',
+        backgroundColor: prim,
         alignItems: 'center'
     },
 
@@ -368,25 +368,26 @@ const styles = (props) => EStyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        backgroundColor: 'cyan'
+        backgroundColor: sec
     },
 
     currHabitWeightView: {
         flex: 1,
         width: '100%',
-        backgroundColor: 'yellow',
+        backgroundColor: sec,
         justifyContent: 'center'
 
     },
 
     currHabitWeightText: {
         fontSize: '50rem',
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'white'
     },
 
     signButtons: {
         flex: 1,
-        backgroundColor: 'green',
+        backgroundColor: prim,
         height: '50%',
         width: '100%',
         flexDirection: 'row',
@@ -410,12 +411,13 @@ const styles = (props) => EStyleSheet.create({
         height: 200,
         width: 200,
         textAlign: 'center',
-        top: '25%'
+        top: '25%',
+        color: 'white'
     },
 
     addButton: {
         flex: 1,
-        backgroundColor: 'blue',
+        backgroundColor: buttonColor,
     },
 
     addButtonView: {
@@ -425,7 +427,8 @@ const styles = (props) => EStyleSheet.create({
     },
 
     addButtonText: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'white'
     },
 
     deleteButton: {
@@ -444,13 +447,13 @@ const styles = (props) => EStyleSheet.create({
     },
 
     deleteButtonText: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'white'
     },
 
     cancelButton: {
-        //flex: 1,
         height: sHeight*.2,
-        backgroundColor: 'rgb(255,255,0)'
+        backgroundColor: 'red'
     },
 
     cancelButtonView: {
@@ -460,7 +463,8 @@ const styles = (props) => EStyleSheet.create({
     },
 
     cancelButtonText: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'white'
     },
 
 

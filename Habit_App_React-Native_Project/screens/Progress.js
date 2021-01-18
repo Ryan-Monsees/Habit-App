@@ -64,7 +64,7 @@ export default class Progress extends React.Component {
             {this.state.display == 'previous' ? (
               <View>
                 <TouchableOpacity onPress={() => this.setState({display: 'home'})}>
-                  <View backgroundColor='red'> 
+                  <View backgroundColor={buttonColor}> 
                     <Text style = {styles.text}>
                       go back
                     </Text>
@@ -113,7 +113,7 @@ export default class Progress extends React.Component {
             {this.state.display == 'current' ? (
             <View>
               <TouchableOpacity onPress={() => this.setState({display: 'home'})}>
-                <View backgroundColor='red'> 
+                <View backgroundColor={buttonColor}> 
                   <Text style = {styles.text}>
                     go back
                   </Text>

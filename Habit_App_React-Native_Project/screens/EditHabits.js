@@ -70,7 +70,7 @@ render() {
         {/* Navigates to Edit Habit Mode. Passes index -1 to indicate new habit */}
         <ButtonNav
                 
-          color= 'red'
+          color= {buttonColor}
           buttonWidth= {1}
           buttonHeight= {.2}
           text= "Add new habit"
@@ -94,7 +94,7 @@ const styles = EStyleSheet.create({
 
   MainContainer: {
       flex: 1,
-      backgroundColor: 'black',
+      backgroundColor: prim,
   },
 
   habit: {

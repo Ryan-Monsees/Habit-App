@@ -30,6 +30,8 @@ const styles = (props) => EStyleSheet.create({
 
     signButtonText: {
         textAlign: 'center',
+        color: 'white',
+        fontSize: '50rem'
     },
 
 

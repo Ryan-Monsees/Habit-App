@@ -34,6 +34,9 @@ const HabitProgressDisplay = props => {
 
             <View style = {styles.count}>
                 <Text style = {styles.countText}>
+                Count :
+                </Text>
+                <Text style = {styles.countText}>
                 {array[props.index].count}
                 </Text>
             </View>
@@ -49,7 +52,7 @@ const styles = EStyleSheet.create({
     weight: {
         flex: 1,
         height: Math.round(sHeight*.15),
-        backgroundColor: 'purple',
+        backgroundColor: sec,
         justifyContent: 'center',
         
         
@@ -60,8 +63,7 @@ const styles = EStyleSheet.create({
     weightText: {
         
             textAlign: 'center',
-            
-           
+            color: 'white',  
     },
 
     name: {
@@ -71,17 +73,22 @@ const styles = EStyleSheet.create({
     count: {
         flex: 1,
         height: '100%',
-        backgroundColor: 'cyan',
+        backgroundColor: sec,
         justifyContent: 'center',
     },
 
     countText: {
         textAlign: 'center',
+        color: 'white',
     },
 
     habitContainer: {  
+        backgroundColor: prim,
+        borderBottomWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderColor: 'white',
         flex: 1, 
-        backgroundColor: 'green',
          alignItems: 'center',
          justifyContent: 'center',
          flexDirection: 'row',    
@@ -91,6 +98,7 @@ const styles = EStyleSheet.create({
          // Uses dynamic font sizes based on screen size
          fontSize: '30rem',
          textAlign: 'center',
+         color: 'white',
          
     }
 
