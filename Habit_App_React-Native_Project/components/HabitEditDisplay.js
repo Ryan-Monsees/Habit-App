@@ -7,11 +7,14 @@ import '../global.js';
 //=================================================================
 const HabitEditDisplay = props => {
 
-
+    var check = {
+        style: props.index != 0 ? styles.habitContainer : styles.habitContainerTopBorder
+    }
   
     return (
-        <View style = {styles.habitContainer}> 
-
+        
+        <View {...check}> 
+       
             <View style = {styles.weight}>
                 <Text style = {styles.weightText}>
                     weight
@@ -52,6 +55,19 @@ const styles = EStyleSheet.create({
         borderBottomWidth: 1,
         borderLeftWidth: 1,
         borderRightWidth: 1,
+        borderColor: 'white',
+         alignItems: 'center',
+         justifyContent: 'center',
+         flexDirection: 'row',    
+    },
+
+    habitContainerTopBorder: {  
+        flex: 1, 
+        backgroundColor: prim,
+        borderBottomWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopWidth: 1,
         borderColor: 'white',
          alignItems: 'center',
          justifyContent: 'center',

@@ -30,7 +30,7 @@ export default class HabitCounter extends React.Component {
 
     render() {
         return(
-            <View style={styles.container}>
+            <View style={styles().container}>
             <ScrollView showsVerticalScrollIndicator={true}>
           {/* Displays the list of habits */}
           { this.state.habitsArray.map((item, index)=>(
@@ -60,7 +60,8 @@ EStyleSheet.build({ $rem: sWidth / sHeight });
 
 const styles = (props) => EStyleSheet.create({
     container: {
-        height: sHeight
+        height: sHeight,
+        backgroundColor: prim
     },
 
    

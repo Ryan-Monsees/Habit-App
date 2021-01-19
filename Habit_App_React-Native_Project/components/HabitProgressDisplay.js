@@ -11,10 +11,14 @@ const HabitProgressDisplay = props => {
     if(props.array == 'habits')
         array = habits;
     else if(props.array == 'prevHabits')
-        array = prevHabits
+        array = prevHabits;
   
+        var check = {
+            style: props.index != 0 ? styles.habitContainer : styles.habitContainerTopBorder
+        }
+
     return (
-        <View style = {styles.habitContainer}> 
+        <View {...check}> 
 
             <View style = {styles.weight}>
                 <Text style = {styles.weightText}>
@@ -93,6 +97,19 @@ const styles = EStyleSheet.create({
          justifyContent: 'center',
          flexDirection: 'row',    
     },
+    habitContainerTopBorder: {  
+        backgroundColor: prim,
+        borderBottomWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopWidth: 1,
+        borderColor: 'white',
+        flex: 1, 
+         alignItems: 'center',
+         justifyContent: 'center',
+         flexDirection: 'row',    
+    },
+
 
     habitText: {
          // Uses dynamic font sizes based on screen size

@@ -10,11 +10,12 @@ import '../global.js';
 //=================================================================
 const HabitEditDisplay = props => {
 
-    
-  
+    var check = {
+        style: props.index != 0 ? styles.habitContainer : styles.habitContainerTopBorder
+    }
     return (
     
-        <View style = {styles.habitContainer}> 
+        <View {...check}> 
 
             
             <TouchableOpacity 
@@ -82,6 +83,20 @@ const styles = EStyleSheet.create({
          borderBottomWidth: 1,
          borderColor: 'white'    
     },
+
+    habitContainerTopBorder: {  
+        flex: 1, 
+         alignItems: 'center',
+         justifyContent: 'center',
+         flexDirection: 'row',
+         backgroundColor: prim,
+         borderRightWidth: 1,
+         borderLeftWidth: 1,
+         borderBottomWidth: 1,
+         borderTopWidth: 1,
+         borderColor: 'white'    
+    },
+
 
 
     weightText: {
