@@ -214,7 +214,7 @@ export default class EditHabitMode extends React.Component {
 
     render() {
         return (
-
+        <View style = {{height: '100%', backgroundColor: prim}}>
         <View style = {styles().outerLayer}>
             <View
             
@@ -246,8 +246,8 @@ export default class EditHabitMode extends React.Component {
                     <View style={styles().signButtons}>
 
                         {/* Negative */}
-                        <TouchableOpacity onPress={() => this.setState({ weightButtonController: { sign: -1, color: 'red' } })}>
-                            <SignButton color='red'
+                        <TouchableOpacity onPress={() => this.setState({ weightButtonController: { sign: -1, color: red } })}>
+                            <SignButton color='rgb(100, 0, 0)'
                                 sign='-' />
                         </TouchableOpacity>
 
@@ -292,19 +292,6 @@ export default class EditHabitMode extends React.Component {
                 </View>
 
 
-                {/* Button to confirm adding a new habit */}
-                <TouchableOpacity
-                    style={styles().addButton}
-                    onPress={() => this.addHabit()} >
-                    <View style={styles().addButtonView}>
-                        <Text style={styles().addButtonText}>
-                            {this.state.addOrSave.toString()}
-                        </Text>
-                    </View>
-
-
-                </TouchableOpacity>
-
                 {!this.state.isNewHabit ? (
                     <TouchableOpacity
                         style={styles().deleteButton}
@@ -317,7 +304,8 @@ export default class EditHabitMode extends React.Component {
                     </TouchableOpacity>
                 ) : null}
 
-
+                <View style = {styles().controlButtons}>
+        
                 {/* Button to cancel adding a new habit */}
                 <TouchableOpacity
                     style={styles().cancelButton}
@@ -332,7 +320,24 @@ export default class EditHabitMode extends React.Component {
                 </TouchableOpacity>
 
 
+                {/* Button to confirm adding a new habit */}
+                <TouchableOpacity
+                    style={styles().addButton}
+                    onPress={() => this.addHabit()} >
+                    <View style={styles().addButtonView}>
+                        <Text style={styles().addButtonText}>
+                            {this.state.addOrSave.toString()}
+                        </Text>
+                    </View>
+
+
+                </TouchableOpacity>
+
+                </View>
+
+
             </View>
+        </View>
         </View>
         );
     }
@@ -353,7 +358,7 @@ const styles = (props) => EStyleSheet.create({
 
     container: {
         flex: 1,
-        
+        backgroundColor: prim,
         
     },
 
@@ -415,8 +420,16 @@ const styles = (props) => EStyleSheet.create({
         color: 'white'
     },
 
-    addButton: {
+    controlButtons: {
         flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    },
+
+    addButton: {
+        height: sHeight*.15,
+        width: sWidth*.3,
         backgroundColor: buttonColor,
     },
 
@@ -431,29 +444,10 @@ const styles = (props) => EStyleSheet.create({
         color: 'white'
     },
 
-    deleteButton: {
-        position: 'absolute',
-        height: sHeight*.075,
-        width: sWidth*.15,
-        right: 0,
-        top: sHeight * .05,
-        backgroundColor: 'red',
-        
-    },
-
-    deleteButtonView: {
-        flex: 1,
-        justifyContent: 'center'
-    },
-
-    deleteButtonText: {
-        textAlign: 'center',
-        color: 'white'
-    },
-
     cancelButton: {
-        height: sHeight*.2,
-        backgroundColor: 'red'
+        height: sHeight*.15,
+        width: sWidth*.3,
+        backgroundColor: 'rgb(100, 0, 0)'
     },
 
     cancelButtonView: {
@@ -467,7 +461,25 @@ const styles = (props) => EStyleSheet.create({
         color: 'white'
     },
 
+    deleteButton: {
+        position: 'absolute',
+        height: sHeight*.075,
+        width: sWidth*.15,
+        right: 0,
+        top: sHeight * .05,
+        backgroundColor: 'rgb(100, 0, 0)',
+        
+    },
 
+    deleteButtonView: {
+        flex: 1,
+        justifyContent: 'center'
+    },
+
+    deleteButtonText: {
+        textAlign: 'center',
+        color: 'white'
+    },
 
 
 });
