@@ -6,7 +6,6 @@ import HomeStack from './routes/homeStack';
 import AsyncStorage from '@react-native-community/async-storage';
 import './global.js'
 
-import * as SQLite from 'expo-sqlite';
 import storeData from './components/StoreData';
 
 
@@ -18,6 +17,7 @@ export default class App extends React.Component {
 
   constructor(props) {
     super(props);
+    
   }
 
   // Runs once when the app starts
@@ -27,18 +27,10 @@ export default class App extends React.Component {
       'Non-serializable values were found in the navigation state',
     ]);
     
-
-
     this.getData();
-
   }
 
-
  
-  
-
- 
-  
   
   /*  
      Gathers all the data from local storage. Also gets

@@ -84,7 +84,6 @@ const styles = EStyleSheet.create({
         fontSize: '100rem',
         color: 'yellow',
         opacity: .5,
-
     },
 
 

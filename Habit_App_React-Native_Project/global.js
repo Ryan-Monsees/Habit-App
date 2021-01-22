@@ -1,4 +1,6 @@
+import React from 'react';
 import {Dimensions} from 'react-native';
+import * as SQLite from 'expo-sqlite';
 
 global.habits = [];
 global.prevHabits = [];
@@ -13,4 +15,15 @@ global.buttonColor = 'rgb(0, 75, 175)'
 global.red = 'rgb(100, 0, 0)'
 
 
-
+global.db = SQLite.openDatabase(
+    {
+      name: 'SQLite',
+      location: 'default',
+      createFromLocation: '~SQLite.db',
+    },
+    () => { },
+    error => {
+      console.log("ERROR: " + error);
+    }
+  );
+  
