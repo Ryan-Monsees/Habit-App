@@ -84,6 +84,8 @@ export default class EditHabits extends React.Component {
             parameters={{ index: -1, onGoBack: () => this.updateHabits() }}
           />
         </View>
+
+        <BottomTabBar navigation={this.props.navigation}/>
         
       </View>
     );
@@ -114,6 +116,7 @@ const styles = EStyleSheet.create({
 
   buttonNav: {
     flex: 1,
+    justifyContent:'flex-end',
     alignItems: 'center'
 
   },

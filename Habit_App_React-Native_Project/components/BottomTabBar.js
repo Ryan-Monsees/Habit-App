@@ -13,26 +13,24 @@ export default function BottomTabBar(props) {
                 </Text>
             </View>
 
-            <View style={styles().padding}>
-                <Text/>
-            </View>
+            
         </View>
     );    
 }
 
 const styles = (props) => EStyleSheet.create({
     container: {
-       position: 'absolute',
+       
+        flex: 1,
+        justifyContent: 'flex-end',
         
-        
-        top: sHeight*.7
         
     },
 
     tabBar: {
-        flex: 1,
-        height:  Math.round(sHeight * .1),
+        height:  sHeight * .1,
         width: sWidth,
+        
         backgroundColor: 'red',
         
         justifyContent: 'center'
@@ -41,9 +39,6 @@ const styles = (props) => EStyleSheet.create({
         textAlign: 'center'
     },
 
-    padding: {
-        flex: 1,
-        backgroundColor: 'red'
-    }
+   
 
 })

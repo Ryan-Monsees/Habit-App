@@ -24,7 +24,6 @@ export default class StartScreen extends React.Component {
 
 render () {
     return (
-        
 
         <View style={styles.container} >
             
@@ -66,8 +65,12 @@ render () {
 
             </View>
 
-            <BottomTabBar navigation={this.props.navigation}/>
+            
+                <BottomTabBar navigation={this.props.navigation}/>
+            
     </View>
+    
+    
     );
 }
 
@@ -83,8 +86,8 @@ const styles = EStyleSheet.create({
 
     // Added to style properly based on the screen size
     container: {
+        flex: 1,
         width: sWidth,
-        height: sHeight,
         backgroundColor: prim,
 
     },

@@ -85,11 +85,11 @@ export default function homeStack() {
             <NavigationContainer>
                 <HomeStack.Navigator
                 screenOptions={{
-
+                    animationEnabled: false,
                 }}>
                 <HomeStack.Screen name="Better Today" component={StartScreen}
                     options={({ navigation, route }) => ({
-
+                        
                         header: props => <Header name="Better Today" {...props} />,
                         tab: props => <Header name="Better Today" {...props} />
 
