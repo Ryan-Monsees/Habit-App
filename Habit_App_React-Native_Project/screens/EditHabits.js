@@ -10,6 +10,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import storeData from '../components/StoreData';
 
+import BottomTabBar from '../components/BottomTabBar';
+
 import '../global.js';
 
 
@@ -43,7 +45,10 @@ export default class EditHabits extends React.Component {
 
   render() {
     return (
+      
       <View style={styles.MainContainer}>
+
+        
 
         <View style={styles.scrollView}>
           <ScrollView showsVerticalScrollIndicator={true}>
@@ -79,9 +84,7 @@ export default class EditHabits extends React.Component {
             parameters={{ index: -1, onGoBack: () => this.updateHabits() }}
           />
         </View>
-
-
-
+        
       </View>
     );
 

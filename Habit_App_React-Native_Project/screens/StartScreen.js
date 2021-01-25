@@ -2,18 +2,32 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet, Text, ImageBackground, PixelRatio, Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import ButtonNav from '../components/ButtonNav';
-import '../global.js';
+import BottomTabBar from '../components/BottomTabBar';
+import '../global';
 
 
 
 
-const StartScreen = props => {
 
 
+export default class StartScreen extends React.Component {
+
+
+    constructor(props) {
+        super(props);
+
+        this.state= {
+            screenHeight: sHeight
+        }
+    }
+
+
+render () {
     return (
+        
 
-        <View style={styles.container}>
-
+        <View style={styles.container} >
+            
             
 
 
@@ -25,7 +39,7 @@ const StartScreen = props => {
                     buttonWidth={.2}
                     buttonHeight={.1}
                     text="Edit Habits"
-                    navigation={props.navigation}
+                    navigation={this.props.navigation}
                     navigateTo="Edit Habits"
                 />
 
@@ -34,7 +48,7 @@ const StartScreen = props => {
                     buttonWidth={.2}
                     buttonHeight={.1}
                     text="Habit Counter"
-                    navigation={props.navigation}
+                    navigation={this.props.navigation}
                     navigateTo="Habit Counter"
                 /> 
                 
@@ -43,7 +57,7 @@ const StartScreen = props => {
                 buttonWidth={.2}
                 buttonHeight={.1}
                 text="Progress"
-                navigation={props.navigation}
+                navigation={this.props.navigation}
                 navigateTo="Progress"
             />
 
@@ -52,15 +66,10 @@ const StartScreen = props => {
 
             </View>
 
-            <View style={styles.buttonRow}>
-
-            </View>
-
-
-        </View>
-
-
+            <BottomTabBar navigation={this.props.navigation}/>
+    </View>
     );
+}
 
 };
 
@@ -99,4 +108,3 @@ const styles = EStyleSheet.create({
 
 });
 
-export default StartScreen;

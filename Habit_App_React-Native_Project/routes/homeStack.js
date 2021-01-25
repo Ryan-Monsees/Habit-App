@@ -10,24 +10,43 @@ import EditHabitMode from '../screens/EditHabitMode';
 import HabitCounter from '../screens/HabitCounter';
 import Progress from '../screens/Progress';
 
+
+
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 
 import '../global';
+import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
+
+
+
+import BottomTabBar from '../components/BottomTabBar';
+
+
 
 const HomeStack = createStackNavigator();
+
+
+
+
+
+
+
+
+
 
 
 // Sets up the foundation for React Navigation so that
 // it can transition between screens properly
 export default function homeStack() {
 
-    function BetterTodayHeader(props) {
+    function Header(props) {
         
         return (
+            
 
             <View style={styles.Container}>
-
+                
                 <View style = {styles.background}>
                
 
@@ -55,28 +74,30 @@ export default function homeStack() {
                         </Text>
                     </View>
                 </View>
+
+                
                
             </View>
         );
     }
 
     return (
-        <NavigationContainer>
-            <HomeStack.Navigator
+            <NavigationContainer>
+                <HomeStack.Navigator
                 screenOptions={{
 
                 }}>
                 <HomeStack.Screen name="Better Today" component={StartScreen}
                     options={({ navigation, route }) => ({
 
-                        header: props => <BetterTodayHeader name="Better Today" {...props} />,
-
+                        header: props => <Header name="Better Today" {...props} />,
+                        tab: props => <Header name="Better Today" {...props} />
 
                     })} />
                 <HomeStack.Screen name="Edit Habits" component={EditHabits}
                     options={({ navigation, route }) => ({
                         
-                        header: props => <BetterTodayHeader name="Edit Habits" {...props} />,
+                        header: props => <Header name="Edit Habits" {...props} />,
 
 
                     })} />
@@ -86,7 +107,7 @@ export default function homeStack() {
                 <HomeStack.Screen name="Habit Counter" component={HabitCounter}
                     options={({ navigation, route }) => ({
                         
-                        header: props => <BetterTodayHeader name="Habit Counter" {...props} />,
+                        header: props => <Header name="Habit Counter" {...props} />,
 
 
                     })} />
@@ -94,16 +115,21 @@ export default function homeStack() {
                 <HomeStack.Screen name="Progress" component={Progress}
                     options={({ navigation, route }) => ({
                         
-                        header: props => <BetterTodayHeader name="Progress" {...props} />,
+                        header: props => <Header name="Progress" {...props} />,
 
 
                     })} />
 
 
             </HomeStack.Navigator>
-        </NavigationContainer>
+            </NavigationContainer>
+
+            
+        
     );
 }
+
+
 
 
 EStyleSheet.build({ $rem: sWidth / sHeight });
@@ -114,6 +140,8 @@ const styles = EStyleSheet.create({
         width: sWidth,
         
     },
+
+    
 
     background: {
         backgroundColor: 'rgb(0, 0, 50)',

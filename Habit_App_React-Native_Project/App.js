@@ -41,7 +41,6 @@ export default class App extends React.Component {
   getData = async() => {
     
     
-    
      try {
         // Gets the current date
         const date = (new Date().getMonth() + 1) + " " +
@@ -104,7 +103,10 @@ export default class App extends React.Component {
 // Renders the HomeStack for navigation
 render() {
   return (
+    
   <HomeStack/>
+  
+ 
   );
 };
 };

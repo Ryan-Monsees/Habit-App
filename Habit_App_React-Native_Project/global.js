@@ -1,12 +1,18 @@
 import React from 'react';
-import {Dimensions} from 'react-native';
+import {Dimensions, StatusBar} from 'react-native';
 import * as SQLite from 'expo-sqlite';
+
+
+
+
+
+
 
 global.habits = [];
 global.prevHabits = [];
 global.prevDate = "";
 global.currDate = "";
-global.sHeight = Dimensions.get('window').height;
+global.sHeight = Math.round(Dimensions.get('window').height);
 global.sWidth = Dimensions.get('window').width;
 
 global.prim = 'rgb(0, 0, 100)'

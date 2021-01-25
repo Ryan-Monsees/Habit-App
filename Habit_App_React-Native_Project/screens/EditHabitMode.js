@@ -7,7 +7,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import '../global.js'
 
 import storeData from '../components/StoreData';
-import BackButton from '../components/BackButton';
 import WeightButton from '../components/WeightButton';
 import SignButton from '../components/SignButton';
 
@@ -351,8 +350,7 @@ EStyleSheet.build({ $rem: sWidth / sHeight });
 
 const styles = (props) => EStyleSheet.create({
 
-    outerLayer: {
-        
+    outerLayer: { 
         height: sHeight
     },
 
