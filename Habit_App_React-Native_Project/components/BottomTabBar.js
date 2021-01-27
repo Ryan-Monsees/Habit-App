@@ -4,20 +4,51 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import TabButton from './TabButton';
 import '../global';
 
-export default function BottomTabBar(props) {
+export default class BottomTabBar extends React.Component {
+
+   constructor(props) {
+        super(props);
+        this.navigating = this.navigating.bind(this);
+        this.state = {
+            navigating : false
+        }
+   }
     
+   
+
+    async navigating(props) {
+        if(this.state.navigating == false)
+        {
+            console.log("start    " + props);
+            this.setState({navigating: true});
+            await this.props.navigation.navigate(props);
+           
+            this.setState({navigating: false});
+            console.log("end      " + props);
+        }
+        else
+        {
+            console.log("Still navigating..." + this.state.navigating);
+        }
+             
+        
+    }
+
+
+    render () {
     return(
-    
         <View style = {styles().container}>
             <View style={styles().tabBar}>
                 <TabButton 
-                    navigation={props.navigation} 
-                    navigateTo="Edit Habits"
+                    navigation={() => this.navigating("Better Today")} 
+                    text="Home"
+                />
+                <TabButton 
+                    navigation={() => this.navigating("Edit Habits")} 
                     text="Edit"
                 />
                 <TabButton 
-                    navigation={props.navigation} 
-                    navigateTo="Habit Counter"
+                    navigation={() => this.navigating("Habit Counter")} 
                     text="Track"
                 />
             </View>
@@ -26,6 +57,7 @@ export default function BottomTabBar(props) {
         </View>
     
     );    
+    }
 }
 
 const styles = (props) => EStyleSheet.create({
@@ -51,12 +83,7 @@ const styles = (props) => EStyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-
-    tabButton: {
-        flex: 1,
-        borderWidth: 1,
-        borderColor: 'white',
-    },
+   
 
     text: {
         textAlign: 'center'

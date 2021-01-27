@@ -5,6 +5,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import '../global.js';
 import storeData from '../components/StoreData';
 
+import BottomTabBar from '../components/BottomTabBar';
+
 import HabitCounterDisplay from '../components/HabitCounterDisplay';
 
 export default class HabitCounter extends React.Component {
@@ -38,7 +40,7 @@ export default class HabitCounter extends React.Component {
             //<TouchableWithoutFeedback onPress = {() => this.props.navigation.navigate("Edit Habit Mode", {index: index, onGoBack: () => this.updateHabits()})}
                                      // key= {index}>
             <View  key={index}>
-              <HabitCounterDisplay 
+              <HabitCounterDisplay
                     index= {index}
                     name= {item.name}
                     count= {item.count}
@@ -50,6 +52,8 @@ export default class HabitCounter extends React.Component {
             )
           }
           </ScrollView>
+
+          <BottomTabBar navigation={this.props.navigation}/>
             </View>
 
         );

@@ -52,7 +52,10 @@ export default function homeStack() {
 
                     {/* Will only show the Back button if the 
                         screen is not the main screen */}     
-                    {!(props.name == "Better Today") ? (
+                    {!(props.name == "Better Today"  || 
+                    props.name == "Edit Habits" ||
+                    props.name == "Progress" ||
+                    props.name == "Habit Counter") ? (
                         <View style={{ justifyContent: 'center', flex: 1 }}>
                             <TouchableOpacity
                                 style={styles.backButton}

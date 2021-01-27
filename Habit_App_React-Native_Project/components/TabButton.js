@@ -14,7 +14,7 @@ export default function TabButton(props) {
     return (
         <View style={styles().container}>
            
-            <TouchableOpacity onPress={() => props.navigation.navigate(props.navigateTo)} 
+            <TouchableOpacity onPress={() => props.navigation()} 
                                                 >
 
                 {/* Sets up the styles for the button */}
