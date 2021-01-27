@@ -87,7 +87,6 @@ const styles = EStyleSheet.create({
     // Added to style properly based on the screen size
     container: {
         flex: 1,
-        width: sWidth,
         backgroundColor: prim,
 
     },

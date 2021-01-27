@@ -60,7 +60,7 @@ EStyleSheet.build({ $rem: sWidth / sHeight });
 
 const styles = (props) => EStyleSheet.create({
     container: {
-        height: sHeight,
+        flex: 1,
         backgroundColor: prim
     },
 

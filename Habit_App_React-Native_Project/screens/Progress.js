@@ -5,6 +5,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import '../global.js';
 import HabitProgressDisplay from '../components/HabitProgressDisplay';
 
+import BottomTabBar from '../components/BottomTabBar';
 
 export default class Progress extends React.Component {
 
@@ -62,9 +63,9 @@ export default class Progress extends React.Component {
             ) : null}
 
             {this.state.display == 'previous' ? (
-              <View>
+              <View style={{flex: 5}}>
                 <TouchableOpacity onPress={() => this.setState({display: 'home'})}>
-                  <View backgroundColor={buttonColor}> 
+                  <View style = {styles.goBack}> 
                     <Text style = {styles.text}>
                       go back
                     </Text>
@@ -111,9 +112,9 @@ export default class Progress extends React.Component {
             ) : null}
 
             {this.state.display == 'current' ? (
-            <View>
+            <View style={{flex: 5}}>
               <TouchableOpacity onPress={() => this.setState({display: 'home'})}>
-                <View backgroundColor={buttonColor}> 
+                <View style = {styles.goBack}> 
                   <Text style = {styles.text}>
                     go back
                   </Text>
@@ -140,6 +141,7 @@ export default class Progress extends React.Component {
           ) : null}
 
             
+              <BottomTabBar navigation={this.props.navigation}/>
 
           </View>
 
@@ -178,6 +180,10 @@ const styles = EStyleSheet.create({
     backgroundColor: buttonColor
   },
 
+  goBack: {
+    backgroundColor: buttonColor,
+    width: sWidth
+  },
   text: {
     textAlign: 'center',
     fontSize: '50rem',

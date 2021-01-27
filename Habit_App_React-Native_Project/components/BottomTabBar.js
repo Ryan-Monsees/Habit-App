@@ -1,40 +1,63 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, Dimensions, Button } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import TabButton from './TabButton';
 import '../global';
 
 export default function BottomTabBar(props) {
     
     return(
+    
         <View style = {styles().container}>
             <View style={styles().tabBar}>
-                <Text style = {styles().text}>
-                    Tab bar
-                </Text>
+                <TabButton 
+                    navigation={props.navigation} 
+                    navigateTo="Edit Habits"
+                    text="Edit"
+                />
+                <TabButton 
+                    navigation={props.navigation} 
+                    navigateTo="Habit Counter"
+                    text="Track"
+                />
             </View>
 
             
         </View>
+    
     );    
 }
 
 const styles = (props) => EStyleSheet.create({
+    
+
     container: {
-       
-        flex: 1,
+        
         justifyContent: 'flex-end',
+        flex: 1,
+        
         
         
     },
 
     tabBar: {
+       
         height:  sHeight * .1,
         width: sWidth,
         
-        backgroundColor: 'red',
+        backgroundColor: sec,
         
-        justifyContent: 'center'
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        alignItems: 'center'
     },
+
+    tabButton: {
+        flex: 1,
+        borderWidth: 1,
+        borderColor: 'white',
+    },
+
     text: {
         textAlign: 'center'
     },

@@ -4,8 +4,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 import global from '../global';
 
-let { height, width } = Dimensions.get('window');
-EStyleSheet.build({ $rem: width / height });
+
+EStyleSheet.build({ $rem: sWidth / sHeight });
 
 
 
@@ -24,7 +24,8 @@ Props for the button are:
 export default function ButtonNav(props) {
 
 
-    
+    // Checks if there are parameters to pass to the next
+    // screen before navigating
     const checkParams = () => {
         if(props.parameters)
         {
@@ -73,8 +74,8 @@ const styles = (props) => EStyleSheet.create({
 
     button: {
         // Sets the width, height, and color based on the parameters
-        width: width * props.buttonWidth,
-        height: height * props.buttonHeight,
+        width: sWidth * props.buttonWidth,
+        height: sHeight * props.buttonHeight,
         backgroundColor: buttonColor,
         alignItems: 'center',
         justifyContent: 'center',

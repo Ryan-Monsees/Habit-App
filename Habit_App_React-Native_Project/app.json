@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "newWorkoutApp",
-    "slug": "newWorkoutApp",
+    "name": "habitApp",
+    "slug": "habitApp",
     "platforms": [
       "ios",
       "android",
@@ -22,7 +22,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.verex.newWorkoutApp"
     },
     "description": "",
     "android": {

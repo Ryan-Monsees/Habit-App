@@ -71,19 +71,19 @@ export default class EditHabits extends React.Component {
           </ScrollView>
         </View>
 
-        <View style={styles.buttonNav}>
+        
           {/* Navigates to Edit Habit Mode. Passes index -1 to indicate new habit */}
           <ButtonNav
 
             color={buttonColor}
             buttonWidth={1}
-            buttonHeight={.2}
+            buttonHeight={.1}
             text="Add new habit"
             navigation={this.props.navigation}
             navigateTo="Edit Habit Mode"
             parameters={{ index: -1, onGoBack: () => this.updateHabits() }}
           />
-        </View>
+        
 
         <BottomTabBar navigation={this.props.navigation}/>
         
@@ -114,22 +114,8 @@ const styles = EStyleSheet.create({
   },
 
 
-  buttonNav: {
-    flex: 1,
-    justifyContent:'flex-end',
-    alignItems: 'center'
+  
 
-  },
-
-  addButton: {
-    backgroundColor: 'blue',
-    alignItems: 'center',
-    padding: sHeight * .10
-  },
-
-  addButtonText: {
-    fontSize: '50rem',
-  },
-
+  
 });
 
