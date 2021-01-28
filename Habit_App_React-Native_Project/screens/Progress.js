@@ -4,8 +4,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 import '../global.js';
 import HabitProgressDisplay from '../components/HabitProgressDisplay';
+import Header from '../components/Header';
 
-import BottomTabBar from '../components/BottomTabBar';
 
 export default class Progress extends React.Component {
 
@@ -38,10 +38,17 @@ export default class Progress extends React.Component {
 
   }
 
+  componentDidUpdate() {
+    console.log("mounted");
+  }
+
 
     render() {
         return(
+
           <View style = {styles.container}>
+
+          <Header navigation = {this.props.navigation} name = "Progress"/>
 
             {this.state.display == 'home' ? (
             <View style = {styles.previous}>
@@ -141,7 +148,7 @@ export default class Progress extends React.Component {
           ) : null}
 
             
-              <BottomTabBar navigation={this.props.navigation}/>
+            
 
           </View>
 

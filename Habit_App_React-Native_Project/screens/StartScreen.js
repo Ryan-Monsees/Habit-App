@@ -1,8 +1,11 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet, Text, ImageBackground, PixelRatio, Dimensions } from 'react-native';
+import { View } from 'react-native';
+
+
 import EStyleSheet from 'react-native-extended-stylesheet';
 import ButtonNav from '../components/ButtonNav';
-import BottomTabBar from '../components/BottomTabBar';
+
+import Header from '../components/Header';
 import '../global';
 
 
@@ -24,13 +27,11 @@ export default class StartScreen extends React.Component {
 
 render () {
     return (
+        
 
-        <View style={styles.container} >
-            
-            
+        <View style={styles.container}>
 
-
-
+           <Header navigation = {this.props.navigation} name = "Better Today"/>
 
             <View style={styles.buttonRow}>
                 <ButtonNav
@@ -66,7 +67,7 @@ render () {
             </View>
 
             
-                <BottomTabBar navigation={this.props.navigation}/>
+           
             
     </View>
     

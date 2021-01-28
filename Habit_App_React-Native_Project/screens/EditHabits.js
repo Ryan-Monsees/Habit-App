@@ -9,8 +9,8 @@ import HabitEditDisplay from '../components/HabitEditDisplay';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import storeData from '../components/StoreData';
+import Header from '../components/Header';
 
-import BottomTabBar from '../components/BottomTabBar';
 
 import '../global.js';
 
@@ -48,6 +48,7 @@ export default class EditHabits extends React.Component {
       
       <View style={styles.MainContainer}>
 
+        <Header navigation = {this.props.navigation} name = "Edit Habits"/>
         
 
         <View style={styles.scrollView}>
@@ -85,7 +86,7 @@ export default class EditHabits extends React.Component {
           />
         
 
-        <BottomTabBar navigation={this.props.navigation}/>
+       
         
       </View>
     );

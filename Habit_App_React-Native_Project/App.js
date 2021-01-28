@@ -1,10 +1,16 @@
 import React, {useRef} from 'react';
-import { YellowBox, StyleSheet, Text, View} from 'react-native';
+import { YellowBox } from 'react-native';
 
 
 import HomeStack from './routes/homeStack';
 import AsyncStorage from '@react-native-community/async-storage';
-import './global.js'
+import './global.js';
+
+import Header from './components/Header';
+
+
+
+
 
 import storeData from './components/StoreData';
 
@@ -103,8 +109,8 @@ export default class App extends React.Component {
 // Renders the HomeStack for navigation
 render() {
   return (
-    
-  <HomeStack/>
+     
+    <HomeStack/>
   
  
   );

@@ -5,8 +5,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import '../global.js';
 import storeData from '../components/StoreData';
 
-import BottomTabBar from '../components/BottomTabBar';
 
+import Header from '../components/Header';
 import HabitCounterDisplay from '../components/HabitCounterDisplay';
 
 export default class HabitCounter extends React.Component {
@@ -33,6 +33,8 @@ export default class HabitCounter extends React.Component {
     render() {
         return(
             <View style={styles().container}>
+
+            <Header navigation={this.props.navigation} name = "Habit Counter"/>
             <ScrollView showsVerticalScrollIndicator={true}>
           {/* Displays the list of habits */}
           { this.state.habitsArray.map((item, index)=>(
@@ -53,7 +55,7 @@ export default class HabitCounter extends React.Component {
           }
           </ScrollView>
 
-          <BottomTabBar navigation={this.props.navigation}/>
+          
             </View>
 
         );

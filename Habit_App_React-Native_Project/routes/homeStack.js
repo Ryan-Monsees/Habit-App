@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, ImageBackground, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ImageBackground, Dimensions, StatusBar } from 'react-native';
 import { BaseRouter, NavigationContainer, useLinkProps } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import StartScreen from '../screens/StartScreen';
 import EditHabits from '../screens/EditHabits';
@@ -10,25 +11,73 @@ import EditHabitMode from '../screens/EditHabitMode';
 import HabitCounter from '../screens/HabitCounter';
 import Progress from '../screens/Progress';
 
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Header } from 'react-native/Libraries/NewAppScreen';
+
 
 import '../global';
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
 
 
 
-import BottomTabBar from '../components/BottomTabBar';
+
 
 
 
 const HomeStack = createStackNavigator();
 
+const Tab = createBottomTabNavigator();
+
+function TabNavigator() {
+    return (
+        
+            <Tab.Navigator
+            tabBarOptions={{
+                style: {
+                    backgroundColor: 'blue',
+                    borderColor: 'white'
+                },
+                activeTintColor: 'cyan',
+                inactiveTintColor: 'white',
+            }}
+            screenOptions={({ route }) => {
+                 
+            }}>
+            <Tab.Screen name="Better Today" component={StartScreen}
+            options={{
+                tabBarLabel: 'Home',
+                tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="home" color='white' size={size} />
+          ),
+            }}/>
+            <Tab.Screen name="Edit Habits" component={EditHabits}
+             options={{
+                tabBarLabel: 'Edit',
+                tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="pencil-outline" color='white' size={size} />
+          ),
+            }}/>
+            <Tab.Screen name="Habit Counter" component={HabitCounter}
+             options={{
+                tabBarLabel: 'Counter',
+                tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="counter" color='white' size={size} />
+          ),
+            }}/>
+            <Tab.Screen name="Progress" component={Progress}
+             options={{
+                tabBarLabel: 'Progress',
+                tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="navigation" color='white' size={size} />
+          ),
+            }}/>
+            </Tab.Navigator>
+    
+    );
 
 
-
+}
 
 
 
@@ -40,85 +89,60 @@ const HomeStack = createStackNavigator();
 // it can transition between screens properly
 export default function homeStack() {
 
-    function Header(props) {
-        
-        return (
-            
+    
+    
+    
 
-            <View style={styles.Container}>
-                
-                <View style = {styles.background}>
-               
-
-                    {/* Will only show the Back button if the 
-                        screen is not the main screen */}     
-                    {!(props.name == "Better Today"  || 
-                    props.name == "Edit Habits" ||
-                    props.name == "Progress" ||
-                    props.name == "Habit Counter") ? (
-                        <View style={{ justifyContent: 'center', flex: 1 }}>
-                            <TouchableOpacity
-                                style={styles.backButton}
-                                onPress={() => props.navigation.goBack()}>
-                                <View style={styles.backButtonView}>
-                                    <Text style={styles.backButtonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                    ) : null}
-
-
-
-                    <View style={styles.header}>
-                        <Text style={styles.headerText}>
-                            {props.name}
-                        </Text>
-                    </View>
-                </View>
-
-                
-               
-            </View>
+    function StatusBarChange() {
+        return(
+        <View>
+        <StatusBar barStyle="light-content"  backgroundColor='rgb(0, 0, 50)' />
+        </View>
         );
     }
 
     return (
+
+        
+        
             <NavigationContainer>
                 <HomeStack.Navigator
                 screenOptions={{
                     animationEnabled: false,
                 }}>
-                <HomeStack.Screen name="Better Today" component={StartScreen}
+                <HomeStack.Screen name="Better Today" component={TabNavigator}
                     options={({ navigation, route }) => ({
                         
-                        header: props => <Header name="Better Today" {...props} />,
-                        tab: props => <Header name="Better Today" {...props} />
+                        header: props => <StatusBarChange/>
+
 
                     })} />
                 <HomeStack.Screen name="Edit Habits" component={EditHabits}
                     options={({ navigation, route }) => ({
                         
-                        header: props => <Header name="Edit Habits" {...props} />,
+                        header: props => <StatusBar/>,
 
 
                     })} />
                 <HomeStack.Screen name="Edit Habit Mode" component={EditHabitMode}
-                    options={{ headerShown: false }} />
-
-                <HomeStack.Screen name="Habit Counter" component={HabitCounter}
                     options={({ navigation, route }) => ({
                         
-                        header: props => <Header name="Habit Counter" {...props} />,
+                        header: props => <StatusBar/>,
+
+
+                    })} />
+                <HomeStack.Screen name="Habit Counter" component={HabitCounter}
+                     options={({ navigation, route }) => ({
+                        
+                        header: props => <StatusBar/>,
 
 
                     })} />
 
                 <HomeStack.Screen name="Progress" component={Progress}
-                    options={({ navigation, route }) => ({
+                     options={({ navigation, route }) => ({
                         
-                        header: props => <Header name="Progress" {...props} />,
+                        header: props => <StatusBar/>,
 
 
                     })} />
