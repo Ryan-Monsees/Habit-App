@@ -34,40 +34,12 @@ render () {
            <Header navigation = {this.props.navigation} name = "Better Today"/>
 
             <View style={styles.buttonRow}>
-                <ButtonNav
-                    color='lightblue'
-                    buttonWidth={.2}
-                    buttonHeight={.1}
-                    text="Edit Habits"
-                    navigation={this.props.navigation}
-                    navigateTo="Edit Habits"
-                />
-
-                <ButtonNav
-                    color='blue'
-                    buttonWidth={.2}
-                    buttonHeight={.1}
-                    text="Habit Counter"
-                    navigation={this.props.navigation}
-                    navigateTo="Habit Counter"
-                /> 
                 
-                <ButtonNav
-                color='rgb(255, 100, 0)'
-                buttonWidth={.2}
-                buttonHeight={.1}
-                text="Progress"
-                navigation={this.props.navigation}
-                navigateTo="Progress"
-            />
 
 
                 
 
-            </View>
-
-            
-           
+            </View>  
             
     </View>
     

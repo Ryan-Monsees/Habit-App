@@ -25,9 +25,18 @@ export default class HabitCounter extends React.Component {
         
     }
 
+    componentDidMount() {
+      this.listener = this.props.navigation.addListener('focus', () => { 
+      this.setState({habitsArray: habits});
+    });
+     
+    }
+
     updateArray() {
 
         this.setState({habitsArray: habits});
+        this.forceUpdate();
+        console.log("Habit Counter array updated");
     }
 
     render() {

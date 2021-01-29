@@ -114,7 +114,7 @@ export default class EditHabitMode extends React.Component {
         let found = false;
         let checkArray = true;
         let index = this.state.index;
-        console.log("habitWeightCheck: " + habitWeightCheck);
+        
 
 
         // Checks to see if the new name is different from the old name.
@@ -122,7 +122,7 @@ export default class EditHabitMode extends React.Component {
         if (index !== -1) {
             if (habits[index].name.toLowerCase() === habitNameCheck.toLowerCase()) {
                 checkArray = false;
-                console.log("check array false");
+               
             }
         }
         // Checks to see if the habit name is in the array
@@ -199,7 +199,6 @@ export default class EditHabitMode extends React.Component {
 
             // Clears input. Navigates back. onGoBack() updates the EditHabits.js state array
             storeData.StoreHabits();
-         
             this.props.route.params.onGoBack();
             this.props.navigation.goBack();
         }

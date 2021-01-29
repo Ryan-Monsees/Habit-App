@@ -67,6 +67,7 @@ function TabNavigator() {
             }}/>
             <Tab.Screen name="Progress" component={Progress}
              options={{
+
                 tabBarLabel: 'Progress',
                 tabBarIcon: ({ color, size }) => (
                 <MaterialCommunityIcons name="navigation" color='white' size={size} />
@@ -117,13 +118,6 @@ export default function homeStack() {
 
 
                     })} />
-                <HomeStack.Screen name="Edit Habits" component={EditHabits}
-                    options={({ navigation, route }) => ({
-                        
-                        header: props => <StatusBar/>,
-
-
-                    })} />
                 <HomeStack.Screen name="Edit Habit Mode" component={EditHabitMode}
                     options={({ navigation, route }) => ({
                         
@@ -131,21 +125,9 @@ export default function homeStack() {
 
 
                     })} />
-                <HomeStack.Screen name="Habit Counter" component={HabitCounter}
-                     options={({ navigation, route }) => ({
-                        
-                        header: props => <StatusBar/>,
+                
 
-
-                    })} />
-
-                <HomeStack.Screen name="Progress" component={Progress}
-                     options={({ navigation, route }) => ({
-                        
-                        header: props => <StatusBar/>,
-
-
-                    })} />
+               
 
 
             </HomeStack.Navigator>
@@ -155,7 +137,15 @@ export default function homeStack() {
         
     );
 }
+/*
+ <HomeStack.Screen name="Progress" component={Progress}
+                     options={({ navigation, route }) => ({
+                        
+                        header: props => <StatusBar/>,
 
+
+                    })} />
+                    */
 
 
 

@@ -9,10 +9,38 @@ import Header from '../components/Header';
 
 export default class Progress extends React.Component {
 
+  calculateTotal() {
+    var habitsTotalTemp = 0;
+    for(var i = 0; i < habits.length; i++) {
 
+        habitsTotalTemp+=(habits[i].count*habits[i].weight);
+    }
+
+    
+
+  this.setState({
+    habitsTotal: habitsTotalTemp,
+  })
+
+
+  }
+
+  componentDidMount() {
+    this.listener = this.props.navigation.addListener('focus', () => { 
+      this.calculateTotal();
+      console.log("updated");
+    });
+  }
+
+
+  componentWillUnmount() {
+    this.listener();
+  }
     constructor(props) {
 
         super(props);
+
+        this.calculateTotal = this.calculateTotal.bind(this);
        
         
         var habitsTotalTemp = 0;
@@ -26,6 +54,8 @@ export default class Progress extends React.Component {
 
           prevHabitsTotalTemp+=(prevHabits[i].count*prevHabits[i].weight);
       }
+      
+     
 
        this.state = {
         prevHabitsArray: prevHabits,
@@ -34,20 +64,14 @@ export default class Progress extends React.Component {
         habitsTotal: habitsTotalTemp,
         display: 'home'
     }
-    console.log("CONSTRUCTOR ACTIVATED");
 
   }
-
-  componentDidUpdate() {
-    console.log("mounted");
-  }
-
-
+  
+ 
     render() {
         return(
 
           <View style = {styles.container}>
-
           <Header navigation = {this.props.navigation} name = "Progress"/>
 
             {this.state.display == 'home' ? (
