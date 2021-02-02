@@ -35,8 +35,7 @@ render () {
 
             <View style={styles.buttonRow}>
                 
-
-
+            
                 
 
             </View>  

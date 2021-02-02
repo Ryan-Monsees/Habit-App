@@ -27,6 +27,16 @@ class StoreData extends React.Component {
           }
   }
 
+  StoreToDoList = async() => {
+    try {
+            
+      await AsyncStorage.setItem('toDoList', JSON.stringify(toDoList))
+    
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
     
 }
 

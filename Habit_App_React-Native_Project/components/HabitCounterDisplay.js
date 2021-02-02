@@ -13,6 +13,7 @@ const HabitEditDisplay = props => {
     var check = {
         style: props.index != 0 ? styles.habitContainer : styles.habitContainerTopBorder
     }
+    
     return (
     
         <View {...check}> 

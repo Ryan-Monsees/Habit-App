@@ -15,10 +15,11 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
                 {/* Will only show the Back button if the 
                     screen is not the main screen */}     
-                {!(props.name == "Better Today"  || 
+                {!(props.name == "Better Today"  ||
                 props.name == "Edit Habits" ||
                 props.name == "Progress" ||
-                props.name == "Habit Counter") ? (
+                props.name == "Habit Counter" ||
+                props.name == "Todo List") ? (
                     <View style={{ justifyContent: 'center', flex: 1 }}>
                         <TouchableOpacity
                             style={styles.backButton}

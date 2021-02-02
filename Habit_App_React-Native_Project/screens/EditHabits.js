@@ -27,11 +27,8 @@ export default class EditHabits extends React.Component {
   constructor(props) {
     super(props);
 
-
-
     this.state = {
       habitsArray: habits
-
     }
 
 
@@ -39,14 +36,13 @@ export default class EditHabits extends React.Component {
 
   componentDidMount() {
     this.listener = this.props.navigation.addListener('focus', () => { 
-    this.setState({habitsArray: habits});
+      this.setState({habitsArray: habits});
   });
    
   }
 
   updateHabits() {
     this.setState({ habitsArray: habits });
-
   }
 
 
@@ -84,7 +80,6 @@ export default class EditHabits extends React.Component {
         
           {/* Navigates to Edit Habit Mode. Passes index -1 to indicate new habit */}
           <ButtonNav
-
             color={buttonColor}
             buttonWidth={1}
             buttonHeight={.1}
