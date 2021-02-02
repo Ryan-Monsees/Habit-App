@@ -37,10 +37,19 @@ export default class EditHabits extends React.Component {
 
   }
 
+  componentDidMount() {
+    this.listener = this.props.navigation.addListener('focus', () => { 
+    this.setState({habitsArray: habits});
+  });
+   
+  }
+
   updateHabits() {
     this.setState({ habitsArray: habits });
 
   }
+
+
 
 
   render() {
