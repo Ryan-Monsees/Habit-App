@@ -9,10 +9,13 @@ import * as SQLite from 'expo-sqlite';
 
 
 global.habits = [];
-global.prevHabits = [];
+
+global.habitHistory = [];
+global.dateHistory = [];
+
 global.toDoList = [{name: "lift", difficulty: 3}, {name: "eat", difficulty: 1}];
-global.prevDate = "";
-global.currDate = "";
+
+global.lastDate = "";
 global.sHeight = Math.round(Dimensions.get('window').height);
 global.sWidth = Dimensions.get('window').width;
 

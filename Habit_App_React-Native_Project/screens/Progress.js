@@ -50,15 +50,11 @@ export default class Progress extends React.Component {
             habitsTotalTemp+=(habits[i].count*habits[i].weight);
         }
 
-        for(var i = 0; i < prevHabits.length; i++) {
-
-          prevHabitsTotalTemp+=(prevHabits[i].count*prevHabits[i].weight);
-      }
+       
       
      
 
        this.state = {
-        prevHabitsArray: prevHabits,
         prevHabitsTotal: prevHabitsTotalTemp,
         habitsArray: habits,
         habitsTotal: habitsTotalTemp,
@@ -126,7 +122,7 @@ export default class Progress extends React.Component {
             {this.state.display == 'home' ? (
             <View style = {styles.current}>
             <Text style = {styles.text}>
-                Current day: {currDate}
+                Current day: {lastDate}
               </Text>
               <Text style = {styles.text}>
                 Total score: {this.state.habitsTotal}

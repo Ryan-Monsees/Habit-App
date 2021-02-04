@@ -58,23 +58,22 @@ export default class App extends React.Component {
         habits = JSON.parse(array);
 
         // Gets the list of prevHabits
-        const array2 = await AsyncStorage.getItem('prevArray') || '[]';
-        prevHabits = JSON.parse(array2);
+        const storedPrevArray = await AsyncStorage.getItem('habitHistory') || '[]';
+        prevHabits = JSON.parse(storedPrevArray);
+        
 
         // gets the stored dates and stores them in global variables
-        const storedPrevDate = await AsyncStorage.getItem('prevDate') || "";
-        const storedCurrDate = await AsyncStorage.getItem('currDate') || "";
-        prevDate = storedPrevDate;
-        currDate = storedCurrDate;
+        
+        const storedCurrDate = await AsyncStorage.getItem('lastDate') || "";
+        lastDate = storedCurrDate;
 
-        // Checks to see if currDate is accurate or empty
-        if(currDate == "" || date != currDate)
+        // Checks to see if lastDate is accurate or empty
+        if(date != lastDate)
         {
-          prevDate = currDate;
-          currDate = date;
+          prevHabits.push([lastDate, habits])
+          lastDate = date;
           
           // Stores the habits from the prev day in an array
-          prevHabits = JSON.parse(JSON.stringify(habits));
           storeData.StorePrevHabits();       
 
           for(var i = 0; i < habits.length; i++)
@@ -86,11 +85,14 @@ export default class App extends React.Component {
         }
 
       // Stores the accurate dates
-      await AsyncStorage.setItem('prevDate', prevDate);
-      await AsyncStorage.setItem('currDate', currDate);
+      await AsyncStorage.setItem('lastDate', lastDate);
         
-      console.log("current prevDate: " + prevDate);
-      console.log("current currDate: " + currDate);
+
+      
+      console.log("first element: " + prevHabits[0]);
+      console.log("first date: " + prevHabits[0][0]);
+      console.log("first array: " + prevHabits[0][1]);
+      
 
      }  catch(err) {
        console.log(err);

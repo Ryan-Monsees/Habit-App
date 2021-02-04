@@ -20,8 +20,8 @@ class StoreData extends React.Component {
       
           try {
             
-            await AsyncStorage.setItem('prevArray', JSON.stringify(prevHabits))
-          
+            await AsyncStorage.setItem('habitHistory', JSON.stringify(prevHabits))
+            
           } catch(err) {
             console.log(err);
           }
