@@ -9,25 +9,12 @@ import Header from '../components/Header';
 
 export default class Progress extends React.Component {
 
-  calculateTotal() {
-    var habitsTotalTemp = 0;
-    for(var i = 0; i < habits.length; i++) {
+  
 
-        habitsTotalTemp+=(habits[i].count*habits[i].weight);
-    }
-
-    
-
-  this.setState({
-    habitsTotal: habitsTotalTemp,
-  })
-
-
-  }
 
   componentDidMount() {
     this.listener = this.props.navigation.addListener('focus', () => { 
-      this.calculateTotal();
+      this.setState({})
       console.log("updated");
     });
   }
@@ -55,10 +42,7 @@ export default class Progress extends React.Component {
      
 
        this.state = {
-        prevHabitsTotal: prevHabitsTotalTemp,
-        habitsArray: habits,
-        habitsTotal: habitsTotalTemp,
-        display: 'home'
+        habits: prevHabits
     }
 
   }

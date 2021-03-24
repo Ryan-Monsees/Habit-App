@@ -6,7 +6,8 @@ import * as SQLite from 'expo-sqlite';
 
 
 
-
+// stores all the previous habits
+global.preHabits = [];
 
 global.habits = [];
 

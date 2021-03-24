@@ -10,7 +10,6 @@ import EditHabits from '../screens/EditHabits';
 import EditHabitMode from '../screens/EditHabitMode';
 import HabitCounter from '../screens/HabitCounter';
 import Progress from '../screens/Progress';
-import ToDoList from '../screens/ToDoList';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -66,13 +65,7 @@ function TabNavigator() {
                 <MaterialCommunityIcons name="counter" color='white' size={size} />
           ),
             }}/>
-            <Tab.Screen name="ToDoList" component={ToDoList}
-             options={{
-                tabBarLabel: 'ToDo',
-                tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="format-list-checks" color='white' size={size} />
-          ),
-            }}/>
+            
             <Tab.Screen name="Progress" component={Progress}
              options={{
 
