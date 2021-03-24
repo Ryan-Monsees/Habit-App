@@ -80,10 +80,6 @@ const styles = EStyleSheet.create({
         height: Math.round(sHeight*.15),
         backgroundColor: sec,
         justifyContent: 'center',
-        
-        
-        
-
     },
 
     weightText: {

@@ -50,7 +50,7 @@ export default class App extends React.Component {
      try {
         // Gets the current date
         const date = (new Date().getMonth() + 1) + "/" +
-        new Date().getDate() + "/" +
+        new Date().getDate()+1 + "/" +
         new Date().getFullYear();
 
         // Gets the list of habits
@@ -92,6 +92,12 @@ export default class App extends React.Component {
       console.log("first element: " + prevHabits[0]);
       console.log("first date: " + prevHabits[0][0]);
       console.log("first array: " + prevHabits[0][1]);
+      
+      for(i = 0; i < prevHabits.length; i++)
+      {
+        console.log("index " + i + " date: " + prevHabits[i][0]);
+      }
+      
       
 
      }  catch(err) {

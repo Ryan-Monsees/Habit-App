@@ -26,18 +26,6 @@ export default class Progress extends React.Component {
     constructor(props) {
 
         super(props);
-
-        this.calculateTotal = this.calculateTotal.bind(this);
-       
-        
-        var habitsTotalTemp = 0;
-        var prevHabitsTotalTemp = 0;
-        for(var i = 0; i < habits.length; i++) {
-
-            habitsTotalTemp+=(habits[i].count*habits[i].weight);
-        }
-
-       
       
      
 
