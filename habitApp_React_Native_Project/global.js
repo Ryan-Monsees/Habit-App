@@ -11,7 +11,7 @@ global.preHabits = [];
 
 global.habits = [];
 
-global.habitHistory = [];
+
 global.dateHistory = [];
 
 global.toDoList = [{name: "lift", difficulty: 3}, {name: "eat", difficulty: 1}];

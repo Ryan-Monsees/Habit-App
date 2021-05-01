@@ -9,18 +9,13 @@ import StartScreen from '../screens/StartScreen';
 import EditHabits from '../screens/EditHabits';
 import EditHabitMode from '../screens/EditHabitMode';
 import HabitCounter from '../screens/HabitCounter';
-import Progress from '../screens/Progress';
+import Score from '../screens/Score';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-
 import '../global';
-
-
-
-
 
 
 
@@ -66,10 +61,10 @@ function TabNavigator() {
           ),
             }}/>
             
-            <Tab.Screen name="Progress" component={Progress}
+            <Tab.Screen name="Score" component={Score}
              options={{
 
-                tabBarLabel: 'Progress',
+                tabBarLabel: 'Score',
                 tabBarIcon: ({ color, size }) => (
                 <MaterialCommunityIcons name="navigation" color='white' size={size} />
           ),
@@ -139,7 +134,7 @@ export default function homeStack() {
     );
 }
 /*
- <HomeStack.Screen name="Progress" component={Progress}
+ <HomeStack.Screen name="Score" component={Score}
                      options={({ navigation, route }) => ({
                         
                         header: props => <StatusBar/>,

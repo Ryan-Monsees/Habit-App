@@ -17,16 +17,7 @@ class StoreData extends React.Component {
             }
     }
 
-    StorePrevHabits = async() => {
-      
-          try {
-            
-            await AsyncStorage.setItem('habitHistory', JSON.stringify(prevHabits))
-            
-          } catch(err) {
-            console.log(err);
-          }
-  }
+   
 
   StoreToDoList = async() => {
     try {

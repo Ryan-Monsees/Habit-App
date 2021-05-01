@@ -10,7 +10,7 @@ import './global.js';
 import Header from './components/Header';
 
 
-
+import RNCalendarEvents from "react-native-calendar-events";
 
 
 import storeData from './components/StoreData';
@@ -35,10 +35,18 @@ export default class App extends React.Component {
     ]);
     
     this.getData();
+    this.googleCalendarPermission();
   }
 
  
-  
+  googleCalendarPermission = () => {
+
+    RNCalendarEvents.requestPermissions((readOnly = false));
+    
+
+  }
+
+
   /*  
      Gathers all the data from local storage. Also gets
      the current date and see if it's different from the 
@@ -58,9 +66,7 @@ export default class App extends React.Component {
         const array = await AsyncStorage.getItem('array') || '[]';
         habits = JSON.parse(array);
 
-        // Gets the list of prevHabits
-        const storedPrevArray = await AsyncStorage.getItem('habitHistory') || '[]';
-        prevHabits = JSON.parse(storedPrevArray);
+        
         
 
         // gets the stored dates and stores them in global variables
@@ -71,11 +77,13 @@ export default class App extends React.Component {
         // Checks to see if lastDate is accurate or empty
         if(date != lastDate)
         {
-          prevHabits.push([lastDate, habits])
+          // ======================================================
+          // Add event to Google Calendar to add habits array
+          //=======================================================
+
+
           lastDate = date;
-          
-          // Stores the habits from the prev day in an array
-          storeData.StorePrevHabits();       
+              
 
           for(var i = 0; i < habits.length; i++)
           {

@@ -17,7 +17,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
                     screen is not the main screen */}     
                 {!(props.name == "Better Today"  ||
                 props.name == "Edit Habits" ||
-                props.name == "Progress" ||
+                props.name == "Score" ||
                 props.name == "Habit Counter" ||
                 props.name == "Todo List") ? (
                     <View style={{ justifyContent: 'center', flex: 1 }}>
