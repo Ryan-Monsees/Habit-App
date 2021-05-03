@@ -1,5 +1,7 @@
+
 import React, {useRef} from 'react';
-import { YellowBox } from 'react-native';
+import { YellowBox, TextInput, TouchableOpacity } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 
 import HomeStack from './routes/homeStack';
@@ -9,11 +11,29 @@ import './global.js';
 
 import Header from './components/Header';
 
-
-import RNCalendarEvents from "react-native-calendar-events";
-
-
 import storeData from './components/StoreData';
+
+
+//==========================================
+// Firebase setup
+//==========================================
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyDWdljrHdPoYRx3r5X-GmNyW6qzxc5GtW8",
+  authDomain: "habit-app-e5db6.firebaseapp.com",
+  projectId: "habit-app-e5db6",
+  storageBucket: "habit-app-e5db6.appspot.com",
+  messagingSenderId: "307116291206",
+  appId: "1:307116291206:web:1d8593eb6f348bb51bcd07",
+  measurementId: "G-879QW1DT3G"
+};
+
+// Initialize firebase
+if(firebase.apps.length == 0) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 
 
@@ -25,6 +45,10 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     
+    
+    this.state = {
+        user: null
+    }
   }
 
   // Runs once when the app starts
@@ -35,16 +59,26 @@ export default class App extends React.Component {
     ]);
     
     this.getData();
-    this.googleCalendarPermission();
+    this.readUser();
   }
 
- 
-  googleCalendarPermission = () => {
+  readUser = async() => {
 
-    RNCalendarEvents.requestPermissions((readOnly = false));
+    console.log("Reading user...");
+    const user = await AsyncStorage.getItem('user');
     
-
+    if(user) {
+        this.setState({user: JSON.parse(user)});
+    }
+    else {
+      console.log("else activated");
+      return <View style={styles.container}>
+        <TextInput style={styles.textInput}
+                    placeholder="Enter a username"/>
+      </View> 
+    }
   }
+
 
 
   /*  
@@ -98,15 +132,6 @@ export default class App extends React.Component {
         
 
       
-      console.log("first element: " + prevHabits[0]);
-      console.log("first date: " + prevHabits[0][0]);
-      console.log("first array: " + prevHabits[0][1]);
-      
-      for(i = 0; i < prevHabits.length; i++)
-      {
-        console.log("index " + i + " date: " + prevHabits[i][0]);
-      }
-      
       
 
      }  catch(err) {
@@ -131,6 +156,21 @@ render() {
   );
 };
 };
+
+
+const styles = EStyleSheet.create({
+container: {
+  flex: 1,
+  backgroundColor: 'white',
+},
+textInput: {
+  borderWidth: 1,
+  width: '100%',
+  height: '10%',
+
+}
+
+});
 
 
 

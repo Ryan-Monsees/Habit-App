@@ -4,6 +4,7 @@ import { View } from 'react-native';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 import ButtonNav from '../components/ButtonNav';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Header from '../components/Header';
 import '../global';
@@ -20,9 +21,34 @@ export default class StartScreen extends React.Component {
         super(props);
 
         this.state= {
-            screenHeight: sHeight
+            screenHeight: sHeight,
+            user: null
         }
+
+
     }
+
+    componentDidMount() {
+        this.readUser();
+    }
+
+    readUser = async() => {
+
+        console.log("Reading user...");
+        const user = await AsyncStorage.getItem('user');
+        
+        if(user) {
+            console.log("user is " + user);
+            this.setState({user: JSON.parse(user)});
+        }
+        else {
+          console.log("else activated");
+          return <View style={styles.container}>
+            <TextInput style={styles.textInput}
+                        placeholder="Enter a username"/>
+          </View> 
+        }
+      }
 
 
 render () {
