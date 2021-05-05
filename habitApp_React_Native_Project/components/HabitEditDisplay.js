@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, Text, StyleSheet, Dimensions, ImageBackground, TouchableOpacity} from 'react-native';
+import {View, Text} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import '../global.js';
 //================================================================
