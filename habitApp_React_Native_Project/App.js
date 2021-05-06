@@ -5,7 +5,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 
 import HomeStack from './routes/homeStack';
-//import AsyncStorage from '@react-native-community/async-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import './global.js';
 
@@ -14,26 +13,7 @@ import Header from './components/Header';
 import storeData from './components/StoreData';
 
 
-//==========================================
-// Firebase setup
-//==========================================
-import * as firebase from 'firebase';
-import 'firebase/firestore';
 
-var firebaseConfig = {
-  apiKey: "AIzaSyDWdljrHdPoYRx3r5X-GmNyW6qzxc5GtW8",
-  authDomain: "habit-app-e5db6.firebaseapp.com",
-  projectId: "habit-app-e5db6",
-  storageBucket: "habit-app-e5db6.appspot.com",
-  messagingSenderId: "307116291206",
-  appId: "1:307116291206:web:1d8593eb6f348bb51bcd07",
-  measurementId: "G-879QW1DT3G"
-};
-
-// Initialize firebase
-if(firebase.apps.length == 0) {
-  firebase.initializeApp(firebaseConfig);
-}
 
 
 
@@ -59,7 +39,7 @@ export default class App extends React.Component {
     ]);
     
     this.getData();
-    this.readUser();
+    
   }
 
   readUser = async() => {
@@ -163,12 +143,7 @@ container: {
   flex: 1,
   backgroundColor: 'white',
 },
-textInput: {
-  borderWidth: 1,
-  width: '100%',
-  height: '10%',
 
-}
 
 });
 

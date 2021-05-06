@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
 
 
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -8,6 +8,45 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Header from '../components/Header';
 import '../global';
+
+//==========================================
+// Firebase setup
+//==========================================
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyDWdljrHdPoYRx3r5X-GmNyW6qzxc5GtW8",
+  authDomain: "habit-app-e5db6.firebaseapp.com",
+  projectId: "habit-app-e5db6",
+  storageBucket: "habit-app-e5db6.appspot.com",
+  messagingSenderId: "307116291206",
+  appId: "1:307116291206:web:1d8593eb6f348bb51bcd07",
+  measurementId: "G-879QW1DT3G"
+};
+
+// Initialize firebase
+if(firebase.apps.length == 0) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+const db = firebase.firestore();
+const userRef = db.collection('users');
+
+import auth from '@react-native-firebase/auth';
+
+auth()
+  .signInAnonymously()
+  .then(() => {
+    console.log('User signed in anonymously');
+  })
+  .catch(error => {
+    if (error.code === 'auth/operation-not-allowed') {
+      console.log('Enable anonymous in your firebase console.');
+    }
+
+    console.error(error);
+  });
 
 
 
@@ -22,15 +61,16 @@ export default class StartScreen extends React.Component {
 
         this.state= {
             screenHeight: sHeight,
-            user: null
+            user: null,
+            inputUser: ""
+            
         }
-
-
-    }
-
-    componentDidMount() {
         this.readUser();
+        
+
     }
+
+    
 
     readUser = async() => {
 
@@ -42,16 +82,37 @@ export default class StartScreen extends React.Component {
             this.setState({user: JSON.parse(user)});
         }
         else {
-          console.log("else activated");
-          return <View style={styles.container}>
-            <TextInput style={styles.textInput}
-                        placeholder="Enter a username"/>
-          </View> 
+          console.log("no user found");
+            
         }
       }
 
+      confirmUser = async() => {
+          const username = this.state.inputUser;
+          const _id = Math.random().toString(36).substring(7);
+          const user = {_id, username};
+          
+            await AsyncStorage.setItem('user', JSON.stringify(user));
+            this.setState({user: user});
+
+            await userRef.add({
+                username: username
+            });
+        }
+
+      inputUsernameHandler(textInput) {
+        this.setState({ inputUser: textInput });
+    };
+
+
+
+
 
 render () {
+    
+        
+
+
     return (
         
 
@@ -59,12 +120,18 @@ render () {
 
            <Header navigation = {this.props.navigation} name = "Better Today"/>
 
-            <View style={styles.buttonRow}>
-                
+           {this.state.user == null ? (
             
-                
+                <View>
+                   <TextInput   style={styles.input} 
+                                placeholder="Enter username" 
+                                value={this.state.inputUser} 
+                                onChangeText={textInput => this.inputUsernameHandler(textInput)}/>
+                    
+                </View>
+           ): null}  
 
-            </View>  
+           <Button title= "Confirm" onPress={() => this.confirmUser()}  />     
             
     </View>
     
@@ -76,8 +143,6 @@ render () {
 
 
 EStyleSheet.build({ $rem: sWidth / sHeight });
-
-
 
 
 const styles = EStyleSheet.create({
@@ -95,15 +160,6 @@ const styles = EStyleSheet.create({
         opacity: .5,
     },
 
-
-    buttonRow: {
-        height: '25%',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-
-
-    },
 
 
 });
