@@ -7,7 +7,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import StartScreen from '../screens/StartScreen';
 import EditHabits from '../screens/EditHabits';
-import EditHabitMode from '../screens/EditHabitMode';
 import HabitCounter from '../screens/HabitCounter';
 import Score from '../screens/Score';
 

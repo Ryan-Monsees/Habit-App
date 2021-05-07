@@ -13,6 +13,8 @@ import Header from '../components/Header';
 import WeightButton from '../components/WeightButton';
 import SignButton from '../components/SignButton';
 
+import EditHabitMode from '../components/EditHabitMode';
+
 
 import '../global.js';
 
@@ -31,9 +33,10 @@ export default class EditHabits extends React.Component {
 
     this.state = {
       habitsArray: habits,
-      modalVisible: false
+      modalVisible: false,
+      index: -1
     }
-
+    this.closeModal = this.closeModal.bind(this);
 
   }
 
@@ -42,6 +45,16 @@ export default class EditHabits extends React.Component {
       this.setState({habitsArray: habits});
   });
    
+  }
+
+  openModal(props) {
+    console.log("changing index to: " + props);
+    this.setState({index: props});
+    this.setState({modalVisible: true});
+  }
+
+  closeModal() {
+    this.setState({modalVisible: false});
   }
 
   updateHabits() {
@@ -59,17 +72,13 @@ export default class EditHabits extends React.Component {
         <Header navigation = {this.props.navigation} name = "Edit Habits"/>
         
         <Modal
+        
         animationType="slide"
         transparent={true}
         visible={this.state.modalVisible}
         
       >
-       <View style = {{backgroundColor: red, flex: 1}}>
-       <Header navigation = {this.props.navigation} name = "Habit Edit Mode"/>
-         <Text>
-           TESTING
-         </Text>
-       </View>
+       <EditHabitMode index={this.state.index} closeModal={this.closeModal}/>
       </Modal>
 
         <View style={styles().scrollView}>
@@ -77,7 +86,7 @@ export default class EditHabits extends React.Component {
             {/* Displays the list of habits */}
             {this.state.habitsArray.map((item, index) => (
               // Makes it so when you click on a Habit it passes the habit index and updateHabits() to Edit Habit Mode and navigates to it
-              <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate("Edit Habit Mode", { index: index, onGoBack: () => this.updateHabits() })}
+              <TouchableWithoutFeedback onPress={() => this.openModal(index)}
                 key={index}>
                 <View style={styles().habit}>
                   <HabitEditDisplay
@@ -96,7 +105,7 @@ export default class EditHabits extends React.Component {
         
           {/* Navigates to Edit Habit Mode. Passes index -1 to indicate new habit */}
          <TouchableOpacity onPress = {() => {
-           this.setState({modalVisible: true});
+           this.openModal(-1);
          }}>
            <View>
              <Text>

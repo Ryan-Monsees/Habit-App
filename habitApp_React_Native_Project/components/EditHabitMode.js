@@ -6,9 +6,9 @@ import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import '../global.js'
 
-import storeData from '../components/StoreData';
-import WeightButton from '../components/WeightButton';
-import SignButton from '../components/SignButton';
+import storeData from './StoreData';
+import WeightButton from './WeightButton';
+import SignButton from './SignButton';
 
 
 
@@ -23,8 +23,8 @@ export default class EditHabitMode extends React.Component {
 
 
         this.state = {
-            // Holds the index in the habit array that we're editting.
-            index: -1,
+            
+            index: habits.length,
 
             // State for holding the habit name to be added.
             habitName: "",
@@ -62,17 +62,30 @@ export default class EditHabitMode extends React.Component {
 
 
     componentDidMount() {
+
+        const index = this.props.index;
+        console.log("index: " + index);
+        console.log("habits length: " + habits.length);
         // Checks to see if we're editting a habit
         // or adding a habit by seeing if we passed
         // the index to this screen. If it's -1,
         // We're adding a new Habit
-        if (this.props.route.params.index != -1) {
-            this.setState({ index: this.props.route.params.index });
-            this.setState({ habitName: habits[this.props.route.params.index].name });
-            this.setState({ habitWeight: habits[this.props.route.params.index].weight });
-            this.setState({ habitCount: habits[this.props.route.params.index].count });
+        if (index != -1) {
+            this.setState({ index: index });
+            this.setState({ habitName: habits[index].name });
+            this.setState({ habitWeight: habits[index].weight });
+            this.setState({ habitCount: habits[index].count });
             this.setState({ isNewHabit: false, addOrSave: "SAVE" });
         }
+        else {
+            this.setState({ index: -1 });
+            this.setState({ habitName: "" });
+            this.setState({ habitWeight: 1 });
+            this.setState({ habitCount: 0 });
+            this.setState({ isNewHabit: true, addOrSave: "ADD" });
+        }
+
+        
     }
 
 
@@ -82,8 +95,7 @@ export default class EditHabitMode extends React.Component {
 
         habits.splice(this.state.index, 1);
         storeData.StoreHabits();
-        this.props.route.params.onGoBack();
-        this.props.navigation.goBack();
+        this.props.closeModal();
     }
 
     // Calls the function from EditHabit.js
@@ -91,9 +103,8 @@ export default class EditHabitMode extends React.Component {
     cancelHabit() {
 
         // Clears input.
-        this.setState({ habitName: "" });
-        this.props.route.params.onGoBack();
-        this.props.navigation.goBack();
+        
+        this.props.closeModal();
     }
 
 
@@ -199,8 +210,7 @@ export default class EditHabitMode extends React.Component {
 
             // Clears input. Navigates back. onGoBack() updates the EditHabits.js state array
             storeData.StoreHabits();
-            this.props.route.params.onGoBack();
-            this.props.navigation.goBack();
+            this.props.closeModal();
         }
 
 
