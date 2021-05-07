@@ -10,9 +10,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import storeData from '../components/StoreData';
 import Header from '../components/Header';
 
-import WeightButton from '../components/WeightButton';
-import SignButton from '../components/SignButton';
-
 import EditHabitMode from '../components/EditHabitMode';
 
 
@@ -102,19 +99,19 @@ export default class EditHabits extends React.Component {
           </ScrollView>
         </View>
 
-        
+        <View style={styles().addHabitButton}>
           {/* Navigates to Edit Habit Mode. Passes index -1 to indicate new habit */}
          <TouchableOpacity onPress = {() => {
            this.openModal(-1);
          }}>
            <View>
-             <Text>
-               EDIT MODE
+             <Text style = {styles().addHabitText}>
+               Add new habit
              </Text>
            </View>
          </TouchableOpacity>
 
-       
+         </View>
         
       </View>
     );
@@ -140,6 +137,20 @@ const styles = (props) => EStyleSheet.create({
   scrollView: {
     flex: 4,
     alignItems: 'center',
+  },
+  
+  addHabitButton: {
+    //height: sHeight * .1,
+    flex: .5,
+    backgroundColor: buttonColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
+  
+  addHabitText: {
+    fontSize: '50rem',
+    
   },
 
 

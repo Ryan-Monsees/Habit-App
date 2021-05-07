@@ -236,6 +236,7 @@ export default class EditHabitMode extends React.Component {
                         multiline={true}
                         numberOfLines={3}
                         placeholder="Enter name of habit"
+                        placeholderTextColor='white'
                         style={styles().textInput}
                         onChangeText={enteredTextName => this.inputHandlerName(enteredTextName)}
                         value={this.state.habitName}
