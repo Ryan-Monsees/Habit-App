@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, ImageBackground, Dimensions, StatusBar } from 'react-native';
 import { BaseRouter, NavigationContainer, useLinkProps } from '@react-navigation/native';
-import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
+
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -20,7 +20,7 @@ import '../global';
 
 
 
-const HomeStack = createStackNavigator();
+
 
 const Tab = createBottomTabNavigator();
 
