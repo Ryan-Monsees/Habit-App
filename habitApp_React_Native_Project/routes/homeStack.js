@@ -99,41 +99,83 @@ export default function homeStack() {
     }
 
     return (
+    <NavigationContainer>
+        <Tab.Navigator
+            tabBarOptions={{
+                style: {
+                    backgroundColor: 'blue',
+                    borderColor: 'white'
+                },
+                activeTintColor: 'cyan',
+                inactiveTintColor: 'white',
+            }}
+            screenOptions={({ route }) => {
+                 
+            }}>
+            <Tab.Screen name="Better Today" component={StartScreen}
+            options={{
+                tabBarLabel: 'Home',
+                tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="home" color='white' size={size} />
+          ),
+            }}/>
+            <Tab.Screen name="Edit Habits" component={EditHabits}
+             options={{
+                tabBarLabel: 'Edit',
+                tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="pencil-outline" color='white' size={size} />
+          ),
+            }}/>
+            <Tab.Screen name="Habit Counter" component={HabitCounter}
+             options={{
+                tabBarLabel: 'Counter',
+                tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="counter" color='white' size={size} />
+          ),
+            }}/>
+            
+            <Tab.Screen name="Score" component={Score}
+             options={{
 
-        
-        
-            <NavigationContainer>
-                <HomeStack.Navigator
-                screenOptions={{
-                    animationEnabled: false,
-                }}>
-                <HomeStack.Screen name="Better Today" component={TabNavigator}
-                    options={({ navigation, route }) => ({
-                        
-                        header: props => <StatusBarChange/>
-
-
-                    })} />
-                <HomeStack.Screen name="Edit Habit Mode" component={EditHabitMode}
-                    options={({ navigation, route }) => ({
-                        
-                        header: props => <StatusBar/>,
-
-
-                    })} />
-                
-
-               
-
-
-            </HomeStack.Navigator>
+                tabBarLabel: 'Score',
+                tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="navigation" color='white' size={size} />
+          ),
+            }}/>
+            </Tab.Navigator>
             </NavigationContainer>
 
             
-        
+       
     );
 }
 /*
+<NavigationContainer>
+<HomeStack.Navigator
+screenOptions={{
+    animationEnabled: false,
+}}>
+<HomeStack.Screen name="Better Today" component={TabNavigator}
+    options={({ navigation, route }) => ({
+        
+       // header: props => <StatusBarChange/>
+
+
+    })} />
+<HomeStack.Screen name="Edit Habit Mode" component={EditHabitMode}
+    options={({ navigation, route }) => ({
+        
+       // header: props => <StatusBar/>,
+
+
+    })} />
+
+
+
+
+
+</HomeStack.Navigator>
+
  <HomeStack.Screen name="Score" component={Score}
                      options={({ navigation, route }) => ({
                         
@@ -141,9 +183,9 @@ export default function homeStack() {
 
 
                     })} />
-                    */
+                    
 
-
+*/
 
 EStyleSheet.build({ $rem: sWidth / sHeight });
 const styles = EStyleSheet.create({

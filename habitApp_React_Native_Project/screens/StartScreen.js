@@ -12,8 +12,9 @@ import '../global';
 //==========================================
 // Firebase setup
 //==========================================
-import * as firebase from 'firebase';
-import 'firebase/firestore';
+import firebase from '@react-native-firebase/app';
+import '@react-native-firebase/auth';
+import '@react-native-firebase/firestore';
 
 var firebaseConfig = {
   apiKey: "AIzaSyDWdljrHdPoYRx3r5X-GmNyW6qzxc5GtW8",
@@ -26,14 +27,14 @@ var firebaseConfig = {
 };
 
 // Initialize firebase
-if(firebase.apps.length == 0) {
-  firebase.initializeApp(firebaseConfig);
-}
+//if(firebase.apps.length == 0) {
+ // firebase.initializeApp(firebaseConfig);
+//}
 
-const db = firebase.firestore();
-const userRef = db.collection('users');
+//const db = firebase.firestore();
+//const userRef = db.collection('users');
 
-import auth from '@react-native-firebase/auth';
+/*
 
 auth()
   .signInAnonymously()
@@ -48,7 +49,7 @@ auth()
     console.error(error);
   });
 
-
+*/
 
 
 

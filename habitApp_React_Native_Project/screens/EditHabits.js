@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Dimensions, TouchableOpacity, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableOpacity, TextInput, Text, Modal, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 
@@ -9,6 +9,9 @@ import HabitEditDisplay from '../components/HabitEditDisplay';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import storeData from '../components/StoreData';
 import Header from '../components/Header';
+
+import WeightButton from '../components/WeightButton';
+import SignButton from '../components/SignButton';
 
 
 import '../global.js';
@@ -27,7 +30,8 @@ export default class EditHabits extends React.Component {
     super(props);
 
     this.state = {
-      habitsArray: habits
+      habitsArray: habits,
+      modalVisible: false
     }
 
 
@@ -50,19 +54,32 @@ export default class EditHabits extends React.Component {
   render() {
     return (
       
-      <View style={styles.MainContainer}>
+      <View style={styles().MainContainer}>
 
         <Header navigation = {this.props.navigation} name = "Edit Habits"/>
         
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={this.state.modalVisible}
+        
+      >
+       <View style = {{backgroundColor: red, flex: 1}}>
+       <Header navigation = {this.props.navigation} name = "Habit Edit Mode"/>
+         <Text>
+           TESTING
+         </Text>
+       </View>
+      </Modal>
 
-        <View style={styles.scrollView}>
+        <View style={styles().scrollView}>
           <ScrollView showsVerticalScrollIndicator={true}>
             {/* Displays the list of habits */}
             {this.state.habitsArray.map((item, index) => (
               // Makes it so when you click on a Habit it passes the habit index and updateHabits() to Edit Habit Mode and navigates to it
               <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate("Edit Habit Mode", { index: index, onGoBack: () => this.updateHabits() })}
                 key={index}>
-                <View style={styles.habit}>
+                <View style={styles().habit}>
                   <HabitEditDisplay
                     index={index}
                     name={item.name}
@@ -78,16 +95,15 @@ export default class EditHabits extends React.Component {
 
         
           {/* Navigates to Edit Habit Mode. Passes index -1 to indicate new habit */}
-          <ButtonNav
-            color={buttonColor}
-            buttonWidth={1}
-            buttonHeight={.1}
-            text="Add new habit"
-            navigation={this.props.navigation}
-            navigateTo="Edit Habit Mode"
-            parameters={{ index: -1, onGoBack: () => this.updateHabits() }}
-          />
-        
+         <TouchableOpacity onPress = {() => {
+           this.setState({modalVisible: true});
+         }}>
+           <View>
+             <Text>
+               EDIT MODE
+             </Text>
+           </View>
+         </TouchableOpacity>
 
        
         
@@ -99,7 +115,7 @@ export default class EditHabits extends React.Component {
 
 EStyleSheet.build({ $rem: sWidth / sHeight });
 
-const styles = EStyleSheet.create({
+const styles = (props) => EStyleSheet.create({
 
   MainContainer: {
     flex: 1,
