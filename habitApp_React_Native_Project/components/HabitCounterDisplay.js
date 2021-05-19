@@ -11,7 +11,7 @@ import '../global.js';
 const HabitEditDisplay = props => {
 
     var check = {
-        style: props.index != 0 ? styles.habitContainer : styles.habitContainerTopBorder
+        style: props.index != 0 ? styles().habitContainer : styles().habitContainerTopBorder
     }
     
     return (
@@ -20,7 +20,7 @@ const HabitEditDisplay = props => {
 
             
             <TouchableOpacity 
-            style = {styles.countMinus}
+            style = {styles().countMinus}
             onPress={() => {    // Checks to see if the count is greater than 
                                 // zero before incrementing and saving  
                                if(habits[props.index].count > 0) {
@@ -30,20 +30,20 @@ const HabitEditDisplay = props => {
                                }  
                                }}>
                 <View>
-                    <Text style = {styles.countText}>
+                    <Text style = {styles().countText}>
                         -
                     </Text>
                 </View>
             </TouchableOpacity>
                 
-            <View style = {styles.name}>
+            <View style = {styles().name}>
                  {/* Displays the name */}
-                 <Text style = {styles.habitText}>
+                 <Text style = {styles().habitText}>
                     {habits[props.index].name}
                 </Text>
 
                 {/* Displays the count */}
-                <Text style = {styles.habitText}>
+                <Text style = {styles().habitText}>
                     {habits[props.index].count}
                 </Text>
             </View>
@@ -51,12 +51,12 @@ const HabitEditDisplay = props => {
         
             
             <TouchableOpacity 
-            style = {styles.countPlus}
+            style = {styles().countPlus}
             onPress={() => {    habits[props.index].count++;
                                 props.update(props.index);
                                 StoreData.StoreHabits(); }}>
                 <View>
-                    <Text style = {styles.countText}>
+                    <Text style = {styles().countText}>
                         +
                     </Text>
                 </View>
@@ -71,7 +71,7 @@ const HabitEditDisplay = props => {
 
 }
 
-const styles = EStyleSheet.create({
+const styles = (props) => EStyleSheet.create({
     
     habitContainer: {  
         flex: 1, 

@@ -12,9 +12,10 @@ import '../global';
 //==========================================
 // Firebase setup
 //==========================================
-import firebase from '@react-native-firebase/app';
-import '@react-native-firebase/auth';
-import '@react-native-firebase/firestore';
+import firebase from 'firebase/app';
+import "firebase/firestore";
+import "firebase/auth";
+import "firebase/database";
 
 var firebaseConfig = {
   apiKey: "AIzaSyDWdljrHdPoYRx3r5X-GmNyW6qzxc5GtW8",
@@ -27,30 +28,20 @@ var firebaseConfig = {
 };
 
 // Initialize firebase
-//if(firebase.apps.length == 0) {
- // firebase.initializeApp(firebaseConfig);
-//}
+if(firebase.apps.length == 0) {
+  firebase.initializeApp(firebaseConfig);
+  console.log("firebase initialized");
+}
 
-//const db = firebase.firestore();
-//const userRef = db.collection('users');
+const db = firebase.firestore();
 
-/*
 
-auth()
-  .signInAnonymously()
-  .then(() => {
-    console.log('User signed in anonymously');
-  })
-  .catch(error => {
-    if (error.code === 'auth/operation-not-allowed') {
-      console.log('Enable anonymous in your firebase console.');
-    }
 
-    console.error(error);
-  });
 
-*/
 
+
+
+  
 
 
 
@@ -68,10 +59,57 @@ export default class StartScreen extends React.Component {
         }
         this.readUser();
         
+          //=========================================
+          // Creates a user
+          //=========================================
+          const user = {email: "bob@yahoo.com", password: "123456" }
+          /*firebase.auth()
+            .createUserWithEmailAndPassword(user.email, user.password)
+            .then(() => console.log("logged in"))
+            .catch(error => console.log(error))
+  */
+            firebase
+            .auth()
+            .signInWithEmailAndPassword(user.email, user.password)
+            .then(res => {
+                console.log(res.user.email);
+         });
 
     }
 
+    firebaseWrite = () => {
+      
+      //==============================
+      // Adds user to collection
+      //=============================
+      db.collection("users").add({
+        first: "Ada",
+        last: "Lovelace",
+        born: 1815
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+
+
+      //========================
+      // Displays all users
+      //========================
+      firebase.firestore().collection('users').get()
+    .then(querySnapshot => {
+      querySnapshot.docs.forEach(doc => {
+      console.log(doc.data());
+    });
+  });
+  
+
     
+    }
+
+    //request.auth != null
 
     readUser = async() => {
 
@@ -132,7 +170,7 @@ render () {
                 </View>
            ): null}  
 
-           <Button title= "Confirm" onPress={() => this.confirmUser()}  />     
+           <Button title= "Confirm" onPress={() => this.firebaseWrite()}  />     
             
     </View>
     

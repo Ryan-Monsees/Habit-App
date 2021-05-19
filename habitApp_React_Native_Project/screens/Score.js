@@ -55,9 +55,9 @@ export default class Score extends React.Component {
           <Header navigation = {this.props.navigation} name = "Score"/>
 
            
-         <View>
-           <Text>
-             Score: {this.state.score}
+         <View style={styles.scoreView}>
+           <Text style={styles.scoreText}>
+            {this.state.score}
            </Text>
          </View>
             
@@ -79,9 +79,19 @@ const styles = EStyleSheet.create({
     
     flex: 1,
     alignItems: 'center',
-    backgroundColor: sec
+    backgroundColor: prim
   },  
 
+  scoreView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  scoreText: {
+    color: 'white',
+    fontSize: '200rem'
+  }
   
 
 
