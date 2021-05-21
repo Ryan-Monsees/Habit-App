@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Setting a timer']);
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 import ButtonNav from '../components/ButtonNav';
@@ -8,6 +11,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Header from '../components/Header';
 import '../global';
+
+import storeData from '../components/StoreData';
 
 //==========================================
 // Firebase setup
@@ -54,45 +59,70 @@ export default class StartScreen extends React.Component {
         this.state= {
             screenHeight: sHeight,
             user: null,
-            inputUser: ""
-            
+            inputUser: "" 
         }
         this.readUser();
+        this.firebaseLogin();
+       //this.firebaseSignOut();
         
-          //=========================================
+          
+
+    }
+
+    firebaseSignOut = async() => {
+      firebase.auth()
+  .signOut()
+  .then(() => console.log('User signed out!'));
+    }
+
+    firebaseCreateUser = async() => {
+
+        //=========================================
           // Creates a user
           //=========================================
-          const user = {email: "bob@yahoo.com", password: "123456" }
+          
           /*firebase.auth()
             .createUserWithEmailAndPassword(user.email, user.password)
             .then(() => console.log("logged in"))
             .catch(error => console.log(error))
   */
-            firebase
-            .auth()
-            .signInWithEmailAndPassword(user.email, user.password)
-            .then(res => {
-                console.log(res.user.email);
-         });
-
+            
     }
 
-    firebaseWrite = () => {
-      
+    firebaseLogin = async() => {
+
+      const user = {email: "bob@yahoo.com", password: "123456" }
+      firebase
+      .auth()
+      .signInWithEmailAndPassword(user.email, user.password)
+      .then(res => {
+          console.log(res.user.email);
+   });
+    }
+
+    firebaseWrite = async() => {
+
+      // Calculates score based on habit weight and habit count
+       calculatedScore = 0;
+      for(i = 0; i < habits.length; i++)
+      {
+        calculatedScore += (habits[i].weight * habits[i].count);
+      }
+     
       //==============================
       // Adds user to collection
       //=============================
-      db.collection("users").add({
-        first: "Ada",
-        last: "Lovelace",
-        born: 1815
+      db.collection("Bob").doc(lastDate.split("/").join("_")).set({
+        score: calculatedScore
       })
-      .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
+      .then(() => {
+        console.log("Document written with ID: ", "bob");
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
       });
+
+      
 
 
       //========================
@@ -108,8 +138,6 @@ export default class StartScreen extends React.Component {
 
     
     }
-
-    //request.auth != null
 
     readUser = async() => {
 
@@ -170,7 +198,7 @@ render () {
                 </View>
            ): null}  
 
-           <Button title= "Confirm" onPress={() => this.firebaseWrite()}  />     
+           <Button title= "Confirm" onPress={() => storeData.firebaseWrite()}  />     
             
     </View>
     

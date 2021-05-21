@@ -3,7 +3,8 @@ import {Dimensions, StatusBar} from 'react-native';
 
 
 
-
+// Local storage of user who is logged in
+global.user = "";
 
 
 // stores all the previous habits

@@ -40,22 +40,7 @@ export default class App extends React.Component {
     
   }
 
-  readUser = async() => {
-
-    console.log("Reading user...");
-    const user = await AsyncStorage.getItem('user');
-    
-    if(user) {
-        this.setState({user: JSON.parse(user)});
-    }
-    else {
-      console.log("else activated");
-      return <View style={styles.container}>
-        <TextInput style={styles.textInput}
-                    placeholder="Enter a username"/>
-      </View> 
-    }
-  }
+  
 
 
 
@@ -70,14 +55,16 @@ export default class App extends React.Component {
     
      try {
         // Gets the current date
-        const date = (new Date().getMonth() + 1) + "/" +
-        new Date().getDate()+1 + "/" +
+        const date = (new Date().getMonth() + 1) + "_" +
+        new Date().getDate() + "_" +
         new Date().getFullYear();
 
         // Gets the list of habits
         const array = await AsyncStorage.getItem('array') || '[]';
         habits = JSON.parse(array);
 
+        // Stores 
+        user = await AsyncStorage.getItem('user');
         
         
 
@@ -90,9 +77,11 @@ export default class App extends React.Component {
         if(date != lastDate)
         {
           // ======================================================
-          // Add event to Google Calendar to add habits array
+          // Implement Firebase storage here
           //=======================================================
-
+          
+          //Check to see if user is logged in
+          
 
           lastDate = date;
               
