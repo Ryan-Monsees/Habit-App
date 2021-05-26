@@ -61,7 +61,7 @@ export default class StartScreen extends React.Component {
             user: null,
             inputUser: "" 
         }
-        this.readUser();
+        
         this.firebaseLogin();
        //this.firebaseSignOut();
         
@@ -98,74 +98,8 @@ export default class StartScreen extends React.Component {
       .then(res => {
           console.log(res.user.email);
    });
-    }
-
-    firebaseWrite = async() => {
-
-      // Calculates score based on habit weight and habit count
-       calculatedScore = 0;
-      for(i = 0; i < habits.length; i++)
-      {
-        calculatedScore += (habits[i].weight * habits[i].count);
-      }
-     
-      //==============================
-      // Adds user to collection
-      //=============================
-      db.collection("Bob").doc(lastDate.split("/").join("_")).set({
-        score: calculatedScore
-      })
-      .then(() => {
-        console.log("Document written with ID: ", "bob");
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
-
-      
-
-
-      //========================
-      // Displays all users
-      //========================
-      firebase.firestore().collection('users').get()
-    .then(querySnapshot => {
-      querySnapshot.docs.forEach(doc => {
-      console.log(doc.data());
-    });
-  });
-  
-
     
-    }
-
-    readUser = async() => {
-
-        console.log("Reading user...");
-        const user = await AsyncStorage.getItem('user');
-        
-        if(user) {
-            console.log("user is " + user);
-            this.setState({user: JSON.parse(user)});
-        }
-        else {
-          console.log("no user found");
-            
-        }
-      }
-
-      confirmUser = async() => {
-          const username = this.state.inputUser;
-          const _id = Math.random().toString(36).substring(7);
-          const user = {_id, username};
-          
-            await AsyncStorage.setItem('user', JSON.stringify(user));
-            this.setState({user: user});
-
-            await userRef.add({
-                username: username
-            });
-        }
+  }
 
       inputUsernameHandler(textInput) {
         this.setState({ inputUser: textInput });

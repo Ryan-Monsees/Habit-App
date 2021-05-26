@@ -26,9 +26,7 @@ export default class App extends React.Component {
     super(props);
     
     
-    this.state = {
-        user: null
-    }
+    
   }
 
   // Runs once when the app starts
@@ -37,6 +35,7 @@ export default class App extends React.Component {
     
     
     this.getData();
+    
     
   }
 
@@ -50,7 +49,7 @@ export default class App extends React.Component {
      stored date, indicating we need to store the 
      current habits array reset it.
   */
-  getData = async() => {
+  getData = async() => { 
     
     
      try {
@@ -63,8 +62,7 @@ export default class App extends React.Component {
         const array = await AsyncStorage.getItem('array') || '[]';
         habits = JSON.parse(array);
 
-        // Stores 
-        user = await AsyncStorage.getItem('user');
+        
         
         
 
@@ -76,11 +74,7 @@ export default class App extends React.Component {
         // Checks to see if lastDate is accurate or empty
         if(date != lastDate)
         {
-          // ======================================================
-          // Implement Firebase storage here
-          //=======================================================
           
-          //Check to see if user is logged in
           
 
           lastDate = date;

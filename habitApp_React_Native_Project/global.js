@@ -6,6 +6,8 @@ import {Dimensions, StatusBar} from 'react-native';
 // Local storage of user who is logged in
 global.user = "";
 
+global.prevScores = [];
+
 
 // stores all the previous habits
 global.preHabits = [];
@@ -15,7 +17,6 @@ global.habits = [];
 
 global.dateHistory = [];
 
-global.toDoList = [{name: "lift", difficulty: 3}, {name: "eat", difficulty: 1}];
 
 global.lastDate = "";
 global.sHeight = Math.round(Dimensions.get('window').height);
