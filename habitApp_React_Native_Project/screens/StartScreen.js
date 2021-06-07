@@ -13,32 +13,7 @@ import Header from '../components/Header';
 import '../global';
 
 import storeData from '../components/StoreData';
-
-//==========================================
-// Firebase setup
-//==========================================
-import firebase from 'firebase/app';
-import "firebase/firestore";
-import "firebase/auth";
-import "firebase/database";
-
-var firebaseConfig = {
-  apiKey: "AIzaSyDWdljrHdPoYRx3r5X-GmNyW6qzxc5GtW8",
-  authDomain: "habit-app-e5db6.firebaseapp.com",
-  projectId: "habit-app-e5db6",
-  storageBucket: "habit-app-e5db6.appspot.com",
-  messagingSenderId: "307116291206",
-  appId: "1:307116291206:web:1d8593eb6f348bb51bcd07",
-  measurementId: "G-879QW1DT3G"
-};
-
-// Initialize firebase
-if(firebase.apps.length == 0) {
-  firebase.initializeApp(firebaseConfig);
-  console.log("firebase initialized");
-}
-
-const db = firebase.firestore();
+import firebase from '../components/Firebase';
 
 
 
@@ -59,51 +34,18 @@ export default class StartScreen extends React.Component {
         this.state= {
             screenHeight: sHeight,
             user: null,
-            inputUser: "" 
+            inputUser: "",
+            modal: "logged out"
         }
         
-        this.firebaseLogin();
-       //this.firebaseSignOut();
-        
-          
-
+        firebase.login();
     }
 
-    firebaseSignOut = async() => {
-      firebase.auth()
-  .signOut()
-  .then(() => console.log('User signed out!'));
-    }
-
-    firebaseCreateUser = async() => {
-
-        //=========================================
-          // Creates a user
-          //=========================================
-          
-          /*firebase.auth()
-            .createUserWithEmailAndPassword(user.email, user.password)
-            .then(() => console.log("logged in"))
-            .catch(error => console.log(error))
-  */
-            
-    }
-
-    firebaseLogin = async() => {
-
-      const user = {email: "bob@yahoo.com", password: "123456" }
-      firebase
-      .auth()
-      .signInWithEmailAndPassword(user.email, user.password)
-      .then(res => {
-          console.log(res.user.email);
-   });
     
-  }
 
       inputUsernameHandler(textInput) {
         this.setState({ inputUser: textInput });
-    };
+      };
 
 
 
@@ -121,7 +63,7 @@ render () {
 
            <Header navigation = {this.props.navigation} name = "Better Today"/>
 
-           {this.state.user == null ? (
+           {this.state.modal == "logged out" ? (
             
                 <View>
                    <TextInput   style={styles.input} 
@@ -129,11 +71,32 @@ render () {
                                 value={this.state.inputUser} 
                                 onChangeText={textInput => this.inputUsernameHandler(textInput)}/>
                     
-                </View>
-           ): null}  
-
-           <Button title= "Confirm" onPress={() => storeData.firebaseWrite()}  />     
+                    <Button title= "Login" onPress={() => firebase.saveScore()}  />     
             
+                </View>
+           ): this.state.modal == "logged in" ? (
+            
+            <View>
+               <TextInput   style={styles.input} 
+                            placeholder="Enter username" 
+                            value={this.state.inputUser} 
+                            onChangeText={textInput => this.inputUsernameHandler(textInput)}/>
+                <Button title= "TEST" onPress={() => firebase.saveScore()}  />     
+            
+            </View>
+       ): this.state.modal == "sign up" ? (
+            
+        <View>
+           <TextInput   style={styles.input} 
+                        placeholder="Enter username" 
+                        value={this.state.inputUser} 
+                        onChangeText={textInput => this.inputUsernameHandler(textInput)}/>
+            <Button title= "TEST" onPress={() => firebase.saveScore()}  />     
+        
+        </View>
+   ): null}
+
+           
     </View>
     
     
