@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, KeyboardAwareScrollView, Platform, TextInput, Alert, CheckBox, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, TextInput, Alert, CheckBox, TouchableOpacity } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import '../global.js'
 
 import storeData from './StoreData';
@@ -24,7 +22,11 @@ export default class EditHabitMode extends React.Component {
 
         this.state = {
             
-            index: habits.length,
+            // Index in the habits array to edit.
+            // Initiallized to -1 for adding a new habit,
+            // but will change to the index passed in props 
+            // if we're editing a current habit.
+            index: -1,
 
             // State for holding the habit name to be added.
             habitName: "",
@@ -39,6 +41,7 @@ export default class EditHabitMode extends React.Component {
             // has been done today
             habitCount: 0,
 
+            
             isNewHabit: true,
 
             // Determines if the Add button will display 
@@ -46,6 +49,8 @@ export default class EditHabitMode extends React.Component {
             // if you are editing a habit
             addOrSave: "ADD",
 
+            // controls the color of the button to 
+            // change the weight of a habit
             weightButtonController: {
                 sign: 1,
                 color: 'blue'
@@ -64,8 +69,8 @@ export default class EditHabitMode extends React.Component {
     componentDidMount() {
 
         const index = this.props.index;
-        console.log("index: " + index);
-        console.log("habits length: " + habits.length);
+        
+
         // Checks to see if we're editting a habit
         // or adding a habit by seeing if we passed
         // the index to this screen. If it's -1,
@@ -90,7 +95,8 @@ export default class EditHabitMode extends React.Component {
 
 
 
-    // Handles deleting the selected habit.
+    // Removes habit from array and stores the array in
+    // local storage.
     deleteHabit() {
 
         habits.splice(this.state.index, 1);
@@ -101,8 +107,6 @@ export default class EditHabitMode extends React.Component {
     // Calls the function from EditHabit.js
     // to cancel adding a habit.
     cancelHabit() {
-
-        // Clears input.
         
         this.props.closeModal();
     }
