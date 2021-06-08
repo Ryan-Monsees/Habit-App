@@ -3,7 +3,6 @@ import { View, TouchableOpacity, TextInput, Text, Modal, ScrollView, TouchableWi
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 
-import ButtonNav from '../components/ButtonNav';
 import HabitEditDisplay from '../components/HabitEditDisplay';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';

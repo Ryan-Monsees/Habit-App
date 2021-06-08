@@ -6,13 +6,10 @@ import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Setting a timer']);
 
 import EStyleSheet from 'react-native-extended-stylesheet';
-import ButtonNav from '../components/ButtonNav';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Header from '../components/Header';
 import '../global';
 
-import storeData from '../components/StoreData';
 import firebase from '../components/Firebase';
 
 
