@@ -10,8 +10,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Header from '../components/Header';
 import '../global';
 
-import firebase from '../components/Firebase';
-
+//import firebase from '../components/Firebase';
+import firebase from 'firebase/app';
 
 
 
@@ -29,14 +29,33 @@ export default class StartScreen extends React.Component {
         super(props);
 
         this.state= {
-            screenHeight: sHeight,
             user: null,
             inputUser: "",
-            modal: "logged out"
+            login: false
         }
-        
-        firebase.login();
+    
     }
+
+    
+
+
+    // Runs once when the app starts
+    componentDidMount() {
+        
+
+       // Checks if user is logged in
+       firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.setState({login: true});
+        }
+        else {
+            this.setState({login: false});
+        }
+     });
+        
+    }
+
+    
 
     
 
@@ -60,7 +79,7 @@ render () {
 
            <Header navigation = {this.props.navigation} name = "Better Today"/>
 
-           {this.state.modal == "logged out" ? (
+           {this.state.login == false ? (
             
                 <View>
                    <TextInput   style={styles.input} 

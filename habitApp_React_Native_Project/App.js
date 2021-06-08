@@ -12,6 +12,8 @@ import Header from './components/Header';
 
 import storeData from './components/StoreData';
 
+import firebase from './components/Firebase';
+
 
 
 
@@ -35,6 +37,12 @@ export default class App extends React.Component {
     
     
     this.getData();
+    const user = {email: "umm@yahoo.com", password: '123456'};
+    
+    //firebase.login(user);
+    //firebase.signOut();
+    //firebase.saveScore();
+    
     
     
   }
@@ -58,7 +66,7 @@ export default class App extends React.Component {
         new Date().getDate() + "_" +
         new Date().getFullYear();
 
-        // Gets the list of habits
+        // Gets the list of habits from local storage
         const array = await AsyncStorage.getItem('array') || '[]';
         habits = JSON.parse(array);
 
@@ -67,7 +75,6 @@ export default class App extends React.Component {
         
 
         // gets the stored dates and stores them in global variables
-        
         const storedCurrDate = await AsyncStorage.getItem('lastDate') || "";
         lastDate = storedCurrDate;
 

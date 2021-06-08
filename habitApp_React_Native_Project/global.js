@@ -8,6 +8,8 @@ global.user = "";
 
 global.prevScores = [];
 
+global.loggedIn = false;
+
 
 // stores all the previous habits
 global.preHabits = [];

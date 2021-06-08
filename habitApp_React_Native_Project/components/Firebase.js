@@ -7,6 +7,7 @@ import firebase from 'firebase/app';
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/database";
+import "../global";
 
 var firebaseConfig = {
   apiKey: "AIzaSyDWdljrHdPoYRx3r5X-GmNyW6qzxc5GtW8",
@@ -33,17 +34,17 @@ class Firebase extends React.Component {
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
             // Calculates score based on habit weight and habit count
-            calculatedScore = 0;
-            for(i = 0; i < habits.length; i++)
+            var calculatedScore = 0;
+            for(var i = 0; i < habits.length; i++)
             {
               calculatedScore += (habits[i].weight * habits[i].count);
             }
             
-            username = "Bob";
+            var username = "umm@yahoo.com";
             //==============================
             // Adds user to collection
             //==============================
-            db.collection(username).doc(lastDate).set({
+            db.collection("users").doc(username).set({
               score: calculatedScore
             })
             .then(() => {
@@ -63,17 +64,6 @@ class Firebase extends React.Component {
          
     }
 
-    checkLogin = async() => {
-        // Checks if user is logged in
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-              return true; 
-            }
-            else {
-                return false;
-            }
-         });
-    }
 
     // Gets all stored dates and scores from Firestore
     // and stores them in global variable prevScores
@@ -90,23 +80,22 @@ class Firebase extends React.Component {
     });
     }
 
-    firebaseCreateUser = async() => {
+    createUser = async(user) => {
 
-        //=========================================
+          //=========================================
           // Creates a user
           //=========================================
           
-          /*firebase.auth()
+          firebase.auth()
             .createUserWithEmailAndPassword(user.email, user.password)
             .then(() => console.log("logged in"))
             .catch(error => console.log(error))
-  */
+  
             
     }
 
-    login = async() => {
+    login = async(user) => {
 
-        const user = {email: "bob@yahoo.com", password: "123456" }
         firebase
         .auth()
         .signInWithEmailAndPassword(user.email, user.password)
