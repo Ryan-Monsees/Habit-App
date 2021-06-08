@@ -3,6 +3,8 @@ import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import '../global.js';
 
+import firebase from 'firebase/app';
+import "firebase/auth";
 
 class StoreData extends React.Component {
 

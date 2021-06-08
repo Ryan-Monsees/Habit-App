@@ -12,7 +12,6 @@ import Header from './components/Header';
 
 import storeData from './components/StoreData';
 
-import firebase from './components/Firebase';
 
 
 
@@ -37,11 +36,7 @@ export default class App extends React.Component {
     
     
     this.getData();
-    const user = {email: "umm@yahoo.com", password: '123456'};
     
-    //firebase.login(user);
-    //firebase.signOut();
-    //firebase.saveScore();
     
     
     
