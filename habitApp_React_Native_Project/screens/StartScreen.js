@@ -72,66 +72,39 @@ export default class StartScreen extends React.Component {
             this.setState({login: false});
         }
      });
-     const user = {email: "umm@yahoo.com", password: "123456"};
-     this.login(user);
+     const user = {email: "ref@yahoo.com", password: "123456"};
+     //this.login(user);
+     this.getScores(user);
+     
     
     }
 
-    saveScore = async() => {
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            // Calculates score based on habit weight and habit count
-            var calculatedScore = 0;
-            for(var i = 0; i < habits.length; i++)
-            {
-              calculatedScore += (habits[i].weight * habits[i].count);
-            }
-            
-            var username = "umm@yahoo.com";
-            //==============================
-            // Adds user to collection
-            //==============================
-            db.collection("users").doc(username).set({
-              score: calculatedScore
-            })
-            .then(() => {
-              console.log("Document written with ID: ", username);
-            })
-            .catch((error) => {
-              console.error("Error adding document: ", error);
-            });
-  
-  
-            for(i = 0; i < prevScores.length; i++) {
-              console.log("Index: " + i + " has " + prevScores[i].date + " " + prevScores[i].score);
-            }
-          }
-        });
-
-         
-    }
 
 
     // Gets all stored dates and scores from Firestore
     // and stores them in global variable prevScores
     getScores = async(user) => {
-    console.log("Username passed is: " + user);
+   
     prevScores = [];
-    firebase.firestore().collection(user).get()
+    await firebase.firestore().collection("users").doc(user.email).collection("History").get()
     .then(querySnapshot => {
     querySnapshot.docs.forEach(doc => {
-
+      console.log("date: " + doc.id + " score: " + doc.data().score);
       prevScores.push({date: doc.id, score: doc.data().score});
-    
     });
     });
+
     }
 
-    createUser = async(user) => {
+    printScores = () => {
+      for(var i = 0; i < prevScores.length; i++) {
+        console.log("Index: " + i + " contains " + prevScores[i].date + " " + prevScores[i].score);
+      }
+      console.log("SCORES DONE PRINTING");
+    }
 
-          //=========================================
-          // Creates a user
-          //=========================================
+    // Creates a user
+    createUser = async(user) => { 
           
           firebase.auth()
             .createUserWithEmailAndPassword(user.email, user.password)
@@ -214,7 +187,7 @@ render () {
         </View>
    ): null}
 
-           
+<Button title= "TEST" onPress={() => this.printScores()}  />  
     </View>
     
     
