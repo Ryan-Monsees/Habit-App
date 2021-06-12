@@ -12,7 +12,7 @@ global.loggedIn = false;
 
 
 // stores all the previous habits
-global.preHabits = [];
+global.history = [];
 
 global.habits = [];
 

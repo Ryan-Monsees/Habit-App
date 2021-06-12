@@ -47,7 +47,30 @@ class StoreData extends React.Component {
             } catch(err) {
               console.log(err);
             }
-    }  
+    } 
+    
+    // Gets all stored dates and scores from Firestore
+    // and stores them in global variable prevScores
+    getScores = async() => {
+      
+      // Clears history
+      history = [];
+
+       // Checks if user is logged in
+       firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          
+          firebase.firestore().collection("users").doc(user.email).collection("History").get()
+          .then(querySnapshot => {
+          querySnapshot.docs.forEach(doc => {
+            
+            history.push({date: doc.id, score: doc.data().score});
+          });
+          });
+        }
+  });
+  
+  }
     
 }
 

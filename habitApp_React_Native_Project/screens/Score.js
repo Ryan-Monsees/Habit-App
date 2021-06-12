@@ -35,7 +35,7 @@ export default class Score extends React.Component {
       super(props);
       
       // Calculates score based on habit weight and habit count
-      calculatedScore = 0;
+      var calculatedScore = 0;
       for(i = 0; i < habits.length; i++)
       {
         calculatedScore += (habits[i].weight * habits[i].count);

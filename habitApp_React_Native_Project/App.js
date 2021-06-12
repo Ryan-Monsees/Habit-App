@@ -56,6 +56,11 @@ export default class App extends React.Component {
     
     
      try {
+        
+        // Gets scores from database and stores them in
+        // a local array
+        storeData.getScores();
+
         // Gets the current date
         const date = (new Date().getMonth() + 1) + "_" +
         new Date().getDate() + "_" +
@@ -88,6 +93,7 @@ export default class App extends React.Component {
           }
           
           storeData.StoreHabits();
+          
         }
 
       // Stores the accurate dates
