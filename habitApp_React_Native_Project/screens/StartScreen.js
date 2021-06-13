@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, Input, Icon, TouchableOpacity, LogBox } from 'react-native';
+import { View, Text, TextInput, Alert, TouchableOpacity, LogBox } from 'react-native';
 
 LogBox.ignoreLogs(['Setting a timer']);
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import Header from '../components/Header';
+import storeData from '../components/StoreData';
 import '../global';
 
 //==========================================
@@ -60,6 +61,7 @@ export default class StartScreen extends React.Component {
         }
 
         this.checkLogin();
+        
     }
 
     // Runs once when the app starts
@@ -130,8 +132,45 @@ export default class StartScreen extends React.Component {
         .then(() => console.log('User signed out!'));
     }
 
-    
+    signUp() {
 
+      if(this.state.inputPass == this.state.inputPass2) {
+        firebase.auth()
+        .createUserWithEmailAndPassword(this.state.inputEmail, this.state.inputPass)
+        .then(() => { console.log("signed up!");
+                      storeData.StoreHabits();
+                      this.clearInput();})
+        
+        .catch(error => {
+          Alert.alert(
+            "Invalid",
+            error.toString().substring(7),
+            [
+              
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ],
+            { cancelable: false }
+          );
+          this.setState({ inputPass: "",
+                          inputPass2: ""});})
+      }
+      else {
+        Alert.alert(
+          "Invalid",
+          "Passwords do not match",
+          [
+            
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: false }
+        );
+        this.setState({ inputPass: "",
+        inputPass2: ""});
+      }
+      
+      
+      
+    }
     
 
       inputEmailHandler(textInput) {
@@ -148,16 +187,8 @@ export default class StartScreen extends React.Component {
 
       cancel() {
         this.clearInput();
-        this.setState({ modal: "logged out"})
+        this.setState({ modal: "logged out"});
       };
-
-      
-
-
-    
-
-
-
 
 
 render () {
@@ -197,11 +228,7 @@ render () {
            ): this.state.modal == "logged in" ? (
             
             <View>
-               <TextInput   style={styles.input} 
-                            placeholder="Enter username" 
-                            value={this.state.inputEmail} 
-                            onChangeText={textInput => this.inputEmailHandler(textInput)}/>
-                    
+               
             
             </View>
        ): this.state.modal == "sign up" ? (
@@ -242,7 +269,7 @@ render () {
                       </View>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => console.log("OK")}>
+                    <TouchableOpacity onPress={() => this.signUp()}>
                       <View style = {styles.signUp}>
                         <Text style={styles.signInText}>
                           OK
