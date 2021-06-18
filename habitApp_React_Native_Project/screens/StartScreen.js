@@ -6,7 +6,7 @@ LogBox.ignoreLogs(['Setting a timer']);
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import Header from '../components/Header';
-import storeData from '../components/StoreData';
+//import storeData from '../components/StoreData';
 import '../global';
 
 //==========================================
@@ -73,7 +73,7 @@ export default class StartScreen extends React.Component {
          
       });
       
-     const user = {email: "ref@yahoo.com", password: "123456"};
+    
      
      
     
@@ -116,14 +116,29 @@ export default class StartScreen extends React.Component {
             
     }
 
-    login = async(user) => {
+    login = async() => {
 
+        const user = {email: this.state.inputEmail, password: this.state.inputPass};
         firebase
         .auth()
         .signInWithEmailAndPassword(user.email, user.password)
         .then(res => {
-            console.log(res.user.email);
-     });
+          this.setState({
+            inputEmail: "",
+            inputPass: "",
+            inputPass2: "",
+            modal: "logged in"});
+     }).catch(error => {
+      Alert.alert(
+        "Error",
+        error.toString().substring(7),
+        [
+          
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ],
+        { cancelable: false }
+      );
+      });
     }
 
     logout = async() => {
@@ -132,13 +147,16 @@ export default class StartScreen extends React.Component {
         .then(() => console.log('User signed out!'));
     }
 
+    passwordReset(email) {
+      firebase.auth().sendPasswordResetEmail(email);
+    }
+
     signUp() {
 
       if(this.state.inputPass == this.state.inputPass2) {
         firebase.auth()
         .createUserWithEmailAndPassword(this.state.inputEmail, this.state.inputPass)
         .then(() => { console.log("signed up!");
-                      storeData.StoreHabits();
                       this.clearInput();})
         
         .catch(error => {
@@ -207,7 +225,7 @@ render () {
            {this.state.modal == "logged out" ? (
             
                 <View style={styles.buttonsView}>
-                    <TouchableOpacity onPress={() => console.log("CLICK")}>
+                    <TouchableOpacity onPress={() => this.setState({modal: "login"})}>
                       <View style = {styles.signIn}>
                         <Text style={styles.signInText}>
                           Sign in
@@ -228,7 +246,21 @@ render () {
            ): this.state.modal == "logged in" ? (
             
             <View>
-               
+               <Text style = {styles.loggedIn}>
+                 Logged In!
+               </Text>
+
+               <View style={styles.buttonsView}>
+                    <TouchableOpacity onPress={() => this.logout()}>
+                      <View style = {styles.cancel}>
+                        <Text style={styles.signInText}>
+                          Logout
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                         
+            
+        </View>
             
             </View>
        ): this.state.modal == "sign up" ? (
@@ -278,12 +310,54 @@ render () {
                     </TouchableOpacity>
                          
             
-                </View>
-
         </View>
 
-        
-   ): null}
+      </View>
+
+    ): this.state.modal == "login" ? (     
+      <View>
+        <View style={styles.inputLoginView}>
+           <TextInput   style={styles.input} 
+                        placeholder="Enter your email"
+                        placeholderTextColor='white'
+                        maxLength={50}
+                        value={this.state.inputEmail} 
+                        onChangeText={textInput => this.inputEmailHandler(textInput)}/>
+            
+            <TextInput  style={styles.input}
+                        secureTextEntry={true} 
+                        placeholder="Enter password"
+                        placeholderTextColor='white'
+                        maxLength={50}
+                        value={this.state.inputPass} 
+                        onChangeText={textInput => this.inputPassHandler(textInput)}/>
+                       
+        </View>
+
+        <View style={styles.buttonsView}>
+                    <TouchableOpacity onPress={() => this.cancel()}>
+                      <View style = {styles.cancel}>
+                        <Text style={styles.signInText}>
+                          CANCEL
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => this.login()}>
+                      <View style = {styles.signUp}>
+                        <Text style={styles.signInText}>
+                          OK
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                         
+            
+        </View>
+      </View>
+
+    
+    
+    ): null}
     
     </View>
     
@@ -330,6 +404,13 @@ const styles = EStyleSheet.create({
         borderColor: 'white'
     },
 
+    inputLoginView: {
+      backgroundColor: sec,
+      height: sHeight * .2,
+      borderWidth: 1,
+      borderColor: 'white'
+  },
+
     input: {
       borderWidth: 1,
       borderColor: 'white',
@@ -363,6 +444,12 @@ const styles = EStyleSheet.create({
       textAlign: 'center',
       color: 'white',
       fontSize: '30rem'
+    },
+
+    loggedIn: {
+      textAlign: 'center',
+      color: 'white',
+      fontSize: '50rem'
     }
 
 
