@@ -122,7 +122,7 @@ export default class StartScreen extends React.Component {
         firebase
         .auth()
         .signInWithEmailAndPassword(user.email, user.password)
-        .then(res => {
+        .then(() => {
           this.setState({
             inputEmail: "",
             inputPass: "",
@@ -147,8 +147,24 @@ export default class StartScreen extends React.Component {
         .then(() => console.log('User signed out!'));
     }
 
-    passwordReset(email) {
-      firebase.auth().sendPasswordResetEmail(email);
+    passwordReset() {
+      firebase.auth().sendPasswordResetEmail(this.state.inputEmail).then(
+        () => {
+        this.clearInput();
+      this.setState({modal: "logged out"});
+      }
+      ).catch(error => {
+        Alert.alert(
+          "Error",
+          error.toString().substring(7),
+          [
+            
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: false }
+        );
+      });
+      
     }
 
     signUp() {
@@ -223,7 +239,8 @@ render () {
            <Header navigation = {this.props.navigation} name = "Better Today"/>
 
            {this.state.modal == "logged out" ? (
-            
+            <View>
+
                 <View style={styles.buttonsView}>
                     <TouchableOpacity onPress={() => this.setState({modal: "login"})}>
                       <View style = {styles.signIn}>
@@ -240,9 +257,18 @@ render () {
                         </Text>
                       </View>
                     </TouchableOpacity>
-                         
-            
+                
                 </View>
+              
+                <TouchableOpacity onPress={() => this.setState({modal: "forgot password"})}>
+                      <View style = {styles.forgotPassView}>
+                        <Text style={styles.forgotPassText}>
+                          Forgot Password
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+              </View>
+
            ): this.state.modal == "logged in" ? (
             
             <View>
@@ -356,6 +382,39 @@ render () {
       </View>
 
     
+    ): this.state.modal == "forgot password" ? (   
+      <View>
+        
+    <View style = {styles.inputForgotPassView}>
+      <TextInput   style={styles.input} 
+                        placeholder="Enter your email"
+                        placeholderTextColor='white'
+                        maxLength={50}
+                        value={this.state.inputEmail} 
+                        onChangeText={textInput => this.inputEmailHandler(textInput)}/>
+            
+    </View>
+
+    <View style={styles.buttonsView}>
+              <TouchableOpacity onPress={() => this.cancel()}>
+                      <View style = {styles.cancel}>
+                        <Text style={styles.signInText}>
+                          CANCEL
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => this.passwordReset()}>
+                      <View style = {styles.signUp}>
+                        <Text style={styles.signInText}>
+                          Send Reset
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+
+          </View>
+    
+    </View> 
     
     ): null}
     
@@ -389,6 +448,16 @@ const styles = EStyleSheet.create({
         opacity: .5,
     },
 
+    forgotPassView: {
+        
+    },
+
+    forgotPassText: {
+        fontSize: '30rem',
+        color: 'white',
+        textDecorationLine: 'underline'
+    },
+
     buttonsView: {
       height: sHeight * .2,
       width: '100%',
@@ -403,6 +472,15 @@ const styles = EStyleSheet.create({
         borderWidth: 1,
         borderColor: 'white'
     },
+
+    inputForgotPassView: {
+      
+        backgroundColor: sec,
+        height: sHeight * .1,
+        borderWidth: 1,
+        borderColor: 'white'
+    },
+    
 
     inputLoginView: {
       backgroundColor: sec,
