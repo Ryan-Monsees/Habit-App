@@ -23,6 +23,10 @@ export default class Score extends React.Component {
       
       this.setState({score: calculatedScore})
       console.log("updated");
+
+      //==================================================
+      // Test for habits printing
+      this.printScores();
     });
   }
 
@@ -45,6 +49,7 @@ export default class Score extends React.Component {
         score: calculatedScore
     }
 
+
   }
   
  
@@ -66,6 +71,15 @@ export default class Score extends React.Component {
           </View>
 
         );
+    }
+
+    printScores = () => {
+      for(var i = 0; i < history.length; i++) {
+        console.log("Index: " + i + " contains " + history[i].date + " " + history[i].score);
+        console.log(history[i].prevHabits[0].count);
+      }
+      
+      console.log("SCORES DONE PRINTING");
     }
 }
 

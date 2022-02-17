@@ -6,7 +6,7 @@ LogBox.ignoreLogs(['Setting a timer']);
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import Header from '../components/Header';
-//import storeData from '../components/StoreData';
+import storeData from '../components/StoreData';
 import '../global';
 
 //==========================================
@@ -61,6 +61,7 @@ export default class StartScreen extends React.Component {
         }
 
         this.checkLogin();
+        storeData.getScores();
         
     }
 
@@ -72,10 +73,7 @@ export default class StartScreen extends React.Component {
         this.checkLogin();
          
       });
-      
-    
-     
-     
+
     
     }
 
@@ -102,7 +100,9 @@ export default class StartScreen extends React.Component {
     printScores = () => {
       for(var i = 0; i < history.length; i++) {
         console.log("Index: " + i + " contains " + history[i].date + " " + history[i].score);
+        console.log(history[i].prevHabits[0].count);
       }
+      
       console.log("SCORES DONE PRINTING");
     }
 

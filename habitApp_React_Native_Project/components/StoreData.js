@@ -33,6 +33,7 @@ class StoreData extends React.Component {
                       db.collection("users").doc(user.email).collection("History").doc(lastDate).set({
                        
                       score: calculatedScore,
+                      prevHabits: habits
                         
                       })
                       .then(() => {
@@ -64,7 +65,7 @@ class StoreData extends React.Component {
           .then(querySnapshot => {
           querySnapshot.docs.forEach(doc => {
             
-            history.push({date: doc.id, score: doc.data().score});
+            history.push({date: doc.id, score: doc.data().score, prevHabits: doc.data().prevHabits});
           });
           });
         }
